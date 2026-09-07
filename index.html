@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Devoluciones Full y Colecta — Mercado Libre</title>
+<style>
+  :root {
+    --bg: #f4f5f7;
+    --card-bg: #ffffff;
+    --border: #e2e4e8;
+    --text: #1c1f26;
+    --muted: #6b7280;
+    --full: #1d4ed8;
+    --full-bg: #dbeafe;
+    --colecta: #b45309;
+    --colecta-bg: #fef3c7;
+    --urgente: #dc2626;
+    --urgente-bg: #fee2e2;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+  }
+  header {
+    background: var(--card-bg);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  header h1 { font-size: 20px; margin: 0; }
+  header .meta { font-size: 13px; color: var(--muted); }
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 20px;
+  }
+  section {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+  }
+  section h2 {
+    font-size: 15px;
+    margin: 0 0 4px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  section .count {
+    background: var(--bg);
+    border-radius: 999px;
+    padding: 2px 10px;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  section p.desc { font-size: 12px; color: var(--muted); margin: 0 0 14px 0; }
+  .item {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 12px;
+    margin-bottom: 8px;
+    font-size: 13px;
+  }
+  .item:last-child { margin-bottom: 0; }
+  .item-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+  .badge {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+  .badge.full { color: var(--full); background: var(--full-bg); }
+  .badge.colecta { color: var(--colecta); background: var(--colecta-bg); }
+  .badge.desconocido { color: var(--muted); background: var(--bg); }
+  .badge.urgente { color: var(--urgente); background: var(--urgente-bg); }
+  .item .linea { color: var(--muted); font-size: 12px; }
+  .item a { color: var(--full); text-decoration: none; }
+  .item a:hover { text-decoration: underline; }
+  .vacio { color: var(--muted); font-size: 13px; font-style: italic; padding: 8px 0; }
+  .error-banner {
+    max-width: 1200px;
+    margin: 16px auto 0 auto;
+    padding: 12px 16px;
+    background: var(--urgente-bg);
+    color: var(--urgente);
+    border-radius: 8px;
+    font-size: 13px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Devoluciones — FULL y Colecta</h1>
+  <div class="meta" id="ultima-actualizacion">Cargando...</div>
+</header>
+
+<div id="error-banner"></div>
+
+<main>
+  <section>
+    <h2>Reclamos <span class="count" id="count-reclamos">0</span></h2>
+    <p class="desc">Reclamos y mediaciones con una acción pendiente de responder.</p>
+    <div id="lista-reclamos"></div>
+  </section>
+
+  <section>
+    <h2>En camino <span class="count" id="count-en-camino">0</span></h2>
+    <p class="desc">Devoluciones ya enviadas de regreso, todavía no llegan al almacén.</p>
+    <div id="lista-en-camino"></div>
+  </section>
+
+  <section>
+    <h2>Ya llegaron <span class="count" id="count-llegaron">0</span></h2>
+    <p class="desc">Devoluciones que ya llegaron al almacén.</p>
+    <div id="lista-llegaron"></div>
+  </section>
+</main>
+
+<script>
+  const REFRESCO_MS = 5 * 60 * 1000;
+
+  function badgeCanal(canal) {
+    const clase = canal === "FULL" ? "full" : canal === "Colecta" ? "colecta" : "desconocido";
+    return `<span class="badge ${clase}">${canal}</span>`;
+  }
+
+  function fila(item, tipo) {
+    const partes = [];
+    partes.push(`<div class="item-top">`);
+    partes.push(`<strong>Reclamo ${item.claim_id}</strong>`);
+    partes.push(`<span style="display:flex; gap:6px;">`);
+    if (tipo === "reclamos" && item.urgente_hoy) {
+      partes.push(`<span class="badge urgente">VENCE HOY</span>`);
+    }
+    partes.push(badgeCanal(item.canal));
+    partes.push(`</span></div>`);
+
+    if (item.order_id) {
+      partes.push(`<div class="linea"><a href="https://www.mercadolibre.com.mx/ventas/${item.order_id}/detalle" target="_blank">Pedido ${item.order_id}</a></div>`);
+    }
+    if (tipo === "reclamos") {
+      partes.push(`<div class="linea">Motivo: ${item.reason_id || "—"} · Acción: ${item.accion || "—"}${item.vence ? " · Vence: " + item.vence.slice(0,10) : ""}</div>`);
+    } else {
+      partes.push(`<div class="linea">Estado: ${item.status || "—"}${item.tracking_number ? " · Guía: " + item.tracking_number : ""}</div>`);
+    }
+    return `<div class="item">${partes.join("")}</div>`;
+  }
+
+  function pintarLista(idContenedor, idContador, items, tipo) {
+    const contenedor = document.getElementById(idContenedor);
+    document.getElementById(idContador).textContent = items.length;
+    if (!items.length) {
+      contenedor.innerHTML = `<div class="vacio">Nada por aquí ahora mismo.</div>`;
+      return;
+    }
+    contenedor.innerHTML = items.map(item => fila(item, tipo)).join("");
+  }
+
+  async function cargarDatos() {
+    try {
+      const resp = await fetch("data.json?_=" + Date.now());
+      if (!resp.ok) throw new Error("data.json respondio " + resp.status);
+      const data = await resp.json();
+
+      document.getElementById("error-banner").innerHTML = "";
+      document.getElementById("ultima-actualizacion").textContent =
+        "Actualizado: " + new Date(data.generado).toLocaleString("es-MX");
+
+      pintarLista("lista-reclamos", "count-reclamos", data.reclamos || [], "reclamos");
+      pintarLista("lista-en-camino", "count-en-camino", data.en_camino || [], "en_camino");
+      pintarLista("lista-llegaron", "count-llegaron", data.llegaron || [], "llegaron");
+    } catch (e) {
+      document.getElementById("error-banner").innerHTML =
+        `<div class="error-banner">Todavia no hay datos (data.json no existe o no se pudo leer). ` +
+        `Esto es normal si el script automatico todavia no ha corrido por primera vez.</div>`;
+      document.getElementById("ultima-actualizacion").textContent = "Sin datos todavia";
+    }
+  }
+
+  cargarDatos();
+  setInterval(cargarDatos, REFRESCO_MS);
+</script>
+
+</body>
+</html>
