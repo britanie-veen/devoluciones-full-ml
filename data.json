@@ -1,5 +1,5 @@
 {
-  "generado": "2026-09-08T05:56:59.240282+00:00",
+  "generado": "2026-09-08T10:59:54.603073+00:00",
   "reclamos": [
     {
       "claim_id": 5573077361,
@@ -141,7 +141,7 @@
       "type": "returns",
       "stage": "claim",
       "canal": "FULL",
-      "status": "shipped",
+      "status": "delivered",
       "shipping_status": null,
       "seller_review": null,
       "tracking_number": null
