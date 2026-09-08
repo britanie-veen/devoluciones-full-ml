@@ -1,6 +1,18 @@
 {
-  "generado": "2026-09-07T22:58:32.701596+00:00",
-  "reclamos": [],
+  "generado": "2026-09-08T01:06:57.723366+00:00",
+  "reclamos": [
+    {
+      "claim_id": 5573077361,
+      "order_id": 2000018299514856,
+      "reason_id": "PDD9946",
+      "type": "mediations",
+      "stage": "dispute",
+      "canal": "FULL",
+      "accion": "send_message_to_mediator",
+      "vence": "2026-11-06T20:56:39.000-04:00",
+      "urgente_hoy": false
+    }
+  ],
   "en_camino": [
     {
       "claim_id": 5572875990,
@@ -140,18 +152,6 @@
       "reason_id": "PDD9939",
       "type": "returns",
       "stage": "claim",
-      "canal": "FULL",
-      "status": "label_generated",
-      "shipping_status": null,
-      "seller_review": null,
-      "tracking_number": null
-    },
-    {
-      "claim_id": 5570589848,
-      "order_id": 2000018217691016,
-      "reason_id": "PDD9941",
-      "type": "mediations",
-      "stage": "dispute",
       "canal": "FULL",
       "status": "label_generated",
       "shipping_status": null,
