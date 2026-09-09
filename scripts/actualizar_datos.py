@@ -5,6 +5,16 @@ Devoluciones — actualizador de datos (FULL y Colecta, ambos, siempre etiquetad
 SOLO LECTURA. Nunca hace POST/PUT contra la API de Mercado Libre para
 responder reclamos, refrescar devoluciones ni ninguna acción de escritura
 salvo el refresh del propio access_token (que es necesario para poder leer).
+
+Nota: este script ya NO consulta el estado de envío de las devoluciones
+(bloques "en camino" / "ya llegaron"). Para FULL, que un envío no esté
+"delivered" no significa que vaya rumbo al almacén propio — normalmente
+se queda en el centro de Mercado Libre y solo a veces termina llegando.
+Mostrar eso generaba ruido que nadie podía accionar. Ahora solo se
+reportan los reclamos con una acción pendiente del vendedor, divididos
+en "urgentes" (vencen hoy o ya vencieron) y "proximas_por_atender"
+(tienen fecha límite pero todavía no es hoy) — igual que se ven en la
+pestaña Posventa > Devoluciones de Mercado Libre.
 """
 
 import json
@@ -62,7 +72,7 @@ def ml_get(path, token, intentos_max=4):
     return {"_error": 429, "_body": "rate limit persistente"}
 
 
-def procesar_claim(claim, token, reclamos, en_camino, llegaron):
+def procesar_claim(claim, token, urgentes, proximas_por_atender):
     shipping_id = None
     order_id = None
     if claim.get("resource") == "shipment":
@@ -96,34 +106,15 @@ def procesar_claim(claim, token, reclamos, en_camino, llegaron):
             if a.get("due_date") and (accion_urgente is None or a["due_date"] < accion_urgente["due_date"]):
                 accion_urgente = a
 
-    if accion_urgente:
-        item = dict(resumen, accion=accion_urgente["action"], vence=accion_urgente["due_date"])
-        hoy = datetime.now(timezone.utc).date().isoformat()
-        item["urgente_hoy"] = accion_urgente["due_date"][:10] <= hoy
-        reclamos.append(item)
-
-    time.sleep(0.3)
-    ret = ml_get(f"/post-purchase/v2/claims/{claim.get('id')}/returns", token)
-    if "_error" in ret:
+    if not accion_urgente:
         return
 
-    shipping_info = ret.get("shipping") or {}
-    seller_review = ret.get("seller_review") or {}
-    item_dev = dict(
-        resumen,
-        status=ret.get("status"),
-        shipping_status=shipping_info.get("status"),
-        seller_review=seller_review.get("status"),
-        tracking_number=shipping_info.get("tracking_number"),
-    )
-
-    if ret.get("status") in ("cancelled", "failed", "expired", "closed"):
-        return
-
-    if shipping_info.get("status") == "delivered":
-        llegaron.append(item_dev)
+    item = dict(resumen, accion=accion_urgente["action"], vence=accion_urgente["due_date"])
+    hoy = datetime.now(timezone.utc).date().isoformat()
+    if accion_urgente["due_date"][:10] <= hoy:
+        urgentes.append(item)
     else:
-        en_camino.append(item_dev)
+        proximas_por_atender.append(item)
 
 
 def construir_dashboard():
@@ -136,9 +127,8 @@ def construir_dashboard():
     me = ml_get("/users/me", token)
     user_id = me.get("id")
 
-    reclamos = []
-    en_camino = []
-    llegaron = []
+    urgentes = []
+    proximas_por_atender = []
 
     offset = 0
     limit = 20
@@ -161,15 +151,14 @@ def construir_dashboard():
             break
 
         for c in claims:
-            procesar_claim(c, token, reclamos, en_camino, llegaron)
+            procesar_claim(c, token, urgentes, proximas_por_atender)
 
         offset += limit
 
     return {
         "generado": datetime.now(timezone.utc).isoformat(),
-        "reclamos": reclamos,
-        "en_camino": en_camino,
-        "llegaron": llegaron,
+        "urgentes": urgentes,
+        "proximas_por_atender": proximas_por_atender,
     }
 
 
@@ -177,5 +166,5 @@ if __name__ == "__main__":
     data = construir_dashboard()
     with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
-    print(f"data.json actualizado: {len(data['reclamos'])} reclamos, "
-          f"{len(data['en_camino'])} en camino, {len(data['llegaron'])} llegaron.")
+    print(f"data.json actualizado: {len(data['urgentes'])} urgentes, "
+          f"{len(data['proximas_por_atender'])} proximas por atender.")
