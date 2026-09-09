@@ -1,5 +1,5 @@
 {
-  "generado": "2026-09-09T11:54:29.056148+00:00",
+  "generado": "2026-09-09T16:08:58.138682+00:00",
   "reclamos": [
     {
       "claim_id": 5573756803,
@@ -14,6 +14,18 @@
     }
   ],
   "en_camino": [
+    {
+      "claim_id": 5573971339,
+      "order_id": 2000018331363972,
+      "reason_id": "PDD9939",
+      "type": "returns",
+      "stage": "claim",
+      "canal": "FULL",
+      "status": "label_generated",
+      "shipping_status": null,
+      "seller_review": null,
+      "tracking_number": null
+    },
     {
       "claim_id": 5573800261,
       "order_id": 2000018339210364,
