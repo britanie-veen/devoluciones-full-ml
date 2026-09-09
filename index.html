@@ -118,21 +118,15 @@
 
 <main>
   <section>
-    <h2>Reclamos <span class="count" id="count-reclamos">0</span></h2>
-    <p class="desc">Reclamos y mediaciones con una acción pendiente de responder.</p>
-    <div id="lista-reclamos"></div>
+    <h2>Urgentes <span class="count" id="count-urgentes">0</span></h2>
+    <p class="desc">Vencen hoy o ya vencieron — necesitan atención ahora.</p>
+    <div id="lista-urgentes"></div>
   </section>
 
   <section>
-    <h2>En camino <span class="count" id="count-en-camino">0</span></h2>
-    <p class="desc">Devoluciones ya enviadas de regreso, todavía no llegan al almacén.</p>
-    <div id="lista-en-camino"></div>
-  </section>
-
-  <section>
-    <h2>Ya llegaron <span class="count" id="count-llegaron">0</span></h2>
-    <p class="desc">Devoluciones que ya llegaron al almacén.</p>
-    <div id="lista-llegaron"></div>
+    <h2>Próximas por atender <span class="count" id="count-proximas">0</span></h2>
+    <p class="desc">Tienen fecha límite, pero todavía no es hoy.</p>
+    <div id="lista-proximas"></div>
   </section>
 </main>
 
@@ -144,12 +138,12 @@
     return `<span class="badge ${clase}">${canal}</span>`;
   }
 
-  function fila(item, tipo) {
+  function fila(item) {
     const partes = [];
     partes.push(`<div class="item-top">`);
     partes.push(`<strong>Reclamo ${item.claim_id}</strong>`);
     partes.push(`<span style="display:flex; gap:6px;">`);
-    if (tipo === "reclamos" && item.urgente_hoy) {
+    if (item.urgente_hoy) {
       partes.push(`<span class="badge urgente">VENCE HOY</span>`);
     }
     partes.push(badgeCanal(item.canal));
@@ -158,22 +152,18 @@
     if (item.order_id) {
       partes.push(`<div class="linea"><a href="https://www.mercadolibre.com.mx/ventas/${item.order_id}/detalle" target="_blank">Pedido ${item.order_id}</a></div>`);
     }
-    if (tipo === "reclamos") {
-      partes.push(`<div class="linea">Motivo: ${item.reason_id || "—"} · Acción: ${item.accion || "—"}${item.vence ? " · Vence: " + item.vence.slice(0,10) : ""}</div>`);
-    } else {
-      partes.push(`<div class="linea">Estado: ${item.status || "—"}${item.tracking_number ? " · Guía: " + item.tracking_number : ""}</div>`);
-    }
+    partes.push(`<div class="linea">Motivo: ${item.reason_id || "—"} · Acción: ${item.accion || "—"}${item.vence ? " · Vence: " + item.vence.slice(0,10) : ""}</div>`);
     return `<div class="item">${partes.join("")}</div>`;
   }
 
-  function pintarLista(idContenedor, idContador, items, tipo) {
+  function pintarLista(idContenedor, idContador, items) {
     const contenedor = document.getElementById(idContenedor);
     document.getElementById(idContador).textContent = items.length;
     if (!items.length) {
       contenedor.innerHTML = `<div class="vacio">Nada por aquí ahora mismo.</div>`;
       return;
     }
-    contenedor.innerHTML = items.map(item => fila(item, tipo)).join("");
+    contenedor.innerHTML = items.map(item => fila(item)).join("");
   }
 
   async function cargarDatos() {
@@ -186,9 +176,8 @@
       document.getElementById("ultima-actualizacion").textContent =
         "Actualizado: " + new Date(data.generado).toLocaleString("es-MX");
 
-      pintarLista("lista-reclamos", "count-reclamos", data.reclamos || [], "reclamos");
-      pintarLista("lista-en-camino", "count-en-camino", data.en_camino || [], "en_camino");
-      pintarLista("lista-llegaron", "count-llegaron", data.llegaron || [], "llegaron");
+      pintarLista("lista-urgentes", "count-urgentes", data.urgentes || []);
+      pintarLista("lista-proximas", "count-proximas", data.proximas_por_atender || []);
     } catch (e) {
       document.getElementById("error-banner").innerHTML =
         `<div class="error-banner">Todavia no hay datos (data.json no existe o no se pudo leer). ` +
