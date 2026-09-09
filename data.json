@@ -1,7 +1,43 @@
 {
-  "generado": "2026-09-09T01:31:33.746485+00:00",
-  "reclamos": [],
+  "generado": "2026-09-09T06:40:33.888572+00:00",
+  "reclamos": [
+    {
+      "claim_id": 5573756803,
+      "order_id": 2000018323486844,
+      "reason_id": "PDD9960",
+      "type": "mediations",
+      "stage": "dispute",
+      "canal": "FULL",
+      "accion": "send_attachments",
+      "vence": "2026-09-10T22:25:00.000-04:00",
+      "urgente_hoy": false
+    }
+  ],
   "en_camino": [
+    {
+      "claim_id": 5573800261,
+      "order_id": 2000018339210364,
+      "reason_id": "PDD9939",
+      "type": "returns",
+      "stage": "claim",
+      "canal": "FULL",
+      "status": "label_generated",
+      "shipping_status": null,
+      "seller_review": null,
+      "tracking_number": null
+    },
+    {
+      "claim_id": 5573780752,
+      "order_id": 2000018334355056,
+      "reason_id": "PDD9939",
+      "type": "mediations",
+      "stage": "dispute",
+      "canal": "FULL",
+      "status": "label_generated",
+      "shipping_status": null,
+      "seller_review": null,
+      "tracking_number": null
+    },
     {
       "claim_id": 5573639508,
       "order_id": 2000018324869520,
@@ -141,7 +177,7 @@
       "type": "returns",
       "stage": "claim",
       "canal": "FULL",
-      "status": "shipped",
+      "status": "delivered",
       "shipping_status": null,
       "seller_review": null,
       "tracking_number": null
@@ -344,30 +380,6 @@
       "reason_id": "PDD9939",
       "type": "mediations",
       "stage": "dispute",
-      "canal": "FULL",
-      "status": "label_generated",
-      "shipping_status": null,
-      "seller_review": null,
-      "tracking_number": null
-    },
-    {
-      "claim_id": 5568806651,
-      "order_id": 2000018140500468,
-      "reason_id": "PDD9939",
-      "type": "returns",
-      "stage": "claim",
-      "canal": "FULL",
-      "status": "label_generated",
-      "shipping_status": null,
-      "seller_review": null,
-      "tracking_number": null
-    },
-    {
-      "claim_id": 5568326918,
-      "order_id": 2000017948111880,
-      "reason_id": "PDD9939",
-      "type": "returns",
-      "stage": "claim",
       "canal": "FULL",
       "status": "label_generated",
       "shipping_status": null,
