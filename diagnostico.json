@@ -1,0 +1,3291 @@
+{
+  "generado": "2026-09-09T20:09:12.887533+00:00",
+  "total_encontrados": 37,
+  "muestra": [
+    {
+      "claim_id": 5574124297,
+      "resource": "order",
+      "resource_id": 2000018329411456,
+      "reason_id": "PDD9941",
+      "type": "mediations",
+      "stage": "dispute",
+      "status": "opened",
+      "players": [
+        {
+          "role": "complainant",
+          "type": "buyer",
+          "user_id": 280445222,
+          "available_actions": []
+        },
+        {
+          "role": "respondent",
+          "type": "seller",
+          "user_id": 1021233283,
+          "available_actions": []
+        }
+      ],
+      "returns_raw": {
+        "id": 160755132,
+        "last_updated": "2026-09-09T17:57:26.09+00:00",
+        "shipments": [
+          {
+            "shipment_id": 47973369550,
+            "status": "ready_to_ship",
+            "tracking_number": "MEL47973369550FMDOR01",
+            "destination": {
+              "name": "warehouse",
+              "shipping_address": {
+                "address_id": 0,
+                "address_line": "Av. La Antigua S/N",
+                "street_name": "Av. La Antigua",
+                "street_number": "S/N",
+                "comment": "",
+                "zip_code": "54963",
+                "city": {
+                  "id": "TUxNQ1RVTDk0NjQ",
+                  "name": "Tultepec"
+                },
+                "state": {
+                  "id": "MX-MEX",
+                  "name": "Estado De México"
+                },
+                "country": {
+                  "id": "MX",
+                  "name": "Mexico"
+                },
+                "neighborhood": {
+                  "id": null,
+                  "name": "El Nodín"
+                },
+                "municipality": {
+                  "id": null,
+                  "name": null
+                }
+              }
+            },
+            "type": "return"
+          }
+        ],
+        "refund_at": "delivered",
+        "date_closed": null,
+        "resource_type": "order",
+        "date_created": "2026-09-09T17:43:58.533+00:00",
+        "claim_id": 5574124297,
+        "status_money": "retained",
+        "resource_id": 2000018329411456,
+        "orders": [
+          {
+            "order_id": 2000018329411456,
+            "item_id": "MLM3743864586",
+            "context_type": "total",
+            "total_quantity": "1.0",
+            "return_quantity": "1.0",
+            "variation_id": null
+          }
+        ],
+        "subtype": "return_total",
+        "status": "shipped",
+        "related_entities": null,
+        "intermediate_check": false
+      }
+    },
+    {
+      "claim_id": 5573971339,
+      "resource": "order",
+      "resource_id": 2000018331363972,
+      "reason_id": "PDD9939",
+      "type": "returns",
+      "stage": "claim",
+      "status": "opened",
+      "players": [
+        {
+          "role": "complainant",
+          "type": "buyer",
+          "user_id": 1331505319,
+          "available_actions": []
+        },
+        {
+          "role": "respondent",
+          "type": "seller",
+          "user_id": 1021233283,
+          "available_actions": [
+            {
+              "action": "send_message_to_complainant",
+              "mandatory": false,
+              "due_date": null
+            },
+            {
+              "action": "refund",
+              "mandatory": false,
+              "due_date": null
+            },
+            {
+              "action": "open_dispute",
+              "mandatory": false,
+              "due_date": null
+            }
+          ]
+        }
+      ],
+      "returns_raw": {
+        "id": 167331837,
+        "last_updated": "2026-09-09T13:57:51.138+00:00",
+        "shipments": [
+          {
+            "shipment_id": 47970600015,
+            "status": "ready_to_ship",
+            "tracking_number": null,
+            "destination": {
+              "name": "warehouse",
+              "shipping_address": {
+                "address_id": 0,
+                "address_line": "Av. La Antigua S/N",
+                "street_name": "Av. La Antigua",
+                "street_number": "S/N",
+                "comment": "",
+                "zip_code": "54963",
+                "city": {
+                  "id": "TUxNQ1RVTDk0NjQ",
+                  "name": "Tultepec"
+                },
+                "state": {
+                  "id": "MX-MEX",
+                  "name": "Estado De México"
+                },
+                "country": {
+                  "id": "MX",
+                  "name": "Mexico"
+                },
+                "neighborhood": {
+                  "id": null,
+                  "name": "El Nodín"
+                },
+                "municipality": {
+                  "id": null,
+                  "name": null
+                }
+              }
+            },
+            "type": "return"
+          }
+        ],
+        "refund_at": "delivered",
+        "date_closed": null,
+        "resource_type": "order",
+        "date_created": "2026-09-09T13:57:46.172+00:00",
+        "claim_id": 5573971339,
+        "status_money": "retained",
+        "resource_id": 2000018331363972,
+        "orders": [
+          {
+            "order_id": 2000018331363972,
+            "item_id": "MLM5248651580",
+            "context_type": "total",
+            "total_quantity": "1.0",
+            "return_quantity": "1.0",
+            "variation_id": null
+          }
+        ],
+        "subtype": "return_total",
+        "status": "label_generated",
+        "related_entities": null,
+        "intermediate_check": false
+      }
+    },
+    {
+      "claim_id": 5573800261,
+      "resource": "order",
+      "resource_id": 2000018339210364,
+      "reason_id": "PDD9939",
+      "type": "returns",
+      "stage": "claim",
+      "status": "opened",
+      "players": [
+        {
+          "role": "complainant",
+          "type": "buyer",
+          "user_id": 1347707893,
+          "available_actions": []
+        },
+        {
+          "role": "respondent",
+          "type": "seller",
+          "user_id": 1021233283,
+          "available_actions": [
+            {
+              "action": "send_message_to_complainant",
+              "mandatory": false,
+              "due_date": null
+            },
+            {
+              "action": "refund",
+              "mandatory": false,
+              "due_date": null
+            },
+            {
+              "action": "open_dispute",
+              "mandatory": false,
+              "due_date": null
+            }
+          ]
+        }
+      ],
+      "returns_raw": {
+        "id": 167265737,
+        "last_updated": "2026-09-09T03:18:55.321+00:00",
+        "shipments": [
+          {
+            "shipment_id": 47968085252,
+            "status": "ready_to_ship",
+            "tracking_number": null,
+            "destination": {
+              "name": "warehouse",
+              "shipping_address": {
+                "address_id": 0,
+                "address_line": "Av. La Antigua S/N",
+                "street_name": "Av. La Antigua",
+                "street_number": "S/N",
+                "comment": "",
+                "zip_code": "54963",
+                "city": {
+                  "id": "TUxNQ1RVTDk0NjQ",
+                  "name": "Tultepec"
+                },
+                "state": {
+                  "id": "MX-MEX",
+                  "name": "Estado De México"
+                },
+                "country": {
+                  "id": "MX",
+                  "name": "Mexico"
+                },
+                "neighborhood": {
+                  "id": null,
+                  "name": "El Nodín"
+                },
+                "municipality": {
+                  "id": null,
+                  "name": null
+                }
+              }
+            },
+            "type": "return"
+          }
+        ],
+        "refund_at": "delivered",
+        "date_closed": null,
+        "resource_type": "order",
+        "date_created": "2026-09-09T03:18:52.022+00:00",
+        "claim_id": 5573800261,
+        "status_money": "retained",
+        "resource_id": 2000018339210364,
+        "orders": [
+          {
+            "order_id": 2000018339210364,
+            "item_id": "MLM3496296266",
+            "context_type": "total",
+            "total_quantity": "1.0",
+            "return_quantity": "1.0",
+            "variation_id": null
+          }
+        ],
+        "subtype": "return_total",
+        "status": "label_generated",
+        "related_entities": null,
+        "intermediate_check": false
+      }
+    },
+    {
+      "claim_id": 5573780752,
+      "resource": "order",
+      "resource_id": 2000018334355056,
+      "reason_id": "PDD9939",
+      "type": "mediations",
+      "stage": "dispute",
+      "status": "opened",
+      "players": [
+        {
+          "role": "complainant",
+          "type": "buyer",
+          "user_id": 451020033,
+          "available_actions": []
+        },
+        {
+          "role": "respondent",
+          "type": "seller",
+          "user_id": 1021233283,
+          "available_actions": []
+        }
+      ],
+      "returns_raw": {
+        "id": 160624742,
+        "last_updated": "2026-09-09T02:32:57.094+00:00",
+        "shipments": [
+          {
+            "shipment_id": 47967785184,
+            "status": "ready_to_ship",
+            "tracking_number": null,
+            "destination": {
+              "name": "warehouse",
+              "shipping_address": {
+                "address_id": 0,
+                "address_line": "Av. La Antigua S/N",
+                "street_name": "Av. La Antigua",
+                "street_number": "S/N",
+                "comment": "",
+                "zip_code": "54963",
+                "city": {
+                  "id": "TUxNQ1RVTDk0NjQ",
+                  "name": "Tultepec"
+                },
+                "state": {
+                  "id": "MX-MEX",
+                  "name": "Estado De México"
+                },
+                "country": {
+                  "id": "MX",
+                  "name": "Mexico"
+                },
+                "neighborhood": {
+                  "id": null,
+                  "name": "El Nodín"
+                },
+                "municipality": {
+                  "id": null,
+                  "name": null
+                }
+              }
+            },
+            "type": "return"
+          }
+        ],
+        "refund_at": "delivered",
+        "date_closed": null,
+        "resource_type": "order",
+        "date_created": "2026-09-09T02:32:53.924+00:00",
+        "claim_id": 5573780752,
+        "status_money": "retained",
+        "resource_id": 2000018334355056,
+        "orders": [
+          {
+            "order_id": 2000018334355056,
+            "item_id": "MLM3743864586",
+            "context_type": "total",
+            "total_quantity": "1.0",
+            "return_quantity": "1.0",
+            "variation_id": null
+          }
+        ],
+        "subtype": "return_total",
+        "status": "label_generated",
+        "related_entities": null,
+        "intermediate_check": false
+      }
+    },
+    {
+      "claim_id": 5573756803,
+      "resource": "order",
+      "resource_id": 2000018323486844,
+      "reason_id": "PDD9960",
+      "type": "mediations",
+      "stage": "dispute",
+      "status": "opened",
+      "players": [
+        {
+          "role": "complainant",
+          "type": "buyer",
+          "user_id": 22736898,
+          "available_actions": []
+        },
+        {
+          "role": "respondent",
+          "type": "seller",
+          "user_id": 1021233283,
+          "available_actions": [
+            {
+              "action": "send_message_to_mediator",
+              "mandatory": false,
+              "due_date": null
+            }
+          ]
+        }
+      ],
+      "returns_raw": {
+        "_error": 404,
+        "_body": "{\"code\":404,\"error\":\"not_found_error\",\"message\":\"There is no associated return for claim 5573756803\",\"cause\":null}"
+      }
+    },
+    {
+      "claim_id": 5573639508,
+      "resource": "order",
+      "resource_id": 2000018324869520,
+      "reason_id": "PDD9939",
+      "type": "mediations",
+      "stage": "dispute",
+      "status": "opened",
+      "players": [
+        {
+          "role": "complainant",
+          "type": "buyer",
+          "user_id": 268160418,
+          "available_actions": []
+        },
+        {
+          "role": "respondent",
+          "type": "seller",
+          "user_id": 1021233283,
+          "available_actions": []
+        }
+      ],
+      "returns_raw": {
+        "id": 167208249,
+        "last_updated": "2026-09-08T22:41:24.973+00:00",
+        "shipments": [
+          {
+            "shipment_id": 47965526207,
+            "status": "ready_to_ship",
+            "tracking_number": null,
+            "destination": {
+              "name": "warehouse",
+              "shipping_address": {
+                "address_id": 0,
+                "address_line": "Av. La Antigua S/N",
+                "street_name": "Av. La Antigua",
+                "street_number": "S/N",
+                "comment": "",
+                "zip_code": "54963",
+                "city": {
+                  "id": "TUxNQ1RVTDk0NjQ",
+                  "name": "Tultepec"
+                },
+                "state": {
+                  "id": "MX-MEX",
+                  "name": "Estado De México"
+                },
+                "country": {
+                  "id": "MX",
+                  "name": "Mexico"
+                },
+                "neighborhood": {
+                  "id": null,
+                  "name": "El Nodín"
+                },
+                "municipality": {
+                  "id": null,
+                  "name": null
+                }
+              }
+            },
+            "type": "return"
+          }
+        ],
+        "refund_at": "shipped",
+        "date_closed": null,
+        "resource_type": "order",
+        "date_created": "2026-09-08T22:39:45.028+00:00",
+        "claim_id": 5573639508,
+        "status_money": "retained",
+        "resource_id": 2000018324869520,
+        "orders": [
+          {
+            "order_id": 2000018324869520,
+            "item_id": "MLM3397554048",
+            "context_type": "total",
+            "total_quantity": "1.0",
+            "return_quantity": "1.0",
+            "variation_id": 185288258351
+          }
+        ],
+        "subtype": null,
+        "status": "label_generated",
+        "related_entities": null,
+        "intermediate_check": false
+      }
+    },
+    {
+      "claim_id": 5573632727,
+      "resource": "order",
+      "resource_id": 2000018324867590,
+      "reason_id": "PDD9939",
+      "type": "mediations",
+      "stage": "dispute",
+      "status": "opened",
+      "players": [
+        {
+          "role": "complainant",
+          "type": "buyer",
+          "user_id": 268160418,
+          "available_actions": []
+        },
+        {
+          "role": "respondent",
+          "type": "seller",
+          "user_id": 1021233283,
+          "available_actions": []
+        }
+      ],
+      "returns_raw": {
+        "id": 167205083,
+        "last_updated": "2026-09-08T22:29:23.609+00:00",
+        "shipments": [
+          {
+            "shipment_id": 47965423261,
+            "status": "ready_to_ship",
+            "tracking_number": null,
+            "destination": {
+              "name": "warehouse",
+              "shipping_address": {
+                "address_id": 0,
+                "address_line": "Av. La Antigua S/N",
+                "street_name": "Av. La Antigua",
+                "street_number": "S/N",
+                "comment": "",
+                "zip_code": "54963",
+                "city": {
+                  "id": "TUxNQ1RVTDk0NjQ",
+                  "name": "Tultepec"
+                },
+                "state": {
+                  "id": "MX-MEX",
+                  "name": "Estado De México"
+                },
+                "country": {
+                  "id": "MX",
+                  "name": "Mexico"
+                },
+                "neighborhood": {
+                  "id": null,
+                  "name": "El Nodín"
+                },
+                "municipality": {
+                  "id": null,
+                  "name": null
+                }
+              }
+            },
+            "type": "return"
+          }
+        ],
+        "refund_at": "shipped",
+        "date_closed": null,
+        "resource_type": "order",
+        "date_created": "2026-09-08T22:27:43.599+00:00",
+        "claim_id": 5573632727,
+        "status_money": "retained",
+        "resource_id": 2000018324867590,
+        "orders": [
+          {
+            "order_id": 2000018324867590,
+            "item_id": "MLM3397554048",
+            "context_type": "total",
+            "total_quantity": "1.0",
+            "return_quantity": "1.0",
+            "variation_id": 185288258351
+          }
+        ],
+        "subtype": null,
+        "status": "label_generated",
+        "related_entities": null,
+        "intermediate_check": false
+      }
+    },
+    {
+      "claim_id": 5573609349,
+      "resource": "order",
+      "resource_id": 2000018259079512,
+      "reason_id": "PDD9939",
+      "type": "returns",
+      "stage": "claim",
+      "status": "opened",
+      "players": [
+        {
+          "role": "complainant",
+          "type": "buyer",
+          "user_id": 62026360,
+          "available_actions": []
+        },
+        {
+          "role": "respondent",
+          "type": "seller",
+          "user_id": 1021233283,
+          "available_actions": [
+            {
+              "action": "send_message_to_complainant",
+              "mandatory": false,
+              "due_date": null
+            },
+            {
+              "action": "refund",
+              "mandatory": false,
+              "due_date": null
+            },
+            {
+              "action": "open_dispute",
+              "mandatory": false,
+              "due_date": null
+            }
+          ]
+        }
+      ],
+      "returns_raw": {
+        "id": 160561796,
+        "last_updated": "2026-09-08T21:54:28.383+00:00",
+        "shipments": [
+          {
+            "shipment_id": 47965140389,
+            "status": "ready_to_ship",
+            "tracking_number": null,
+            "destination": {
+              "name": "warehouse",
+              "shipping_address": {
+                "address_id": 0,
+                "address_line": "Av. La Antigua S/N",
+                "street_name": "Av. La Antigua",
+                "street_number": "S/N",
+                "comment": "",
+                "zip_code": "54963",
+                "city": {
+                  "id": "TUxNQ1RVTDk0NjQ",
+                  "name": "Tultepec"
+                },
+                "state": {
+                  "id": "MX-MEX",
+                  "name": "Estado De México"
+                },
+                "country": {
+                  "id": "MX",
+                  "name": "Mexico"
+                },
+                "neighborhood": {
+                  "id": null,
+                  "name": "El Nodín"
+                },
+                "municipality": {
+                  "id": null,
+                  "name": null
+                }
+              }
+            },
+            "type": "return"
+          }
+        ],
+        "refund_at": "delivered",
+        "date_closed": null,
+        "resource_type": "order",
+        "date_created": "2026-09-08T21:54:18.246+00:00",
+        "claim_id": 5573609349,
+        "status_money": "retained",
+        "resource_id": 2000018259079512,
+        "orders": [
+          {
+            "order_id": 2000018259079512,
+            "item_id": "MLM2454973089",
+            "context_type": "total",
+            "total_quantity": "1.0",
+            "return_quantity": "1.0",
+            "variation_id": null
+          }
+        ],
+        "subtype": "return_total",
+        "status": "label_generated",
+        "related_entities": null,
+        "intermediate_check": false
+      }
+    },
+    {
+      "claim_id": 5573385981,
+      "resource": "order",
+      "resource_id": 2000018306794010,
+      "reason_id": "PDD9939",
+      "type": "returns",
+      "stage": "claim",
+      "status": "opened",
+      "players": [
+        {
+          "role": "complainant",
+          "type": "buyer",
+          "user_id": 1547263700,
+          "available_actions": []
+        },
+        {
+          "role": "respondent",
+          "type": "seller",
+          "user_id": 1021233283,
+          "available_actions": [
+            {
+              "action": "send_message_to_complainant",
+              "mandatory": false,
+              "due_date": null
+            },
+            {
+              "action": "refund",
+              "mandatory": false,
+              "due_date": null
+            },
+            {
+              "action": "open_dispute",
+              "mandatory": false,
+              "due_date": null
+            }
+          ]
+        }
+      ],
+      "returns_raw": {
+        "id": 167087949,
+        "last_updated": "2026-09-08T16:19:45.031+00:00",
+        "shipments": [
+          {
+            "shipment_id": 47962092941,
+            "status": "ready_to_ship",
+            "tracking_number": "383593706849",
+            "destination": {
+              "name": "warehouse",
+              "shipping_address": {
+                "address_id": 0,
+                "address_line": "Av. La Antigua S/N",
+                "street_name": "Av. La Antigua",
+                "street_number": "S/N",
+                "comment": "",
+                "zip_code": "54963",
+                "city": {
+                  "id": "TUxNQ1RVTDk0NjQ",
+                  "name": "Tultepec"
+                },
+                "state": {
+                  "id": "MX-MEX",
+                  "name": "Estado De México"
+                },
+                "country": {
+                  "id": "MX",
+                  "name": "Mexico"
+                },
+                "neighborhood": {
+                  "id": null,
+                  "name": "El Nodín"
+                },
+                "municipality": {
+                  "id": null,
+                  "name": null
+                }
+              }
+            },
+            "type": "return"
+          }
+        ],
+        "refund_at": "delivered",
+        "date_closed": null,
+        "resource_type": "order",
+        "date_created": "2026-09-08T16:19:37.337+00:00",
+        "claim_id": 5573385981,
+        "status_money": "retained",
+        "resource_id": 2000018306794010,
+        "orders": [
+          {
+            "order_id": 2000018306794010,
+            "item_id": "MLM2109535139",
+            "context_type": "total",
+            "total_quantity": "2.0",
+            "return_quantity": "2.0",
+            "variation_id": 181218032970
+          }
+        ],
+        "subtype": "return_total",
+        "status": "label_generated",
+        "related_entities": null,
+        "intermediate_check": false
+      }
+    },
+    {
+      "claim_id": 5573158031,
+      "resource": "order",
+      "resource_id": 2000018220939088,
+      "reason_id": "PDD9939",
+      "type": "mediations",
+      "stage": "dispute",
+      "status": "opened",
+      "players": [
+        {
+          "role": "complainant",
+          "type": "buyer",
+          "user_id": 44381348,
+          "available_actions": []
+        },
+        {
+          "role": "respondent",
+          "type": "seller",
+          "user_id": 1021233283,
+          "available_actions": []
+        }
+      ],
+      "returns_raw": {
+        "id": 160350106,
+        "last_updated": "2026-09-08T05:37:01.85+00:00",
+        "shipments": [
+          {
+            "shipment_id": 47959069521,
+            "status": "ready_to_ship",
+            "tracking_number": null,
+            "destination": {
+              "name": "warehouse",
+              "shipping_address": {
+                "address_id": 0,
+                "address_line": "Av. La Antigua S/N",
+                "street_name": "Av. La Antigua",
+                "street_number": "S/N",
+                "comment": "",
+                "zip_code": "54963",
+                "city": {
+                  "id": "TUxNQ1RVTDk0NjQ",
+                  "name": "Tultepec"
+                },
+                "state": {
+                  "id": "MX-MEX",
+                  "name": "Estado De México"
+                },
+                "country": {
+                  "id": "MX",
+                  "name": "Mexico"
+                },
+                "neighborhood": {
+                  "id": null,
+                  "name": "El Nodín"
+                },
+                "municipality": {
+                  "id": null,
+                  "name": null
+                }
+              }
+            },
+            "type": "return"
+          }
+        ],
+        "refund_at": "delivered",
+        "date_closed": null,
+        "resource_type": "order",
+        "date_created": "2026-09-08T05:36:58.536+00:00",
+        "claim_id": 5573158031,
+        "status_money": "retained",
+        "resource_id": 2000018220939088,
+        "orders": [
+          {
+            "order_id": 2000018220939088,
+            "item_id": "MLM3743801042",
+            "context_type": "total",
+            "total_quantity": "1.0",
+            "return_quantity": "1.0",
+            "variation_id": null
+          }
+        ],
+        "subtype": "return_total",
+        "status": "label_generated",
+        "related_entities": null,
+        "intermediate_check": false
+      }
+    },
+    {
+      "claim_id": 5573154328,
+      "resource": "order",
+      "resource_id": 2000018329542072,
+      "reason_id": "PDD9939",
+      "type": "returns",
+      "stage": "claim",
+      "status": "opened",
+      "players": [
+        {
+          "role": "complainant",
+          "type": "buyer",
+          "user_id": 194833404,
+          "available_actions": []
+        },
+        {
+          "role": "respondent",
+          "type": "seller",
+          "user_id": 1021233283,
+          "available_actions": [
+            {
+              "action": "send_message_to_complainant",
+              "mandatory": false,
+              "due_date": null
+            },
+            {
+              "action": "refund",
+              "mandatory": false,
+              "due_date": null
+            },
+            {
+              "action": "open_dispute",
+              "mandatory": false,
+              "due_date": null
+            }
+          ]
+        }
+      ],
+      "returns_raw": {
+        "id": 160349072,
+        "last_updated": "2026-09-08T05:06:13.639+00:00",
+        "shipments": [
+          {
+            "shipment_id": 47959302696,
+            "status": "ready_to_ship",
+            "tracking_number": null,
+            "destination": {
+              "name": "warehouse",
+              "shipping_address": {
+                "address_id": 0,
+                "address_line": "Av. La Antigua S/N",
+                "street_name": "Av. La Antigua",
+                "street_number": "S/N",
+                "comment": "",
+                "zip_code": "54963",
+                "city": {
+                  "id": "TUxNQ1RVTDk0NjQ",
+                  "name": "Tultepec"
+                },
+                "state": {
+                  "id": "MX-MEX",
+                  "name": "Estado De México"
+                },
+                "country": {
+                  "id": "MX",
+                  "name": "Mexico"
+                },
+                "neighborhood": {
+                  "id": null,
+                  "name": "El Nodín"
+                },
+                "municipality": {
+                  "id": null,
+                  "name": null
+                }
+              }
+            },
+            "type": "return"
+          }
+        ],
+        "refund_at": "delivered",
+        "date_closed": null,
+        "resource_type": "order",
+        "date_created": "2026-09-08T05:06:10.242+00:00",
+        "claim_id": 5573154328,
+        "status_money": "retained",
+        "resource_id": 2000018329542072,
+        "orders": [
+          {
+            "order_id": 2000018329542072,
+            "item_id": "MLM2369674169",
+            "context_type": "total",
+            "total_quantity": "1.0",
+            "return_quantity": "1.0",
+            "variation_id": null
+          }
+        ],
+        "subtype": "return_total",
+        "status": "label_generated",
+        "related_entities": null,
+        "intermediate_check": false
+      }
+    },
+    {
+      "claim_id": 5573127926,
+      "resource": "order",
+      "resource_id": 2000018307985988,
+      "reason_id": "PDD9939",
+      "type": "mediations",
+      "stage": "dispute",
+      "status": "opened",
+      "players": [
+        {
+          "role": "complainant",
+          "type": "buyer",
+          "user_id": 646308894,
+          "available_actions": []
+        },
+        {
+          "role": "respondent",
+          "type": "seller",
+          "user_id": 1021233283,
+          "available_actions": []
+        }
+      ],
+      "returns_raw": {
+        "id": 166966319,
+        "last_updated": "2026-09-08T02:59:06.536+00:00",
+        "shipments": [
+          {
+            "shipment_id": 47958553689,
+            "status": "ready_to_ship",
+            "tracking_number": null,
+            "destination": {
+              "name": "warehouse",
+              "shipping_address": {
+                "address_id": 0,
+                "address_line": "Av. La Antigua S/N",
+                "street_name": "Av. La Antigua",
+                "street_number": "S/N",
+                "comment": "",
+                "zip_code": "54963",
+                "city": {
+                  "id": "TUxNQ1RVTDk0NjQ",
+                  "name": "Tultepec"
+                },
+                "state": {
+                  "id": "MX-MEX",
+                  "name": "Estado De México"
+                },
+                "country": {
+                  "id": "MX",
+                  "name": "Mexico"
+                },
+                "neighborhood": {
+                  "id": null,
+                  "name": "El Nodín"
+                },
+                "municipality": {
+                  "id": null,
+                  "name": null
+                }
+              }
+            },
+            "type": "return"
+          }
+        ],
+        "refund_at": "delivered",
+        "date_closed": null,
+        "resource_type": "order",
+        "date_created": "2026-09-08T02:59:04.661+00:00",
+        "claim_id": 5573127926,
+        "status_money": "retained",
+        "resource_id": 2000018307985988,
+        "orders": [
+          {
+            "order_id": 2000018307985988,
+            "item_id": "MLM3497258084",
+            "context_type": "total",
+            "total_quantity": "1.0",
+            "return_quantity": "1.0",
+            "variation_id": null
+          }
+        ],
+        "subtype": "return_total",
+        "status": "label_generated",
+        "related_entities": null,
+        "intermediate_check": false
+      }
+    },
+    {
+      "claim_id": 5573116264,
+      "resource": "order",
+      "resource_id": 2000018117178184,
+      "reason_id": "PDD9939",
+      "type": "returns",
+      "stage": "claim",
+      "status": "opened",
+      "players": [
+        {
+          "role": "complainant",
+          "type": "buyer",
+          "user_id": 181657278,
+          "available_actions": []
+        },
+        {
+          "role": "respondent",
+          "type": "seller",
+          "user_id": 1021233283,
+          "available_actions": [
+            {
+              "action": "send_message_to_complainant",
+              "mandatory": false,
+              "due_date": null
+            },
+            {
+              "action": "refund",
+              "mandatory": false,
+              "due_date": null
+            },
+            {
+              "action": "open_dispute",
+              "mandatory": false,
+              "due_date": null
+            }
+          ]
+        }
+      ],
+      "returns_raw": {
+        "id": 160336614,
+        "last_updated": "2026-09-08T20:28:59.238+00:00",
+        "shipments": [
+          {
+            "shipment_id": 47958695264,
+            "status": "ready_to_ship",
+            "tracking_number": "MEL47958695264FMDOR01",
+            "destination": {
+              "name": "warehouse",
+              "shipping_address": {
+                "address_id": 0,
+                "address_line": "Av. La Antigua S/N",
+                "street_name": "Av. La Antigua",
+                "street_number": "S/N",
+                "comment": "",
+                "zip_code": "54963",
+                "city": {
+                  "id": "TUxNQ1RVTDk0NjQ",
+                  "name": "Tultepec"
+                },
+                "state": {
+                  "id": "MX-MEX",
+                  "name": "Estado De México"
+                },
+                "country": {
+                  "id": "MX",
+                  "name": "Mexico"
+                },
+                "neighborhood": {
+                  "id": null,
+                  "name": "El Nodín"
+                },
+                "municipality": {
+                  "id": null,
+                  "name": null
+                }
+              }
+            },
+            "type": "return"
+          }
+        ],
+        "refund_at": "delivered",
+        "date_closed": null,
+        "resource_type": "order",
+        "date_created": "2026-09-08T02:30:30.643+00:00",
+        "claim_id": 5573116264,
+        "status_money": "retained",
+        "resource_id": 2000018117178184,
+        "orders": [
+          {
+            "order_id": 2000018117178184,
+            "item_id": "MLM4685276830",
+            "context_type": "total",
+            "total_quantity": "1.0",
+            "return_quantity": "1.0",
+            "variation_id": null
+          }
+        ],
+        "subtype": "return_total",
+        "status": "shipped",
+        "related_entities": null,
+        "intermediate_check": true
+      }
+    },
+    {
+      "claim_id": 5573077361,
+      "resource": "order",
+      "resource_id": 2000018299514856,
+      "reason_id": "PDD9946",
+      "type": "mediations",
+      "stage": "dispute",
+      "status": "opened",
+      "players": [
+        {
+          "role": "complainant",
+          "type": "buyer",
+          "user_id": 267328059,
+          "available_actions": []
+        },
+        {
+          "role": "respondent",
+          "type": "seller",
+          "user_id": 1021233283,
+          "available_actions": []
+        }
+      ],
+      "returns_raw": {
+        "id": 160595934,
+        "last_updated": "2026-09-09T00:02:02.403+00:00",
+        "shipments": [
+          {
+            "shipment_id": 47966258567,
+            "status": "ready_to_ship",
+            "tracking_number": null,
+            "destination": {
+              "name": "warehouse",
+              "shipping_address": {
+                "address_id": 0,
+                "address_line": "Av. La Antigua S/N",
+                "street_name": "Av. La Antigua",
+                "street_number": "S/N",
+                "comment": "",
+                "zip_code": "54963",
+                "city": {
+                  "id": "TUxNQ1RVTDk0NjQ",
+                  "name": "Tultepec"
+                },
+                "state": {
+                  "id": "MX-MEX",
+                  "name": "Estado De México"
+                },
+                "country": {
+                  "id": "MX",
+                  "name": "Mexico"
+                },
+                "neighborhood": {
+                  "id": null,
+                  "name": "El Nodín"
+                },
+                "municipality": {
+                  "id": null,
+                  "name": null
+                }
+              }
+            },
+            "type": "return"
+          }
+        ],
+        "refund_at": "delivered",
+        "date_closed": null,
+        "resource_type": "order",
+        "date_created": "2026-09-09T00:01:58.227+00:00",
+        "claim_id": 5573077361,
+        "status_money": "retained",
+        "resource_id": 2000018299514856,
+        "orders": [
+          {
+            "order_id": 2000018299514856,
+            "item_id": "MLM3397554048",
+            "context_type": "total",
+            "total_quantity": "1.0",
+            "return_quantity": "1.0",
+            "variation_id": 204163416693
+          }
+        ],
+        "subtype": "return_total",
+        "status": "label_generated",
+        "related_entities": null,
+        "intermediate_check": false
+      }
+    },
+    {
+      "claim_id": 5572804250,
+      "resource": "shipment",
+      "resource_id": 47916917437,
+      "reason_id": "PNR9560",
+      "type": "mediations",
+      "stage": "claim",
+      "status": "opened",
+      "players": [
+        {
+          "role": "complainant",
+          "type": "receiver",
+          "user_id": 1578513346,
+          "available_actions": []
+        },
+        {
+          "role": "respondent",
+          "type": "sender",
+          "user_id": 1021233283,
+          "available_actions": []
+        }
+      ],
+      "returns_raw": {
+        "_error": 404,
+        "_body": "{\"code\":404,\"error\":\"not_found_error\",\"message\":\"There is no associated return for claim 5572804250\",\"cause\":null}"
+      }
+    },
+    {
+      "claim_id": 5572654531,
+      "resource": "order",
+      "resource_id": 2000018266949656,
+      "reason_id": "PDD9939",
+      "type": "mediations",
+      "stage": "dispute",
+      "status": "opened",
+      "players": [
+        {
+          "role": "complainant",
+          "type": "buyer",
+          "user_id": 182767041,
+          "available_actions": []
+        },
+        {
+          "role": "respondent",
+          "type": "seller",
+          "user_id": 1021233283,
+          "available_actions": []
+        }
+      ],
+      "returns_raw": {
+        "id": 160174600,
+        "last_updated": "2026-09-07T10:43:42.193+00:00",
+        "shipments": [
+          {
+            "shipment_id": 47951748730,
+            "status": "ready_to_ship",
+            "tracking_number": null,
+            "destination": {
+              "name": "warehouse",
+              "shipping_address": {
+                "address_id": 0,
+                "address_line": "Av. La Antigua S/N",
+                "street_name": "Av. La Antigua",
+                "street_number": "S/N",
+                "comment": "",
+                "zip_code": "54963",
+                "city": {
+                  "id": "TUxNQ1RVTDk0NjQ",
+                  "name": "Tultepec"
+                },
+                "state": {
+                  "id": "MX-MEX",
+                  "name": "Estado De México"
+                },
+                "country": {
+                  "id": "MX",
+                  "name": "Mexico"
+                },
+                "neighborhood": {
+                  "id": null,
+                  "name": "El Nodín"
+                },
+                "municipality": {
+                  "id": null,
+                  "name": null
+                }
+              }
+            },
+            "type": "return"
+          }
+        ],
+        "refund_at": "delivered",
+        "date_closed": null,
+        "resource_type": "order",
+        "date_created": "2026-09-07T10:43:38.403+00:00",
+        "claim_id": 5572654531,
+        "status_money": "retained",
+        "resource_id": 2000018266949656,
+        "orders": [
+          {
+            "order_id": 2000018266949656,
+            "item_id": "MLM4411281562",
+            "context_type": "total",
+            "total_quantity": "2.0",
+            "return_quantity": "2.0",
+            "variation_id": null
+          }
+        ],
+        "subtype": "return_total",
+        "status": "label_generated",
+        "related_entities": null,
+        "intermediate_check": false
+      }
+    },
+    {
+      "claim_id": 5572635651,
+      "resource": "order",
+      "resource_id": 2000018219886660,
+      "reason_id": "PDD9939",
+      "type": "returns",
+      "stage": "claim",
+      "status": "opened",
+      "players": [
+        {
+          "role": "complainant",
+          "type": "buyer",
+          "user_id": 1934760496,
+          "available_actions": []
+        },
+        {
+          "role": "respondent",
+          "type": "seller",
+          "user_id": 1021233283,
+          "available_actions": [
+            {
+              "action": "send_message_to_complainant",
+              "mandatory": false,
+              "due_date": null
+            },
+            {
+              "action": "refund",
+              "mandatory": false,
+              "due_date": null
+            },
+            {
+              "action": "open_dispute",
+              "mandatory": false,
+              "due_date": null
+            }
+          ]
+        }
+      ],
+      "returns_raw": {
+        "id": 160171410,
+        "last_updated": "2026-09-07T06:10:50.62+00:00",
+        "shipments": [
+          {
+            "shipment_id": 47951433376,
+            "status": "ready_to_ship",
+            "tracking_number": null,
+            "destination": {
+              "name": "warehouse",
+              "shipping_address": {
+                "address_id": 0,
+                "address_line": "Av. La Antigua S/N",
+                "street_name": "Av. La Antigua",
+                "street_number": "S/N",
+                "comment": "",
+                "zip_code": "54963",
+                "city": {
+                  "id": "TUxNQ1RVTDk0NjQ",
+                  "name": "Tultepec"
+                },
+                "state": {
+                  "id": "MX-MEX",
+                  "name": "Estado De México"
+                },
+                "country": {
+                  "id": "MX",
+                  "name": "Mexico"
+                },
+                "neighborhood": {
+                  "id": null,
+                  "name": "El Nodín"
+                },
+                "municipality": {
+                  "id": null,
+                  "name": null
+                }
+              }
+            },
+            "type": "return"
+          }
+        ],
+        "refund_at": "shipped",
+        "date_closed": null,
+        "resource_type": "order",
+        "date_created": "2026-09-07T06:10:46.677+00:00",
+        "claim_id": 5572635651,
+        "status_money": "retained",
+        "resource_id": 2000018219886660,
+        "orders": [
+          {
+            "order_id": 2000018219886660,
+            "item_id": "MLM3743686464",
+            "context_type": "total",
+            "total_quantity": "1.0",
+            "return_quantity": "1.0",
+            "variation_id": null
+          }
+        ],
+        "subtype": "return_total",
+        "status": "label_generated",
+        "related_entities": null,
+        "intermediate_check": false
+      }
+    },
+    {
+      "claim_id": 5572529280,
+      "resource": "order",
+      "resource_id": 2000018287142954,
+      "reason_id": "PDD9502",
+      "type": "returns",
+      "stage": "dispute",
+      "status": "opened",
+      "players": [
+        {
+          "role": "complainant",
+          "type": "buyer",
+          "user_id": 214325216,
+          "available_actions": []
+        },
+        {
+          "role": "respondent",
+          "type": "seller",
+          "user_id": 1021233283,
+          "available_actions": [
+            {
+              "action": "send_message_to_mediator",
+              "mandatory": false,
+              "due_date": null
+            }
+          ]
+        }
+      ],
+      "returns_raw": {
+        "id": 166759011,
+        "last_updated": "2026-09-06T23:15:28.958+00:00",
+        "shipments": null,
+        "refund_at": "shipped",
+        "date_closed": null,
+        "resource_type": "order",
+        "date_created": "2026-09-06T23:15:28.787+00:00",
+        "claim_id": 5572529280,
+        "status_money": "retained",
+        "resource_id": 2000018287142954,
+        "orders": [
+          {
+            "order_id": 2000018287142954,
+            "item_id": "MLM4092769116",
+            "context_type": "total",
+            "total_quantity": "1.0",
+            "return_quantity": "1.0",
+            "variation_id": null
+          }
+        ],
+        "subtype": "return_total",
+        "status": "failed",
+        "related_entities": null,
+        "intermediate_check": false
+      }
+    },
+    {
+      "claim_id": 5572291625,
+      "resource": "order",
+      "resource_id": 2000018265930964,
+      "reason_id": "PDD9939",
+      "type": "returns",
+      "stage": "claim",
+      "status": "opened",
+      "players": [
+        {
+          "role": "complainant",
+          "type": "buyer",
+          "user_id": 1803040145,
+          "available_actions": []
+        },
+        {
+          "role": "respondent",
+          "type": "seller",
+          "user_id": 1021233283,
+          "available_actions": [
+            {
+              "action": "send_message_to_complainant",
+              "mandatory": false,
+              "due_date": null
+            },
+            {
+              "action": "refund",
+              "mandatory": false,
+              "due_date": null
+            },
+            {
+              "action": "open_dispute",
+              "mandatory": false,
+              "due_date": null
+            }
+          ]
+        }
+      ],
+      "returns_raw": {
+        "id": 166694463,
+        "last_updated": "2026-09-09T06:06:26.549+00:00",
+        "shipments": [
+          {
+            "shipment_id": 47945300639,
+            "status": "delivered",
+            "tracking_number": "MEL47945300639FMDOR01",
+            "destination": {
+              "name": "warehouse",
+              "shipping_address": {
+                "address_id": 0,
+                "address_line": "Av. La Antigua S/N",
+                "street_name": "Av. La Antigua",
+                "street_number": "S/N",
+                "comment": "",
+                "zip_code": "54963",
+                "city": {
+                  "id": "TUxNQ1RVTDk0NjQ",
+                  "name": "Tultepec"
+                },
+                "state": {
+                  "id": "MX-MEX",
+                  "name": "Estado De México"
+                },
+                "country": {
+                  "id": "MX",
+                  "name": "Mexico"
+                },
+                "neighborhood": {
+                  "id": null,
+                  "name": "El Nodín"
+                },
+                "municipality": {
+                  "id": null,
+                  "name": null
+                }
+              }
+            },
+            "type": "return"
+          }
+        ],
+        "refund_at": "delivered",
+        "date_closed": null,
+        "resource_type": "order",
+        "date_created": "2026-09-06T13:02:56.466+00:00",
+        "claim_id": 5572291625,
+        "status_money": "retained",
+        "resource_id": 2000018265930964,
+        "orders": [
+          {
+            "order_id": 2000018265930964,
+            "item_id": "MLM2287354889",
+            "context_type": "total",
+            "total_quantity": "1.0",
+            "return_quantity": "1.0",
+            "variation_id": null
+          }
+        ],
+        "subtype": "return_total",
+        "status": "delivered",
+        "related_entities": null,
+        "intermediate_check": false
+      }
+    },
+    {
+      "claim_id": 5572210772,
+      "resource": "order",
+      "resource_id": 2000017930547590,
+      "reason_id": "PDD9939",
+      "type": "returns",
+      "stage": "claim",
+      "status": "opened",
+      "players": [
+        {
+          "role": "complainant",
+          "type": "buyer",
+          "user_id": 2516960607,
+          "available_actions": []
+        },
+        {
+          "role": "respondent",
+          "type": "seller",
+          "user_id": 1021233283,
+          "available_actions": [
+            {
+              "action": "send_message_to_complainant",
+              "mandatory": false,
+              "due_date": null
+            },
+            {
+              "action": "refund",
+              "mandatory": false,
+              "due_date": null
+            },
+            {
+              "action": "open_dispute",
+              "mandatory": false,
+              "due_date": null
+            }
+          ]
+        }
+      ],
+      "returns_raw": {
+        "id": 160060110,
+        "last_updated": "2026-09-06T02:21:51.609+00:00",
+        "shipments": [
+          {
+            "shipment_id": 47944291580,
+            "status": "ready_to_ship",
+            "tracking_number": null,
+            "destination": {
+              "name": "warehouse",
+              "shipping_address": {
+                "address_id": 0,
+                "address_line": "Av. La Antigua S/N",
+                "street_name": "Av. La Antigua",
+                "street_number": "S/N",
+                "comment": "",
+                "zip_code": "54963",
+                "city": {
+                  "id": "TUxNQ1RVTDk0NjQ",
+                  "name": "Tultepec"
+                },
+                "state": {
+                  "id": "MX-MEX",
+                  "name": "Estado De México"
+                },
+                "country": {
+                  "id": "MX",
+                  "name": "Mexico"
+                },
+                "neighborhood": {
+                  "id": null,
+                  "name": "El Nodín"
+                },
+                "municipality": {
+                  "id": null,
+                  "name": null
+                }
+              }
+            },
+            "type": "return"
+          }
+        ],
+        "refund_at": "shipped",
+        "date_closed": null,
+        "resource_type": "order",
+        "date_created": "2026-09-06T02:21:49.586+00:00",
+        "claim_id": 5572210772,
+        "status_money": "retained",
+        "resource_id": 2000017930547590,
+        "orders": [
+          {
+            "order_id": 2000017930547590,
+            "item_id": "MLM2509899077",
+            "context_type": "total",
+            "total_quantity": "1.0",
+            "return_quantity": "1.0",
+            "variation_id": null
+          }
+        ],
+        "subtype": "return_total",
+        "status": "label_generated",
+        "related_entities": null,
+        "intermediate_check": false
+      }
+    },
+    {
+      "claim_id": 5572208253,
+      "resource": "order",
+      "resource_id": 2000018292187826,
+      "reason_id": "PDD9939",
+      "type": "returns",
+      "stage": "claim",
+      "status": "opened",
+      "players": [
+        {
+          "role": "complainant",
+          "type": "buyer",
+          "user_id": 1274021312,
+          "available_actions": []
+        },
+        {
+          "role": "respondent",
+          "type": "seller",
+          "user_id": 1021233283,
+          "available_actions": [
+            {
+              "action": "send_message_to_complainant",
+              "mandatory": false,
+              "due_date": null
+            },
+            {
+              "action": "refund",
+              "mandatory": false,
+              "due_date": null
+            },
+            {
+              "action": "open_dispute",
+              "mandatory": false,
+              "due_date": null
+            }
+          ]
+        }
+      ],
+      "returns_raw": {
+        "id": 166675625,
+        "last_updated": "2026-09-06T02:14:59.799+00:00",
+        "shipments": [
+          {
+            "shipment_id": 47944260900,
+            "status": "ready_to_ship",
+            "tracking_number": null,
+            "destination": {
+              "name": "warehouse",
+              "shipping_address": {
+                "address_id": 0,
+                "address_line": "Av. La Antigua S/N",
+                "street_name": "Av. La Antigua",
+                "street_number": "S/N",
+                "comment": "",
+                "zip_code": "54963",
+                "city": {
+                  "id": "TUxNQ1RVTDk0NjQ",
+                  "name": "Tultepec"
+                },
+                "state": {
+                  "id": "MX-MEX",
+                  "name": "Estado De México"
+                },
+                "country": {
+                  "id": "MX",
+                  "name": "Mexico"
+                },
+                "neighborhood": {
+                  "id": null,
+                  "name": "El Nodín"
+                },
+                "municipality": {
+                  "id": null,
+                  "name": null
+                }
+              }
+            },
+            "type": "return"
+          }
+        ],
+        "refund_at": "shipped",
+        "date_closed": null,
+        "resource_type": "order",
+        "date_created": "2026-09-06T02:14:56.987+00:00",
+        "claim_id": 5572208253,
+        "status_money": "retained",
+        "resource_id": 2000018292187826,
+        "orders": [
+          {
+            "order_id": 2000018292187826,
+            "item_id": "MLM4091866926",
+            "context_type": "total",
+            "total_quantity": "1.0",
+            "return_quantity": "1.0",
+            "variation_id": null
+          }
+        ],
+        "subtype": "return_total",
+        "status": "label_generated",
+        "related_entities": null,
+        "intermediate_check": false
+      }
+    },
+    {
+      "claim_id": 5571877993,
+      "resource": "order",
+      "resource_id": 2000018270447662,
+      "reason_id": "PDD9939",
+      "type": "returns",
+      "stage": "claim",
+      "status": "opened",
+      "players": [
+        {
+          "role": "complainant",
+          "type": "buyer",
+          "user_id": 3449328037,
+          "available_actions": []
+        },
+        {
+          "role": "respondent",
+          "type": "seller",
+          "user_id": 1021233283,
+          "available_actions": [
+            {
+              "action": "send_message_to_complainant",
+              "mandatory": false,
+              "due_date": null
+            },
+            {
+              "action": "refund",
+              "mandatory": false,
+              "due_date": null
+            },
+            {
+              "action": "open_dispute",
+              "mandatory": false,
+              "due_date": null
+            }
+          ]
+        }
+      ],
+      "returns_raw": {
+        "id": 166569189,
+        "last_updated": "2026-09-08T19:47:52.634+00:00",
+        "shipments": [
+          {
+            "shipment_id": 47939526694,
+            "status": "ready_to_ship",
+            "tracking_number": "MEL47939526694FMDOR01",
+            "destination": {
+              "name": "warehouse",
+              "shipping_address": {
+                "address_id": 0,
+                "address_line": "Av. La Antigua S/N",
+                "street_name": "Av. La Antigua",
+                "street_number": "S/N",
+                "comment": "",
+                "zip_code": "54963",
+                "city": {
+                  "id": "TUxNQ1RVTDk0NjQ",
+                  "name": "Tultepec"
+                },
+                "state": {
+                  "id": "MX-MEX",
+                  "name": "Estado De México"
+                },
+                "country": {
+                  "id": "MX",
+                  "name": "Mexico"
+                },
+                "neighborhood": {
+                  "id": null,
+                  "name": "El Nodín"
+                },
+                "municipality": {
+                  "id": null,
+                  "name": null
+                }
+              }
+            },
+            "type": "return"
+          }
+        ],
+        "refund_at": "delivered",
+        "date_closed": null,
+        "resource_type": "order",
+        "date_created": "2026-09-05T13:48:42.527+00:00",
+        "claim_id": 5571877993,
+        "status_money": "retained",
+        "resource_id": 2000018270447662,
+        "orders": [
+          {
+            "order_id": 2000018270447662,
+            "item_id": "MLM3042184802",
+            "context_type": "total",
+            "total_quantity": "1.0",
+            "return_quantity": "1.0",
+            "variation_id": 182629929495
+          }
+        ],
+        "subtype": "return_total",
+        "status": "shipped",
+        "related_entities": null,
+        "intermediate_check": false
+      }
+    },
+    {
+      "claim_id": 5571771859,
+      "resource": "order",
+      "resource_id": 2000018263832768,
+      "reason_id": "PDD9939",
+      "type": "returns",
+      "stage": "claim",
+      "status": "opened",
+      "players": [
+        {
+          "role": "complainant",
+          "type": "buyer",
+          "user_id": 765211442,
+          "available_actions": []
+        },
+        {
+          "role": "respondent",
+          "type": "seller",
+          "user_id": 1021233283,
+          "available_actions": [
+            {
+              "action": "send_message_to_complainant",
+              "mandatory": false,
+              "due_date": null
+            },
+            {
+              "action": "refund",
+              "mandatory": false,
+              "due_date": null
+            },
+            {
+              "action": "open_dispute",
+              "mandatory": false,
+              "due_date": null
+            }
+          ]
+        }
+      ],
+      "returns_raw": {
+        "id": 159925138,
+        "last_updated": "2026-09-05T03:34:31.604+00:00",
+        "shipments": [
+          {
+            "shipment_id": 47937653539,
+            "status": "ready_to_ship",
+            "tracking_number": null,
+            "destination": {
+              "name": "warehouse",
+              "shipping_address": {
+                "address_id": 0,
+                "address_line": "Av. La Antigua S/N",
+                "street_name": "Av. La Antigua",
+                "street_number": "S/N",
+                "comment": "",
+                "zip_code": "54963",
+                "city": {
+                  "id": "TUxNQ1RVTDk0NjQ",
+                  "name": "Tultepec"
+                },
+                "state": {
+                  "id": "MX-MEX",
+                  "name": "Estado De México"
+                },
+                "country": {
+                  "id": "MX",
+                  "name": "Mexico"
+                },
+                "neighborhood": {
+                  "id": null,
+                  "name": "El Nodín"
+                },
+                "municipality": {
+                  "id": null,
+                  "name": null
+                }
+              }
+            },
+            "type": "return"
+          }
+        ],
+        "refund_at": "shipped",
+        "date_closed": null,
+        "resource_type": "order",
+        "date_created": "2026-09-05T03:34:26.723+00:00",
+        "claim_id": 5571771859,
+        "status_money": "retained",
+        "resource_id": 2000018263832768,
+        "orders": [
+          {
+            "order_id": 2000018263832768,
+            "item_id": "MLM2509899077",
+            "context_type": "total",
+            "total_quantity": "1.0",
+            "return_quantity": "1.0",
+            "variation_id": null
+          }
+        ],
+        "subtype": "return_total",
+        "status": "label_generated",
+        "related_entities": null,
+        "intermediate_check": false
+      }
+    },
+    {
+      "claim_id": 5571665125,
+      "resource": "order",
+      "resource_id": 2000018147525424,
+      "reason_id": "PDD9939",
+      "type": "returns",
+      "stage": "claim",
+      "status": "opened",
+      "players": [
+        {
+          "role": "complainant",
+          "type": "buyer",
+          "user_id": 725753172,
+          "available_actions": []
+        },
+        {
+          "role": "respondent",
+          "type": "seller",
+          "user_id": 1021233283,
+          "available_actions": [
+            {
+              "action": "send_message_to_complainant",
+              "mandatory": false,
+              "due_date": null
+            },
+            {
+              "action": "refund",
+              "mandatory": false,
+              "due_date": null
+            },
+            {
+              "action": "open_dispute",
+              "mandatory": false,
+              "due_date": null
+            }
+          ]
+        }
+      ],
+      "returns_raw": {
+        "id": 166499857,
+        "last_updated": "2026-09-04T23:12:22.363+00:00",
+        "shipments": [
+          {
+            "shipment_id": 47936154487,
+            "status": "ready_to_ship",
+            "tracking_number": null,
+            "destination": {
+              "name": "warehouse",
+              "shipping_address": {
+                "address_id": 0,
+                "address_line": "Av. La Antigua S/N",
+                "street_name": "Av. La Antigua",
+                "street_number": "S/N",
+                "comment": "",
+                "zip_code": "54963",
+                "city": {
+                  "id": "TUxNQ1RVTDk0NjQ",
+                  "name": "Tultepec"
+                },
+                "state": {
+                  "id": "MX-MEX",
+                  "name": "Estado De México"
+                },
+                "country": {
+                  "id": "MX",
+                  "name": "Mexico"
+                },
+                "neighborhood": {
+                  "id": null,
+                  "name": "El Nodín"
+                },
+                "municipality": {
+                  "id": null,
+                  "name": null
+                }
+              }
+            },
+            "type": "return"
+          }
+        ],
+        "refund_at": "shipped",
+        "date_closed": null,
+        "resource_type": "order",
+        "date_created": "2026-09-04T23:12:18.783+00:00",
+        "claim_id": 5571665125,
+        "status_money": "retained",
+        "resource_id": 2000018147525424,
+        "orders": [
+          {
+            "order_id": 2000018147525424,
+            "item_id": "MLM2368950745",
+            "context_type": "total",
+            "total_quantity": "1.0",
+            "return_quantity": "1.0",
+            "variation_id": null
+          }
+        ],
+        "subtype": "return_total",
+        "status": "label_generated",
+        "related_entities": null,
+        "intermediate_check": false
+      }
+    },
+    {
+      "claim_id": 5571194051,
+      "resource": "order",
+      "resource_id": 2000018213170358,
+      "reason_id": "PDD9939",
+      "type": "returns",
+      "stage": "claim",
+      "status": "opened",
+      "players": [
+        {
+          "role": "complainant",
+          "type": "buyer",
+          "user_id": 1182741793,
+          "available_actions": []
+        },
+        {
+          "role": "respondent",
+          "type": "seller",
+          "user_id": 1021233283,
+          "available_actions": [
+            {
+              "action": "send_message_to_complainant",
+              "mandatory": false,
+              "due_date": null
+            },
+            {
+              "action": "refund",
+              "mandatory": false,
+              "due_date": null
+            },
+            {
+              "action": "open_dispute",
+              "mandatory": false,
+              "due_date": null
+            }
+          ]
+        }
+      ],
+      "returns_raw": {
+        "id": 159697530,
+        "last_updated": "2026-09-04T02:25:14.528+00:00",
+        "shipments": [
+          {
+            "shipment_id": 47929566805,
+            "status": "ready_to_ship",
+            "tracking_number": null,
+            "destination": {
+              "name": "warehouse",
+              "shipping_address": {
+                "address_id": 0,
+                "address_line": "Av. La Antigua S/N",
+                "street_name": "Av. La Antigua",
+                "street_number": "S/N",
+                "comment": "",
+                "zip_code": "54963",
+                "city": {
+                  "id": "TUxNQ1RVTDk0NjQ",
+                  "name": "Tultepec"
+                },
+                "state": {
+                  "id": "MX-MEX",
+                  "name": "Estado De México"
+                },
+                "country": {
+                  "id": "MX",
+                  "name": "Mexico"
+                },
+                "neighborhood": {
+                  "id": null,
+                  "name": "El Nodín"
+                },
+                "municipality": {
+                  "id": null,
+                  "name": null
+                }
+              }
+            },
+            "type": "return"
+          }
+        ],
+        "refund_at": "shipped",
+        "date_closed": null,
+        "resource_type": "order",
+        "date_created": "2026-09-04T02:25:12.376+00:00",
+        "claim_id": 5571194051,
+        "status_money": "retained",
+        "resource_id": 2000018213170358,
+        "orders": [
+          {
+            "order_id": 2000018213170358,
+            "item_id": "MLM4091957834",
+            "context_type": "total",
+            "total_quantity": "1.0",
+            "return_quantity": "1.0",
+            "variation_id": null
+          }
+        ],
+        "subtype": "return_total",
+        "status": "label_generated",
+        "related_entities": null,
+        "intermediate_check": false
+      }
+    },
+    {
+      "claim_id": 5570244641,
+      "resource": "order",
+      "resource_id": 2000018200277134,
+      "reason_id": "PDD9939",
+      "type": "returns",
+      "stage": "claim",
+      "status": "opened",
+      "players": [
+        {
+          "role": "complainant",
+          "type": "buyer",
+          "user_id": 2426454556,
+          "available_actions": []
+        },
+        {
+          "role": "respondent",
+          "type": "seller",
+          "user_id": 1021233283,
+          "available_actions": [
+            {
+              "action": "send_message_to_complainant",
+              "mandatory": false,
+              "due_date": null
+            },
+            {
+              "action": "refund",
+              "mandatory": false,
+              "due_date": null
+            },
+            {
+              "action": "open_dispute",
+              "mandatory": false,
+              "due_date": null
+            }
+          ]
+        }
+      ],
+      "returns_raw": {
+        "id": 165921283,
+        "last_updated": "2026-09-02T16:13:38.7+00:00",
+        "shipments": [
+          {
+            "shipment_id": 47916156648,
+            "status": "ready_to_ship",
+            "tracking_number": null,
+            "destination": {
+              "name": "warehouse",
+              "shipping_address": {
+                "address_id": 0,
+                "address_line": "Av. La Antigua S/N",
+                "street_name": "Av. La Antigua",
+                "street_number": "S/N",
+                "comment": "",
+                "zip_code": "54963",
+                "city": {
+                  "id": "TUxNQ1RVTDk0NjQ",
+                  "name": "Tultepec"
+                },
+                "state": {
+                  "id": "MX-MEX",
+                  "name": "Estado De México"
+                },
+                "country": {
+                  "id": "MX",
+                  "name": "Mexico"
+                },
+                "neighborhood": {
+                  "id": null,
+                  "name": "El Nodín"
+                },
+                "municipality": {
+                  "id": null,
+                  "name": null
+                }
+              }
+            },
+            "type": "return"
+          }
+        ],
+        "refund_at": "delivered",
+        "date_closed": null,
+        "resource_type": "order",
+        "date_created": "2026-09-02T16:13:34.722+00:00",
+        "claim_id": 5570244641,
+        "status_money": "retained",
+        "resource_id": 2000018200277134,
+        "orders": [
+          {
+            "order_id": 2000018200277134,
+            "item_id": "MLM3732129386",
+            "context_type": "total",
+            "total_quantity": "1.0",
+            "return_quantity": "1.0",
+            "variation_id": null
+          }
+        ],
+        "subtype": "return_total",
+        "status": "label_generated",
+        "related_entities": null,
+        "intermediate_check": false
+      }
+    },
+    {
+      "claim_id": 5570154804,
+      "resource": "order",
+      "resource_id": 2000018060352956,
+      "reason_id": "PDD9939",
+      "type": "returns",
+      "stage": "claim",
+      "status": "opened",
+      "players": [
+        {
+          "role": "complainant",
+          "type": "buyer",
+          "user_id": 118762437,
+          "available_actions": []
+        },
+        {
+          "role": "respondent",
+          "type": "seller",
+          "user_id": 1021233283,
+          "available_actions": [
+            {
+              "action": "send_message_to_complainant",
+              "mandatory": false,
+              "due_date": null
+            },
+            {
+              "action": "refund",
+              "mandatory": false,
+              "due_date": null
+            },
+            {
+              "action": "open_dispute",
+              "mandatory": false,
+              "due_date": null
+            }
+          ]
+        }
+      ],
+      "returns_raw": {
+        "id": 165883013,
+        "last_updated": "2026-09-02T13:37:07.382+00:00",
+        "shipments": [
+          {
+            "shipment_id": 47914470117,
+            "status": "ready_to_ship",
+            "tracking_number": null,
+            "destination": {
+              "name": "warehouse",
+              "shipping_address": {
+                "address_id": 0,
+                "address_line": "Av. La Antigua S/N",
+                "street_name": "Av. La Antigua",
+                "street_number": "S/N",
+                "comment": "",
+                "zip_code": "54963",
+                "city": {
+                  "id": "TUxNQ1RVTDk0NjQ",
+                  "name": "Tultepec"
+                },
+                "state": {
+                  "id": "MX-MEX",
+                  "name": "Estado De México"
+                },
+                "country": {
+                  "id": "MX",
+                  "name": "Mexico"
+                },
+                "neighborhood": {
+                  "id": null,
+                  "name": "El Nodín"
+                },
+                "municipality": {
+                  "id": null,
+                  "name": null
+                }
+              }
+            },
+            "type": "return"
+          }
+        ],
+        "refund_at": "delivered",
+        "date_closed": null,
+        "resource_type": "order",
+        "date_created": "2026-09-02T13:37:03.582+00:00",
+        "claim_id": 5570154804,
+        "status_money": "retained",
+        "resource_id": 2000018060352956,
+        "orders": [
+          {
+            "order_id": 2000018060352956,
+            "item_id": "MLM3397631280",
+            "context_type": "total",
+            "total_quantity": "1.0",
+            "return_quantity": "1.0",
+            "variation_id": 181845293386
+          }
+        ],
+        "subtype": "return_total",
+        "status": "label_generated",
+        "related_entities": null,
+        "intermediate_check": false
+      }
+    },
+    {
+      "claim_id": 5570060138,
+      "resource": "order",
+      "resource_id": 2000018186726294,
+      "reason_id": "PDD9939",
+      "type": "returns",
+      "stage": "claim",
+      "status": "opened",
+      "players": [
+        {
+          "role": "complainant",
+          "type": "buyer",
+          "user_id": 3242098211,
+          "available_actions": []
+        },
+        {
+          "role": "respondent",
+          "type": "seller",
+          "user_id": 1021233283,
+          "available_actions": [
+            {
+              "action": "send_message_to_complainant",
+              "mandatory": false,
+              "due_date": null
+            },
+            {
+              "action": "refund",
+              "mandatory": false,
+              "due_date": null
+            },
+            {
+              "action": "open_dispute",
+              "mandatory": false,
+              "due_date": null
+            }
+          ]
+        }
+      ],
+      "returns_raw": {
+        "id": 159235730,
+        "last_updated": "2026-09-02T08:08:22.679+00:00",
+        "shipments": [
+          {
+            "shipment_id": 47913294338,
+            "status": "ready_to_ship",
+            "tracking_number": null,
+            "destination": {
+              "name": "warehouse",
+              "shipping_address": {
+                "address_id": 0,
+                "address_line": "Av. La Antigua S/N",
+                "street_name": "Av. La Antigua",
+                "street_number": "S/N",
+                "comment": "",
+                "zip_code": "54963",
+                "city": {
+                  "id": "TUxNQ1RVTDk0NjQ",
+                  "name": "Tultepec"
+                },
+                "state": {
+                  "id": "MX-MEX",
+                  "name": "Estado De México"
+                },
+                "country": {
+                  "id": "MX",
+                  "name": "Mexico"
+                },
+                "neighborhood": {
+                  "id": null,
+                  "name": "El Nodín"
+                },
+                "municipality": {
+                  "id": null,
+                  "name": null
+                }
+              }
+            },
+            "type": "return"
+          }
+        ],
+        "refund_at": "delivered",
+        "date_closed": null,
+        "resource_type": "order",
+        "date_created": "2026-09-02T08:08:18.578+00:00",
+        "claim_id": 5570060138,
+        "status_money": "retained",
+        "resource_id": 2000018186726294,
+        "orders": [
+          {
+            "order_id": 2000018186726294,
+            "item_id": "MLM3642312302",
+            "context_type": "total",
+            "total_quantity": "1.0",
+            "return_quantity": "1.0",
+            "variation_id": null
+          }
+        ],
+        "subtype": "return_total",
+        "status": "label_generated",
+        "related_entities": null,
+        "intermediate_check": false
+      }
+    },
+    {
+      "claim_id": 5570040919,
+      "resource": "order",
+      "resource_id": 2000017852740816,
+      "reason_id": "PDD9939",
+      "type": "returns",
+      "stage": "claim",
+      "status": "opened",
+      "players": [
+        {
+          "role": "complainant",
+          "type": "buyer",
+          "user_id": 153111784,
+          "available_actions": []
+        },
+        {
+          "role": "respondent",
+          "type": "seller",
+          "user_id": 1021233283,
+          "available_actions": [
+            {
+              "action": "send_message_to_complainant",
+              "mandatory": false,
+              "due_date": null
+            },
+            {
+              "action": "refund",
+              "mandatory": false,
+              "due_date": null
+            },
+            {
+              "action": "open_dispute",
+              "mandatory": false,
+              "due_date": null
+            }
+          ]
+        }
+      ],
+      "returns_raw": {
+        "id": 165836955,
+        "last_updated": "2026-09-08T01:30:30.779+00:00",
+        "shipments": [
+          {
+            "shipment_id": 47912910148,
+            "status": "shipped",
+            "tracking_number": "383499319659",
+            "destination": {
+              "name": "warehouse",
+              "shipping_address": {
+                "address_id": 0,
+                "address_line": "Av. La Antigua S/N",
+                "street_name": "Av. La Antigua",
+                "street_number": "S/N",
+                "comment": "",
+                "zip_code": "54963",
+                "city": {
+                  "id": "TUxNQ1RVTDk0NjQ",
+                  "name": "Tultepec"
+                },
+                "state": {
+                  "id": "MX-MEX",
+                  "name": "Estado De México"
+                },
+                "country": {
+                  "id": "MX",
+                  "name": "Mexico"
+                },
+                "neighborhood": {
+                  "id": null,
+                  "name": "El Nodín"
+                },
+                "municipality": {
+                  "id": null,
+                  "name": null
+                }
+              }
+            },
+            "type": "return"
+          }
+        ],
+        "refund_at": "delivered",
+        "date_closed": null,
+        "resource_type": "order",
+        "date_created": "2026-09-02T04:30:44.618+00:00",
+        "claim_id": 5570040919,
+        "status_money": "retained",
+        "resource_id": 2000017852740816,
+        "orders": [
+          {
+            "order_id": 2000017852740816,
+            "item_id": "MLM3397580272",
+            "context_type": "total",
+            "total_quantity": "1.0",
+            "return_quantity": "1.0",
+            "variation_id": 199073163579
+          }
+        ],
+        "subtype": "return_total",
+        "status": "shipped",
+        "related_entities": null,
+        "intermediate_check": false
+      }
+    },
+    {
+      "claim_id": 5570027778,
+      "resource": "order",
+      "resource_id": 2000018172180542,
+      "reason_id": "PDD9952",
+      "type": "mediations",
+      "stage": "dispute",
+      "status": "opened",
+      "players": [
+        {
+          "role": "complainant",
+          "type": "buyer",
+          "user_id": 188692873,
+          "available_actions": []
+        },
+        {
+          "role": "respondent",
+          "type": "seller",
+          "user_id": 1021233283,
+          "available_actions": []
+        }
+      ],
+      "returns_raw": {
+        "id": 159223662,
+        "last_updated": "2026-09-02T03:29:18.04+00:00",
+        "shipments": [
+          {
+            "shipment_id": 47912667868,
+            "status": "ready_to_ship",
+            "tracking_number": null,
+            "destination": {
+              "name": "seller_address",
+              "shipping_address": {
+                "address_id": 1204952578,
+                "address_line": "Calle C. 6 13",
+                "street_name": "Calle C. 6",
+                "street_number": "13",
+                "comment": "Referencia: 19.525007895481657, -99.0758153581089",
+                "zip_code": "55340",
+                "city": {
+                  "id": "TUxNQ0VDQTEwOTM",
+                  "name": "Ecatepec de Morelos"
+                },
+                "state": {
+                  "id": "MX-MEX",
+                  "name": "Estado De México"
+                },
+                "country": {
+                  "id": "MX",
+                  "name": "Mexico"
+                },
+                "neighborhood": {
+                  "id": null,
+                  "name": "Rustica Xalostoc"
+                },
+                "municipality": {
+                  "id": null,
+                  "name": "Ecatepec de Morelos"
+                }
+              }
+            },
+            "type": "return"
+          }
+        ],
+        "refund_at": "shipped",
+        "date_closed": null,
+        "resource_type": "order",
+        "date_created": "2026-09-02T03:29:13.957+00:00",
+        "claim_id": 5570027778,
+        "status_money": "retained",
+        "resource_id": 2000018172180542,
+        "orders": [
+          {
+            "order_id": 2000018172180542,
+            "item_id": "MLM4703112086",
+            "context_type": "total",
+            "total_quantity": "1.0",
+            "return_quantity": "1.0",
+            "variation_id": null
+          }
+        ],
+        "subtype": "return_total",
+        "status": "label_generated",
+        "related_entities": null,
+        "intermediate_check": false
+      }
+    },
+    {
+      "claim_id": 5569975741,
+      "resource": "order",
+      "resource_id": 2000018133227168,
+      "reason_id": "PDD9941",
+      "type": "mediations",
+      "stage": "dispute",
+      "status": "opened",
+      "players": [
+        {
+          "role": "complainant",
+          "type": "buyer",
+          "user_id": 395219845,
+          "available_actions": []
+        },
+        {
+          "role": "respondent",
+          "type": "seller",
+          "user_id": 1021233283,
+          "available_actions": []
+        }
+      ],
+      "returns_raw": {
+        "id": 165812229,
+        "last_updated": "2026-09-02T01:19:02.561+00:00",
+        "shipments": [
+          {
+            "shipment_id": 47911794954,
+            "status": "ready_to_ship",
+            "tracking_number": null,
+            "destination": {
+              "name": "warehouse",
+              "shipping_address": {
+                "address_id": 0,
+                "address_line": "Av. La Antigua S/N",
+                "street_name": "Av. La Antigua",
+                "street_number": "S/N",
+                "comment": "",
+                "zip_code": "54963",
+                "city": {
+                  "id": "TUxNQ1RVTDk0NjQ",
+                  "name": "Tultepec"
+                },
+                "state": {
+                  "id": "MX-MEX",
+                  "name": "Estado De México"
+                },
+                "country": {
+                  "id": "MX",
+                  "name": "Mexico"
+                },
+                "neighborhood": {
+                  "id": null,
+                  "name": "El Nodín"
+                },
+                "municipality": {
+                  "id": null,
+                  "name": null
+                }
+              }
+            },
+            "type": "return"
+          }
+        ],
+        "refund_at": "shipped",
+        "date_closed": null,
+        "resource_type": "order",
+        "date_created": "2026-09-02T01:18:57.002+00:00",
+        "claim_id": 5569975741,
+        "status_money": "retained",
+        "resource_id": 2000018133227168,
+        "orders": [
+          {
+            "order_id": 2000018133227168,
+            "item_id": "MLM2203951207",
+            "context_type": "total",
+            "total_quantity": "1.0",
+            "return_quantity": "1.0",
+            "variation_id": null
+          }
+        ],
+        "subtype": "return_total",
+        "status": "label_generated",
+        "related_entities": null,
+        "intermediate_check": false
+      }
+    },
+    {
+      "claim_id": 5569800137,
+      "resource": "order",
+      "resource_id": 2000018167593282,
+      "reason_id": "PDD9960",
+      "type": "mediations",
+      "stage": "dispute",
+      "status": "opened",
+      "players": [
+        {
+          "role": "complainant",
+          "type": "buyer",
+          "user_id": 383122934,
+          "available_actions": []
+        },
+        {
+          "role": "respondent",
+          "type": "seller",
+          "user_id": 1021233283,
+          "available_actions": [
+            {
+              "action": "send_message_to_mediator",
+              "mandatory": false,
+              "due_date": null
+            }
+          ]
+        }
+      ],
+      "returns_raw": {
+        "_error": 404,
+        "_body": "{\"code\":404,\"error\":\"not_found_error\",\"message\":\"There is no associated return for claim 5569800137\",\"cause\":null}"
+      }
+    },
+    {
+      "claim_id": 5569753306,
+      "resource": "order",
+      "resource_id": 2000018061441080,
+      "reason_id": "PDD9939",
+      "type": "returns",
+      "stage": "claim",
+      "status": "opened",
+      "players": [
+        {
+          "role": "complainant",
+          "type": "buyer",
+          "user_id": 395863438,
+          "available_actions": []
+        },
+        {
+          "role": "respondent",
+          "type": "seller",
+          "user_id": 1021233283,
+          "available_actions": [
+            {
+              "action": "send_message_to_complainant",
+              "mandatory": false,
+              "due_date": null
+            },
+            {
+              "action": "refund",
+              "mandatory": false,
+              "due_date": null
+            },
+            {
+              "action": "open_dispute",
+              "mandatory": false,
+              "due_date": null
+            }
+          ]
+        }
+      ],
+      "returns_raw": {
+        "id": 165721757,
+        "last_updated": "2026-09-01T19:11:34.378+00:00",
+        "shipments": [
+          {
+            "shipment_id": 47908625816,
+            "status": "ready_to_ship",
+            "tracking_number": null,
+            "destination": {
+              "name": "warehouse",
+              "shipping_address": {
+                "address_id": 0,
+                "address_line": "Av. La Antigua S/N",
+                "street_name": "Av. La Antigua",
+                "street_number": "S/N",
+                "comment": "",
+                "zip_code": "54963",
+                "city": {
+                  "id": "TUxNQ1RVTDk0NjQ",
+                  "name": "Tultepec"
+                },
+                "state": {
+                  "id": "MX-MEX",
+                  "name": "Estado De México"
+                },
+                "country": {
+                  "id": "MX",
+                  "name": "Mexico"
+                },
+                "neighborhood": {
+                  "id": null,
+                  "name": "El Nodín"
+                },
+                "municipality": {
+                  "id": null,
+                  "name": null
+                }
+              }
+            },
+            "type": "return"
+          }
+        ],
+        "refund_at": "shipped",
+        "date_closed": null,
+        "resource_type": "order",
+        "date_created": "2026-09-01T19:11:32.073+00:00",
+        "claim_id": 5569753306,
+        "status_money": "retained",
+        "resource_id": 2000018061441080,
+        "orders": [
+          {
+            "order_id": 2000018061441080,
+            "item_id": "MLM2369674169",
+            "context_type": "total",
+            "total_quantity": "1.0",
+            "return_quantity": "1.0",
+            "variation_id": null
+          }
+        ],
+        "subtype": "return_total",
+        "status": "label_generated",
+        "related_entities": null,
+        "intermediate_check": false
+      }
+    },
+    {
+      "claim_id": 5569411637,
+      "resource": "order",
+      "resource_id": 2000018127475692,
+      "reason_id": "PDD9939",
+      "type": "mediations",
+      "stage": "dispute",
+      "status": "opened",
+      "players": [
+        {
+          "role": "complainant",
+          "type": "buyer",
+          "user_id": 3123082268,
+          "available_actions": []
+        },
+        {
+          "role": "respondent",
+          "type": "seller",
+          "user_id": 1021233283,
+          "available_actions": []
+        }
+      ],
+      "returns_raw": {
+        "id": 158975164,
+        "last_updated": "2026-09-01T02:35:12.536+00:00",
+        "shipments": [
+          {
+            "shipment_id": 47902899541,
+            "status": "ready_to_ship",
+            "tracking_number": "383476666721",
+            "destination": {
+              "name": "warehouse",
+              "shipping_address": {
+                "address_id": 0,
+                "address_line": "Av. La Antigua S/N",
+                "street_name": "Av. La Antigua",
+                "street_number": "S/N",
+                "comment": "",
+                "zip_code": "54963",
+                "city": {
+                  "id": "TUxNQ1RVTDk0NjQ",
+                  "name": "Tultepec"
+                },
+                "state": {
+                  "id": "MX-MEX",
+                  "name": "Estado De México"
+                },
+                "country": {
+                  "id": "MX",
+                  "name": "Mexico"
+                },
+                "neighborhood": {
+                  "id": null,
+                  "name": "El Nodín"
+                },
+                "municipality": {
+                  "id": null,
+                  "name": null
+                }
+              }
+            },
+            "type": "return"
+          }
+        ],
+        "refund_at": "delivered",
+        "date_closed": null,
+        "resource_type": "order",
+        "date_created": "2026-09-01T02:35:05.862+00:00",
+        "claim_id": 5569411637,
+        "status_money": "retained",
+        "resource_id": 2000018127475692,
+        "orders": [
+          {
+            "order_id": 2000018127475692,
+            "item_id": "MLM3397554048",
+            "context_type": "total",
+            "total_quantity": "1.0",
+            "return_quantity": "1.0",
+            "variation_id": 204163416693
+          }
+        ],
+        "subtype": "return_total",
+        "status": "label_generated",
+        "related_entities": null,
+        "intermediate_check": false
+      }
+    },
+    {
+      "claim_id": 5569393144,
+      "resource": "order",
+      "resource_id": 2000018167517022,
+      "reason_id": "PDD9960",
+      "type": "mediations",
+      "stage": "dispute",
+      "status": "opened",
+      "players": [
+        {
+          "role": "complainant",
+          "type": "buyer",
+          "user_id": 383122934,
+          "available_actions": []
+        },
+        {
+          "role": "respondent",
+          "type": "seller",
+          "user_id": 1021233283,
+          "available_actions": [
+            {
+              "action": "send_message_to_mediator",
+              "mandatory": false,
+              "due_date": null
+            }
+          ]
+        }
+      ],
+      "returns_raw": {
+        "_error": 404,
+        "_body": "{\"code\":404,\"error\":\"not_found_error\",\"message\":\"There is no associated return for claim 5569393144\",\"cause\":null}"
+      }
+    },
+    {
+      "claim_id": 5569301460,
+      "resource": "order",
+      "resource_id": 2000017723862764,
+      "reason_id": "PDD9939",
+      "type": "returns",
+      "stage": "claim",
+      "status": "opened",
+      "players": [
+        {
+          "role": "complainant",
+          "type": "buyer",
+          "user_id": 548748313,
+          "available_actions": []
+        },
+        {
+          "role": "respondent",
+          "type": "seller",
+          "user_id": 1021233283,
+          "available_actions": [
+            {
+              "action": "send_message_to_complainant",
+              "mandatory": false,
+              "due_date": null
+            },
+            {
+              "action": "refund",
+              "mandatory": false,
+              "due_date": null
+            },
+            {
+              "action": "open_dispute",
+              "mandatory": false,
+              "due_date": null
+            }
+          ]
+        }
+      ],
+      "returns_raw": {
+        "id": 158932630,
+        "last_updated": "2026-08-31T23:07:52.205+00:00",
+        "shipments": [
+          {
+            "shipment_id": 47901210431,
+            "status": "ready_to_ship",
+            "tracking_number": null,
+            "destination": {
+              "name": "warehouse",
+              "shipping_address": {
+                "address_id": 0,
+                "address_line": "Av. La Antigua S/N",
+                "street_name": "Av. La Antigua",
+                "street_number": "S/N",
+                "comment": "",
+                "zip_code": "54963",
+                "city": {
+                  "id": "TUxNQ1RVTDk0NjQ",
+                  "name": "Tultepec"
+                },
+                "state": {
+                  "id": "MX-MEX",
+                  "name": "Estado De México"
+                },
+                "country": {
+                  "id": "MX",
+                  "name": "Mexico"
+                },
+                "neighborhood": {
+                  "id": null,
+                  "name": "El Nodín"
+                },
+                "municipality": {
+                  "id": null,
+                  "name": null
+                }
+              }
+            },
+            "type": "return"
+          }
+        ],
+        "refund_at": "shipped",
+        "date_closed": null,
+        "resource_type": "order",
+        "date_created": "2026-08-31T23:07:50.327+00:00",
+        "claim_id": 5569301460,
+        "status_money": "retained",
+        "resource_id": 2000017723862764,
+        "orders": [
+          {
+            "order_id": 2000017723862764,
+            "item_id": "MLM4091866926",
+            "context_type": "total",
+            "total_quantity": "1.0",
+            "return_quantity": "1.0",
+            "variation_id": null
+          }
+        ],
+        "subtype": "return_total",
+        "status": "label_generated",
+        "related_entities": null,
+        "intermediate_check": false
+      }
+    },
+    {
+      "claim_id": 5569017862,
+      "resource": "order",
+      "resource_id": 2000018028125126,
+      "reason_id": "PDD9939",
+      "type": "mediations",
+      "stage": "dispute",
+      "status": "opened",
+      "players": [
+        {
+          "role": "complainant",
+          "type": "buyer",
+          "user_id": 766180787,
+          "available_actions": []
+        },
+        {
+          "role": "respondent",
+          "type": "seller",
+          "user_id": 1021233283,
+          "available_actions": []
+        }
+      ],
+      "returns_raw": {
+        "id": 158801696,
+        "last_updated": "2026-08-31T15:46:49.673+00:00",
+        "shipments": [
+          {
+            "shipment_id": 47897552136,
+            "status": "ready_to_ship",
+            "tracking_number": null,
+            "destination": {
+              "name": "warehouse",
+              "shipping_address": {
+                "address_id": 0,
+                "address_line": "Av. La Antigua S/N",
+                "street_name": "Av. La Antigua",
+                "street_number": "S/N",
+                "comment": "",
+                "zip_code": "54963",
+                "city": {
+                  "id": "TUxNQ1RVTDk0NjQ",
+                  "name": "Tultepec"
+                },
+                "state": {
+                  "id": "MX-MEX",
+                  "name": "Estado De México"
+                },
+                "country": {
+                  "id": "MX",
+                  "name": "Mexico"
+                },
+                "neighborhood": {
+                  "id": null,
+                  "name": "El Nodín"
+                },
+                "municipality": {
+                  "id": null,
+                  "name": null
+                }
+              }
+            },
+            "type": "return"
+          }
+        ],
+        "refund_at": "shipped",
+        "date_closed": null,
+        "resource_type": "order",
+        "date_created": "2026-08-31T15:46:46.579+00:00",
+        "claim_id": 5569017862,
+        "status_money": "retained",
+        "resource_id": 2000018028125126,
+        "orders": [
+          {
+            "order_id": 2000018028125126,
+            "item_id": "MLM4092769116",
+            "context_type": "total",
+            "total_quantity": "1.0",
+            "return_quantity": "1.0",
+            "variation_id": null
+          }
+        ],
+        "subtype": "return_total",
+        "status": "label_generated",
+        "related_entities": null,
+        "intermediate_check": false
+      }
+    }
+  ]
+}
