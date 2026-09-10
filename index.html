@@ -3,224 +3,229 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Devoluciones Full y Colecta — Mercado Libre</title>
+<title>Devoluciones — Para tu revisión</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;500;700;900&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #f4f5f7;
-    --card-bg: #ffffff;
-    --border: #e2e4e8;
-    --text: #1c1f26;
-    --muted: #6b7280;
-    --full: #1d4ed8;
-    --full-bg: #dbeafe;
-    --colecta: #b45309;
-    --colecta-bg: #fef3c7;
-    --urgente: #dc2626;
-    --urgente-bg: #fee2e2;
+    --black:   #0D0D0D;
+    --white:   #FFFFFF;
+    --surface: #F5F5F5;
+    --border:  #E4E4E4;
+    --muted:   #8A8A8A;
   }
-  * { box-sizing: border-box; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    background: var(--bg);
-    color: var(--text);
+    background: var(--surface);
+    color: var(--black);
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100dvh;
   }
+
+  /* ── Header ─────────────────────────────────────────────── */
   header {
-    background: var(--card-bg);
+    background: var(--white);
     border-bottom: 1px solid var(--border);
-    padding: 20px 24px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 8px;
+    padding: 20px clamp(20px, 4vw, 48px);
+    display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap;
   }
-  header h1 { font-size: 20px; margin: 0; }
-  header .meta { font-size: 13px; color: var(--muted); }
-  h3.grupo {
-    font-size: 13px;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    color: var(--muted);
-    margin: 24px auto 8px auto;
-    max-width: 1200px;
-    padding: 0 24px;
+  .title { font-weight: 900; font-size: clamp(20px, 2.6vw, 28px); letter-spacing: -.02em; }
+  .meta { font-weight: 300; font-size: 12px; letter-spacing: .08em; color: var(--muted); }
+
+  main { max-width: 1200px; margin: 0 auto; padding: clamp(24px, 4vw, 44px) clamp(18px, 4vw, 48px) 64px; }
+
+  #banner:not(:empty) {
+    border: 1.5px solid var(--black); background: var(--white);
+    padding: 14px 18px; margin-bottom: 28px; font-weight: 300; font-size: 14px;
   }
-  h3.grupo:first-of-type { margin-top: 24px; }
-  main {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 24px 24px 24px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-    gap: 20px;
+
+  .section-label {
+    font-weight: 700; font-size: 13px; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 16px;
   }
-  section {
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 16px;
+
+  /* ── Fila de tarjetas ───────────────────────────────────── */
+  .cards-row { display: flex; gap: clamp(16px, 2.5vw, 28px); flex-wrap: wrap; }
+  .dash-card {
+    flex: 1; min-width: 300px; background: var(--white);
+    border: 1px solid var(--border); border-radius: 10px; padding: clamp(20px, 2.5vw, 28px);
   }
-  section h2 {
-    font-size: 15px;
-    margin: 0 0 4px 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  .dash-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+  .dash-title { font-weight: 900; font-size: clamp(18px, 2.2vw, 24px); letter-spacing: -.01em; }
+  .count {
+    font-weight: 900; font-size: 15px; min-width: 34px; height: 34px; padding: 0 10px;
+    display: inline-flex; align-items: center; justify-content: center;
+    background: var(--black); color: var(--white); border-radius: 999px;
   }
-  section .count {
-    background: var(--bg);
-    border-radius: 999px;
-    padding: 2px 10px;
-    font-size: 13px;
-    font-weight: 600;
+  .dash-card.urg .count { background: var(--black); }
+  .dash-desc { font-weight: 300; font-size: 13px; color: var(--muted); margin-top: 8px; line-height: 1.5; }
+
+  /* ── Item dentro de la tarjeta ──────────────────────────── */
+  .lista { margin-top: 20px; }
+  .item { border-top: 1px solid var(--border); padding-top: 18px; margin-top: 18px; }
+  .item:first-child { border-top: none; padding-top: 0; margin-top: 0; }
+  .item .prod { font-weight: 900; font-size: 16px; line-height: 1.15; letter-spacing: -.01em; }
+  .item .sub {
+    font-weight: 300; font-size: 12px; letter-spacing: .06em; text-transform: uppercase;
+    color: var(--muted); margin-top: 8px;
   }
-  section p.desc { font-size: 12px; color: var(--muted); margin: 0 0 14px 0; }
-  .item {
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 10px 12px;
-    margin-bottom: 8px;
-    font-size: 13px;
+  .item .sub a { color: var(--black); font-weight: 700; text-decoration: none; }
+  .item .sub a:hover { text-decoration: underline; }
+  .reloj-linea {
+    font-weight: 700; font-size: 12px; letter-spacing: .04em; text-transform: uppercase;
+    margin-top: 10px; display: inline-block;
   }
-  .item:last-child { margin-bottom: 0; }
-  .item-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 4px;
+  .item.warn .reloj-linea, .item.urgent .reloj-linea {
+    background: var(--black); color: var(--white); padding: 6px 12px; border-radius: 4px;
   }
-  .badge {
-    font-size: 11px;
-    font-weight: 700;
-    padding: 2px 8px;
-    border-radius: 999px;
-    white-space: nowrap;
+
+  .registro { display: flex; align-items: center; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+  .registro .guia {
+    font-weight: 300; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted);
+    width: 100%;
   }
-  .badge.full { color: var(--full); background: var(--full-bg); }
-  .badge.colecta { color: var(--colecta); background: var(--colecta-bg); }
-  .badge.desconocido { color: var(--muted); background: var(--bg); }
-  .badge.urgente { color: var(--urgente); background: var(--urgente-bg); }
-  .item .linea { color: var(--muted); font-size: 12px; }
-  .item a { color: var(--full); text-decoration: none; }
-  .item a:hover { text-decoration: underline; }
-  .vacio { color: var(--muted); font-size: 13px; font-style: italic; padding: 8px 0; }
-  .error-banner {
-    max-width: 1200px;
-    margin: 16px auto 0 auto;
-    padding: 12px 16px;
-    background: var(--urgente-bg);
-    color: var(--urgente);
-    border-radius: 8px;
-    font-size: 13px;
+  .registro .guia b { color: var(--black); font-weight: 900; letter-spacing: 0; }
+  .rem-input {
+    flex: 1; min-width: 150px; padding: 11px 14px;
+    border: 2px solid var(--black); background: var(--white); color: var(--black);
+    font-family: 'Montserrat', sans-serif; font-weight: 500; font-size: 14px; border-radius: 6px;
   }
+  .rem-input::placeholder { color: var(--muted); font-weight: 300; }
+  .btn-reg {
+    padding: 11px 24px; border: none; background: var(--black); color: var(--white);
+    font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 12px;
+    letter-spacing: .15em; text-transform: uppercase; cursor: pointer; border-radius: 6px;
+  }
+  .btn-reg:disabled { opacity: .35; cursor: default; }
+  .reg-status { font-weight: 700; font-size: 11px; letter-spacing: .04em; text-transform: uppercase; width: 100%; }
+
+  .vacio { font-weight: 300; font-style: italic; font-size: 14px; color: var(--muted); margin-top: 18px; }
 </style>
 </head>
 <body>
 
 <header>
-  <h1>Devoluciones — FULL y Colecta</h1>
-  <div class="meta" id="ultima-actualizacion">Cargando...</div>
+  <div class="title">Devoluciones — Para tu revisión</div>
+  <div class="meta" id="ultima">Cargando…</div>
 </header>
 
-<div id="error-banner"></div>
-
-<h3 class="grupo">Reclamos y mediaciones</h3>
 <main>
-  <section>
-    <h2>Urgentes <span class="count" id="count-urgentes">0</span></h2>
-    <p class="desc">Vencen hoy o ya vencieron — necesitan atención ahora.</p>
-    <div id="lista-urgentes"></div>
-  </section>
+  <div id="banner"></div>
 
-  <section>
-    <h2>Próximas por atender <span class="count" id="count-proximas">0</span></h2>
-    <p class="desc">Tienen fecha límite, pero todavía no es hoy.</p>
-    <div id="lista-proximas"></div>
-  </section>
-</main>
-
-<h3 class="grupo">Devoluciones</h3>
-<main>
-  <section>
-    <h2>Por revisar <span class="count" id="count-devoluciones">0</span></h2>
-    <p class="desc">Ya llegaron a tu almacén y todavía no las revisas. No incluye las que regresan al almacén de Full — esas no son tuyas.</p>
-    <div id="lista-devoluciones"></div>
-  </section>
+  <div class="section-label">Devoluciones que llegan a tu almacén</div>
+  <div class="cards-row">
+    <div class="dash-card urg">
+      <div class="dash-head"><span class="dash-title">Urgentes</span><span class="count" id="count-urgentes">0</span></div>
+      <div class="dash-desc">Vencen hoy o ya vencieron — necesitan atención ahora.</div>
+      <div class="lista" id="lista-urgentes"></div>
+    </div>
+    <div class="dash-card">
+      <div class="dash-head"><span class="dash-title">Próximas por atender</span><span class="count" id="count-proximas">0</span></div>
+      <div class="dash-desc">Tienen fecha límite (3 días para "Ya la revisé"), pero todavía no es hoy.</div>
+      <div class="lista" id="lista-proximas"></div>
+    </div>
+  </div>
 </main>
 
 <script>
   const REFRESCO_MS = 5 * 60 * 1000;
+  const MESES = ["ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic"];
 
-  function badgeCanal(canal) {
-    const clase = canal === "FULL" ? "full" : canal === "Colecta" ? "colecta" : "desconocido";
-    return `<span class="badge ${clase}">${canal}</span>`;
-  }
+  // Web app del scanner (mismo endpoint; el registro entra por action=registrarDevolucionFull).
+  const BRIDGE_URL = 'https://script.google.com/macros/s/AKfycbzyt2_OBXDiGStpeyTAkQGBAG_wWGI_GP24swuGLcAI1S9LnCWwEmhPHQul2CGsDw/exec';
+  // Motor (Apps Script) que jala las devoluciones de ML y las sirve. Refresca el token solo.
+  const MOTOR_URL = 'https://script.google.com/macros/s/AKfycbwx-Qsark2dwqGE1QeWKZl665uWFX4OtHR_cER0cxKnKRQzM3UpS1SlW_geWMXT6xJm/exec';
+  let DATOS = [];
 
-  function filaReclamo(item) {
-    const partes = [];
-    partes.push(`<div class="item-top">`);
-    partes.push(`<strong>Reclamo ${item.claim_id}</strong>`);
-    partes.push(`<span style="display:flex; gap:6px;">`);
-    if (item.urgente_hoy) {
-      partes.push(`<span class="badge urgente">VENCE HOY</span>`);
-    }
-    partes.push(badgeCanal(item.canal));
-    partes.push(`</span></div>`);
-    if (item.order_id) {
-      partes.push(`<div class="linea"><a href="https://www.mercadolibre.com.mx/ventas/${item.order_id}/detalle" target="_blank">Pedido ${item.order_id}</a></div>`);
-    }
-    partes.push(`<div class="linea">Motivo: ${item.reason_id || "—"} · Acción: ${item.accion || "—"}${item.vence ? " · Vence: " + item.vence.slice(0,10) : ""}</div>`);
-    return `<div class="item">${partes.join("")}</div>`;
-  }
-
-  function filaDevolucion(item) {
-    const partes = [];
-    partes.push(`<div class="item-top">`);
-    partes.push(`<strong>Reclamo ${item.claim_id}</strong>`);
-    partes.push(badgeCanal(item.canal));
-    partes.push(`</div>`);
-    if (item.order_id) {
-      partes.push(`<div class="linea"><a href="https://www.mercadolibre.com.mx/ventas/${item.order_id}/detalle" target="_blank">Pedido ${item.order_id}</a></div>`);
-    }
-    partes.push(`<div class="linea">Motivo: ${item.reason_id || "—"}${item.tracking_number ? " · Guía: " + item.tracking_number : ""}${item.status_money ? " · Dinero: " + item.status_money : ""}</div>`);
-    return `<div class="item">${partes.join("")}</div>`;
-  }
-
-  function pintarLista(idContenedor, idContador, items, pintarFila) {
-    const contenedor = document.getElementById(idContenedor);
-    document.getElementById(idContador).textContent = items.length;
-    if (!items.length) {
-      contenedor.innerHTML = `<div class="vacio">Nada por aquí ahora mismo.</div>`;
-      return;
-    }
-    contenedor.innerHTML = items.map(pintarFila).join("");
-  }
-
-  async function cargarDatos() {
+  async function registrar(idx) {
+    const item = DATOS[idx];
+    const card = document.getElementById("item-" + idx);
+    const btn = card.querySelector(".btn-reg");
+    const rem = card.querySelector(".rem-input").value.trim();
+    const status = card.querySelector(".reg-status");
+    if (!item.guia) { status.textContent = "⚠️ esta no trae guía todavía"; return; }
+    btn.disabled = true; status.textContent = "Registrando…";
+    const payload = JSON.stringify({
+      action: "registrarDevolucionFull",
+      guia: item.guia, pedido: item.order_id, sku: item.sku,
+      cantidad: item.cantidad || 1, remision: rem,
+      motivo: item.motivo, canal: "FULL"
+    });
     try {
-      const resp = await fetch("data.json?_=" + Date.now());
-      if (!resp.ok) throw new Error("data.json respondio " + resp.status);
-      const data = await resp.json();
+      const res = await fetch(BRIDGE_URL, { method: "POST", redirect: "follow", body: payload });
+      const data = await res.json();
+      if (data.ok) {
+        status.textContent = "✓ Registrada" + (rem ? " · Rem " + rem : " (sin remisión aún)");
+      } else {
+        status.textContent = "❌ " + (data.error || "error"); btn.disabled = false;
+      }
+    } catch (e) { status.textContent = "❌ error de red"; btn.disabled = false; }
+  }
 
-      document.getElementById("error-banner").innerHTML = "";
-      document.getElementById("ultima-actualizacion").textContent =
-        "Actualizado: " + new Date(data.generado).toLocaleString("es-MX");
+  function fechaBonita(iso) {
+    if (!iso) return "";
+    const p = iso.split("-");
+    return `${p[2]}/${MESES[(+p[1])-1]}`;
+  }
+  function nivel(dias) {
+    if (dias === null || dias === undefined) return "";
+    if (dias <= 0) return "urgent";
+    if (dias <= 1) return "warn";
+    return "";
+  }
+  function textoReloj(dias) {
+    if (dias === null || dias === undefined) return "sin fecha";
+    if (dias < 0)  return `venció hace ${Math.abs(dias)} d`;
+    if (dias === 0) return "vence HOY";
+    if (dias === 1) return "queda 1 día";
+    return `quedan ${dias} días`;
+  }
 
-      pintarLista("lista-urgentes", "count-urgentes", data.urgentes || [], filaReclamo);
-      pintarLista("lista-proximas", "count-proximas", data.proximas_por_atender || [], filaReclamo);
-      pintarLista("lista-devoluciones", "count-devoluciones", data.devoluciones_por_revisar || [], filaDevolucion);
+  function cardItem(i) {
+    const idx = i._idx;
+    const nv = nivel(i.dias_restantes);
+    return `<div class="item ${nv}" id="item-${idx}">
+      <div class="prod">${i.producto || "(producto sin nombre)"}</div>
+      <div class="sub">${i.sku || ""}${i.cantidad ? " ×" + i.cantidad : ""} · <a href="https://www.mercadolibre.com.mx/ventas/${i.order_id}/detalle" target="_blank">Pedido ${i.order_id}</a></div>
+      <div class="reloj-linea">${textoReloj(i.dias_restantes)} · vence ${fechaBonita(i.vence)}</div>
+      <div class="registro">
+        <span class="guia">Guía devolución: <b>${i.guia || "—"}</b></span>
+        <input class="rem-input" placeholder="N° de remisión (Odoo)">
+        <button class="btn-reg" onclick="registrar(${idx})">Registrar</button>
+        <span class="reg-status"></span>
+      </div>
+    </div>`;
+  }
+
+  function pintar(items) {
+    DATOS = items;
+    const urg = [], prox = [];
+    items.forEach((it, idx) => { it._idx = idx; ((it.dias_restantes ?? 99) <= 0 ? urg : prox).push(it); });
+    document.getElementById("count-urgentes").textContent = urg.length;
+    document.getElementById("count-proximas").textContent = prox.length;
+    const vacio = `<div class="vacio">Nada por aquí ahora mismo.</div>`;
+    document.getElementById("lista-urgentes").innerHTML = urg.length ? urg.map(cardItem).join("") : vacio;
+    document.getElementById("lista-proximas").innerHTML = prox.length ? prox.map(cardItem).join("") : vacio;
+  }
+
+  async function cargar() {
+    try {
+      const r = await fetch(MOTOR_URL + "?_=" + Date.now(), { redirect: "follow" });
+      if (!r.ok) throw new Error(r.status);
+      const d = await r.json();
+      document.getElementById("banner").innerHTML = "";
+      document.getElementById("ultima").textContent =
+        "Actualizado: " + new Date(d.generado).toLocaleString("es-MX");
+      pintar(d.por_revisar || []);
     } catch (e) {
-      document.getElementById("error-banner").innerHTML =
-        `<div class="error-banner">Todavia no hay datos (data.json no existe o no se pudo leer). ` +
-        `Esto es normal si el script automatico todavia no ha corrido por primera vez.</div>`;
-      document.getElementById("ultima-actualizacion").textContent = "Sin datos todavia";
+      document.getElementById("banner").innerHTML =
+        "Todavía no hay datos (no se pudo leer el motor). Es normal si el actualizador no ha corrido aún.";
+      document.getElementById("ultima").textContent = "Sin datos todavía";
     }
   }
 
-  cargarDatos();
-  setInterval(cargarDatos, REFRESCO_MS);
+  cargar();
+  setInterval(cargar, REFRESCO_MS);
 </script>
 
 </body>
