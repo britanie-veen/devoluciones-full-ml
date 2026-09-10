@@ -1,5 +1,197 @@
 {
-  "generado": "2026-09-10T11:47:54.352314+00:00",
+  "generado": "2026-09-10T14:29:20.174806+00:00",
   "urgentes": [],
-  "proximas_por_atender": []
+  "proximas_por_atender": [],
+  "devoluciones_por_revisar": [
+    {
+      "claim_id": 5569251008,
+      "order_id": 2000018146021970,
+      "reason_id": "PDD9944",
+      "type": "mediations",
+      "canal": "FULL",
+      "tracking_number": "D7VEQ4WR6RLKJOOBJLXSBVSTEI",
+      "status_money": "refunded",
+      "date_closed": "2026-08-31T19:20:32.997-04:00"
+    },
+    {
+      "claim_id": 5569249990,
+      "order_id": 2000018146032742,
+      "reason_id": "PDD9944",
+      "type": "mediations",
+      "canal": "FULL",
+      "tracking_number": "YZWWEMML6VJSPCVHENUEPDXESU",
+      "status_money": "refunded",
+      "date_closed": "2026-08-31T19:20:06.140-04:00"
+    },
+    {
+      "claim_id": 5568333484,
+      "order_id": 2000018149357104,
+      "reason_id": "PDD9939",
+      "type": "returns",
+      "canal": "FULL",
+      "tracking_number": "KYFJ2LKP6RKELAAFWJAXSEOHHA",
+      "status_money": "refunded",
+      "date_closed": "2026-09-01T18:31:50.085-04:00"
+    },
+    {
+      "claim_id": 5567858152,
+      "order_id": 2000018146032790,
+      "reason_id": "PDD9939",
+      "type": "mediations",
+      "canal": "FULL",
+      "tracking_number": "AY5CJPJGJZLOZH5NMHYIWWDSAY",
+      "status_money": "refunded",
+      "date_closed": "2026-08-31T19:21:03.006-04:00"
+    },
+    {
+      "claim_id": 5567466131,
+      "order_id": 2000018096246778,
+      "reason_id": "PDD9939",
+      "type": "returns",
+      "canal": "Colecta",
+      "tracking_number": "AFXZJYODBFMMFBXLEWGW5SONRQ",
+      "status_money": "refunded",
+      "date_closed": "2026-09-02T20:23:13.657-04:00"
+    },
+    {
+      "claim_id": 5567454054,
+      "order_id": 2000018123188842,
+      "reason_id": "PDD9939",
+      "type": "returns",
+      "canal": "Colecta",
+      "tracking_number": "4KT2MAWZ2RJV3HV3UYT2LOYXRE",
+      "status_money": "refunded",
+      "date_closed": "2026-08-28T20:01:13.184-04:00"
+    },
+    {
+      "claim_id": 5566199537,
+      "order_id": 2000018055921696,
+      "reason_id": "PDD9941",
+      "type": "returns",
+      "canal": "FULL",
+      "tracking_number": "131250396199",
+      "status_money": "refunded",
+      "date_closed": "2026-08-26T15:41:06.820-04:00"
+    },
+    {
+      "claim_id": 5565732570,
+      "order_id": 2000018045592762,
+      "reason_id": "PDD9939",
+      "type": "returns",
+      "canal": "Colecta",
+      "tracking_number": "PYU6KHLDZJLGHPFDMR4EMH5OSU",
+      "status_money": "refunded",
+      "date_closed": "2026-08-28T18:11:15.636-04:00"
+    },
+    {
+      "claim_id": 5564918822,
+      "order_id": 2000018023957508,
+      "reason_id": "PDD9944",
+      "type": "mediations",
+      "canal": "Colecta",
+      "tracking_number": "1902250200309",
+      "status_money": "refunded",
+      "date_closed": "2026-08-24T17:46:24.505-04:00"
+    },
+    {
+      "claim_id": 5564745239,
+      "order_id": 2000018015239642,
+      "reason_id": "PDD9939",
+      "type": "returns",
+      "canal": "Colecta",
+      "tracking_number": "3OPGZBW4AJNJPCG273XS5JRMYY",
+      "status_money": "refunded",
+      "date_closed": "2026-09-03T01:12:56.336-04:00"
+    },
+    {
+      "claim_id": 5563636392,
+      "order_id": 2000017939736450,
+      "reason_id": "PDD9944",
+      "type": "returns",
+      "canal": "Colecta",
+      "tracking_number": "M2L6JR2J4RP7XKLWV7POYWPOFU",
+      "status_money": "refunded",
+      "date_closed": "2026-08-27T12:01:31.498-04:00"
+    },
+    {
+      "claim_id": 5563377783,
+      "order_id": 2000017763831350,
+      "reason_id": "PDD9939",
+      "type": "mediations",
+      "canal": "Colecta",
+      "tracking_number": "AAMWJFA4YBLQLMHNLQ5XJY4SEA",
+      "status_money": "refunded",
+      "date_closed": "2026-08-22T15:35:28.320-04:00"
+    },
+    {
+      "claim_id": 5563374983,
+      "order_id": 2000017763841140,
+      "reason_id": "PDD9939",
+      "type": "mediations",
+      "canal": "Colecta",
+      "tracking_number": "Z53UXQNFJBIWTPOEJRWVKQO33Q",
+      "status_money": "refunded",
+      "date_closed": "2026-08-22T15:35:22.357-04:00"
+    },
+    {
+      "claim_id": 5563268018,
+      "order_id": 2000017996515784,
+      "reason_id": "PDD9939",
+      "type": "returns",
+      "canal": "FULL",
+      "tracking_number": "AXOMLZDWPRJJPFIL6WFO5YVTOA",
+      "status_money": "refunded",
+      "date_closed": "2026-08-24T20:03:17.891-04:00"
+    },
+    {
+      "claim_id": 5562967277,
+      "order_id": 2000017612266230,
+      "reason_id": "PDD9939",
+      "type": "returns",
+      "canal": "Colecta",
+      "tracking_number": "YR4OGPQLGRMUJMS2QNC2G75CEY",
+      "status_money": "retained",
+      "date_closed": "2026-08-20T19:16:32.147-04:00"
+    },
+    {
+      "claim_id": 5562886493,
+      "order_id": 2000017983588454,
+      "reason_id": "PDD9939",
+      "type": "mediations",
+      "canal": "FULL",
+      "tracking_number": "DDQYFYI2JNK27LAMGKUPHNXRBU",
+      "status_money": "refunded",
+      "date_closed": "2026-08-25T14:34:42.312-04:00"
+    },
+    {
+      "claim_id": 5562535243,
+      "order_id": 2000017949547760,
+      "reason_id": "PDD9939",
+      "type": "returns",
+      "canal": "Colecta",
+      "tracking_number": "57JWJ4OTK5NAROMRW5RM3RKYPA",
+      "status_money": "refunded",
+      "date_closed": "2026-08-20T16:02:58.173-04:00"
+    },
+    {
+      "claim_id": 5562231478,
+      "order_id": 2000017898472910,
+      "reason_id": "PDD9939",
+      "type": "mediations",
+      "canal": "Colecta",
+      "tracking_number": "X34DY33KB5PB3JDHBKK45ZX4OY",
+      "status_money": "refunded",
+      "date_closed": "2026-08-24T18:24:11.040-04:00"
+    },
+    {
+      "claim_id": 5561824519,
+      "order_id": 2000017917352772,
+      "reason_id": "PDD9939",
+      "type": "returns",
+      "canal": "Colecta",
+      "tracking_number": "MBKCUT27GJOQXG63ND7JKMCMTQ",
+      "status_money": "refunded",
+      "date_closed": "2026-08-24T12:36:44.598-04:00"
+    }
+  ]
 }
