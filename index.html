@@ -158,7 +158,7 @@
 
       <div class="card">
         <div class="card-head"><span class="card-title">Registro</span><span class="count" id="c-hoy">0</span></div>
-        <div class="desc">Cada lote procesado se anota solo: canal, etiquetas, remisión, hora y quién lo hizo.</div>
+        <div class="desc">Cada lote procesado se anota solo: canal, etiquetas, remisión, hora y quién lo hizo. Se conservan los últimos 7 días.</div>
         <div class="resumen">
           <div class="kpi"><div class="n" id="k-etq">0</div><div class="l">etiquetas hoy</div></div>
           <div class="kpi"><div class="n" id="k-lotes">0</div><div class="l">lotes hoy</div></div>
@@ -361,11 +361,13 @@
   // Cuando exista el Apps Script del registro, pega aquí su URL de web app (termina en /exec).
   const REGISTRO_URL = '';
   const LS_REG = 'tablero-registro-etiquetas';
+  const DIAS_RETENCION = 7;   // el registro conserva solo la ultima semana; lo mas viejo se borra solo
+  function vigente(x) { return (Date.now() - new Date(x.fecha).getTime()) <= DIAS_RETENCION * 86400000; }
   let REGISTROS = [];
   let FILTRO = '';
 
-  function leerLocal() { try { return JSON.parse(localStorage.getItem(LS_REG) || '[]'); } catch (e) { return []; } }
-  function guardarLocal(arr) { try { localStorage.setItem(LS_REG, JSON.stringify(arr.slice(0, 500))); } catch (e) {} }
+  function leerLocal() { try { return JSON.parse(localStorage.getItem(LS_REG) || '[]').filter(vigente); } catch (e) { return []; } }
+  function guardarLocal(arr) { try { localStorage.setItem(LS_REG, JSON.stringify(arr.filter(vigente).slice(0, 500))); } catch (e) {} }
 
   async function cargarRegistro() {
     let remotos = [], origen = 'Registro guardado en esta computadora.';
@@ -378,7 +380,7 @@
     }
     const locales = leerLocal();
     const vistos = new Set();
-    REGISTROS = [...remotos, ...locales].filter(x => { const k = x.id || (x.fecha + x.canal + x.etiquetas + x.remision); if (vistos.has(k)) return false; vistos.add(k); return true; })
+    REGISTROS = [...remotos, ...locales].filter(vigente).filter(x => { const k = x.id || (x.fecha + x.canal + x.etiquetas + x.remision); if (vistos.has(k)) return false; vistos.add(k); return true; })
       .sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
     document.getElementById('registro-origen').textContent = origen;
     pintarRegistro();
