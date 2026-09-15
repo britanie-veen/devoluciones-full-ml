@@ -3,134 +3,236 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Devoluciones — Para tu revisión</title>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;500;700;900&display=swap" rel="stylesheet">
+<title>Tablero eCommerce — CERO//CERO</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;700;900&display=swap" rel="stylesheet">
 <style>
+  /* Identidad CERO//CERO: negro, blanco, Montserrat 900 / 200 */
   :root {
-    --black:   #0D0D0D;
-    --white:   #FFFFFF;
-    --surface: #F5F5F5;
-    --border:  #E4E4E4;
-    --muted:   #8A8A8A;
+    --bg: #000000; --panel: #0F0F0F; --line: #262626; --fg: #FFFFFF; --dim: #8C8C8C;
+    --ok: #5FCB8A; --ok-bg: #0F2A1B; --warn: #E3B34F; --warn-bg: #2E230C; --err: #F07272; --err-bg: #331414;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    background: var(--surface);
-    color: var(--black);
-    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    min-height: 100dvh;
-  }
+  body { background: var(--bg); color: var(--fg); font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif; -webkit-font-smoothing: antialiased; min-height: 100dvh; font-variant-numeric: tabular-nums; }
+  a { color: inherit; }
 
-  /* ── Header ─────────────────────────────────────────────── */
-  header {
-    background: var(--white);
-    border-bottom: 1px solid var(--border);
-    padding: 20px clamp(20px, 4vw, 48px);
-    display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap;
-  }
-  .title { font-weight: 900; font-size: clamp(20px, 2.6vw, 28px); letter-spacing: -.02em; }
-  .meta { font-weight: 300; font-size: 12px; letter-spacing: .08em; color: var(--muted); }
+  header { border-bottom: 1px solid var(--line); padding: 26px clamp(20px, 4vw, 48px) 0; }
+  .head-row { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; flex-wrap: wrap; }
+  .brand { font-weight: 900; font-size: clamp(22px, 2.8vw, 30px); letter-spacing: -.03em; }
+  .brand span { font-weight: 200; letter-spacing: 0; }
+  .meta { font-weight: 200; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--dim); }
+  nav { display: flex; gap: 2px; margin-top: 22px; overflow-x: auto; }
+  .tab { background: none; border: none; border-bottom: 3px solid transparent; padding: 12px 18px 16px; cursor: pointer; white-space: nowrap; font-family: inherit; font-weight: 200; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--dim); display: inline-flex; align-items: center; gap: 10px; }
+  .tab:hover { color: var(--fg); }
+  .tab:focus-visible { outline: 2px solid var(--fg); outline-offset: -2px; }
+  .tab[aria-selected="true"] { color: var(--fg); font-weight: 900; border-bottom-color: var(--fg); }
+  .pill { font-weight: 900; font-size: 11px; min-width: 22px; height: 22px; padding: 0 7px; display: inline-flex; align-items: center; justify-content: center; background: var(--fg); color: var(--bg); border-radius: 999px; }
+  .pill.soon { background: transparent; color: var(--dim); border: 1px solid var(--line); font-weight: 200; letter-spacing: .06em; }
 
-  main { max-width: 1200px; margin: 0 auto; padding: clamp(24px, 4vw, 44px) clamp(18px, 4vw, 48px) 64px; }
+  main { max-width: 1240px; margin: 0 auto; padding: clamp(24px, 4vw, 44px) clamp(18px, 4vw, 48px) 72px; }
+  section[hidden] { display: none; }
+  .label { font-weight: 200; font-size: 12px; letter-spacing: .22em; text-transform: uppercase; color: var(--dim); margin-bottom: 16px; }
+  #banner:not(:empty) { border: 1px solid var(--fg); padding: 14px 18px; margin-bottom: 28px; font-weight: 200; font-size: 14px; }
 
-  #banner:not(:empty) {
-    border: 1.5px solid var(--black); background: var(--white);
-    padding: 14px 18px; margin-bottom: 28px; font-weight: 300; font-size: 14px;
-  }
+  .row { display: flex; gap: clamp(16px, 2.5vw, 28px); flex-wrap: wrap; align-items: stretch; }
+  .card { flex: 1; min-width: 300px; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: clamp(20px, 2.5vw, 30px); }
+  .card-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+  .card-title { font-weight: 900; font-size: clamp(20px, 2.4vw, 26px); letter-spacing: -.02em; }
+  .count { font-weight: 900; font-size: 15px; min-width: 34px; height: 34px; padding: 0 10px; display: inline-flex; align-items: center; justify-content: center; background: var(--fg); color: var(--bg); border-radius: 999px; }
+  .desc { font-weight: 200; font-size: 13px; color: var(--dim); margin-top: 8px; line-height: 1.55; }
 
-  .section-label {
-    font-weight: 700; font-size: 13px; letter-spacing: .18em; text-transform: uppercase;
-    color: var(--muted); margin-bottom: 16px;
-  }
-
-  /* ── Fila de tarjetas ───────────────────────────────────── */
-  .cards-row { display: flex; gap: clamp(16px, 2.5vw, 28px); flex-wrap: wrap; }
-  .dash-card {
-    flex: 1; min-width: 300px; background: var(--white);
-    border: 1px solid var(--border); border-radius: 10px; padding: clamp(20px, 2.5vw, 28px);
-  }
-  .dash-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
-  .dash-title { font-weight: 900; font-size: clamp(18px, 2.2vw, 24px); letter-spacing: -.01em; }
-  .count {
-    font-weight: 900; font-size: 15px; min-width: 34px; height: 34px; padding: 0 10px;
-    display: inline-flex; align-items: center; justify-content: center;
-    background: var(--black); color: var(--white); border-radius: 999px;
-  }
-  .dash-card.urg .count { background: var(--black); }
-  .dash-desc { font-weight: 300; font-size: 13px; color: var(--muted); margin-top: 8px; line-height: 1.5; }
-
-  /* ── Item dentro de la tarjeta ──────────────────────────── */
+  /* Devoluciones ML (misma lógica de siempre) */
   .lista { margin-top: 20px; }
-  .item { border-top: 1px solid var(--border); padding-top: 18px; margin-top: 18px; }
+  .item { border-top: 1px solid var(--line); padding-top: 18px; margin-top: 18px; }
   .item:first-child { border-top: none; padding-top: 0; margin-top: 0; }
   .item .prod { font-weight: 900; font-size: 16px; line-height: 1.15; letter-spacing: -.01em; }
-  .item .sub {
-    font-weight: 300; font-size: 12px; letter-spacing: .06em; text-transform: uppercase;
-    color: var(--muted); margin-top: 8px;
-  }
-  .item .sub a { color: var(--black); font-weight: 700; text-decoration: none; }
+  .item .sub { font-weight: 200; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--dim); margin-top: 8px; }
+  .item .sub a { color: var(--fg); font-weight: 700; text-decoration: none; }
   .item .sub a:hover { text-decoration: underline; }
-  .reloj-linea {
-    font-weight: 700; font-size: 12px; letter-spacing: .04em; text-transform: uppercase;
-    margin-top: 10px; display: inline-block;
-  }
-  .item.warn .reloj-linea, .item.urgent .reloj-linea {
-    background: var(--black); color: var(--white); padding: 6px 12px; border-radius: 4px;
-  }
-
+  .reloj-linea { font-weight: 700; font-size: 12px; letter-spacing: .04em; text-transform: uppercase; margin-top: 10px; display: inline-block; }
+  .item.warn .reloj-linea, .item.urgent .reloj-linea { background: var(--fg); color: var(--bg); padding: 6px 12px; border-radius: 4px; }
   .registro { display: flex; align-items: center; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
-  .registro .guia {
-    font-weight: 300; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted);
-    width: 100%;
-  }
-  .registro .guia b { color: var(--black); font-weight: 900; letter-spacing: 0; }
-  .rem-input {
-    flex: 1; min-width: 150px; padding: 11px 14px;
-    border: 2px solid var(--black); background: var(--white); color: var(--black);
-    font-family: 'Montserrat', sans-serif; font-weight: 500; font-size: 14px; border-radius: 6px;
-  }
-  .rem-input::placeholder { color: var(--muted); font-weight: 300; }
-  .btn-reg {
-    padding: 11px 24px; border: none; background: var(--black); color: var(--white);
-    font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 12px;
-    letter-spacing: .15em; text-transform: uppercase; cursor: pointer; border-radius: 6px;
-  }
-  .btn-reg:disabled { opacity: .35; cursor: default; }
+  .registro .guia { font-weight: 200; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--dim); width: 100%; }
+  .registro .guia b { color: var(--fg); font-weight: 900; letter-spacing: 0; }
+  .rem-input, .input { flex: 1; min-width: 150px; padding: 12px 14px; border: 1px solid var(--line); background: var(--bg); color: var(--fg); font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 14px; border-radius: 8px; }
+  .rem-input::placeholder, .input::placeholder { color: var(--dim); font-weight: 200; }
+  .rem-input:focus-visible, .input:focus-visible { outline: 2px solid var(--fg); outline-offset: 1px; }
+  .btn-reg, .btn { padding: 13px 26px; border: none; background: var(--fg); color: var(--bg); font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 12px; letter-spacing: .18em; text-transform: uppercase; cursor: pointer; border-radius: 8px; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+  .btn-reg:disabled, .btn:disabled { opacity: .35; cursor: default; }
+  .btn:focus-visible, .btn-reg:focus-visible { outline: 2px solid var(--fg); outline-offset: 2px; }
   .reg-status { font-weight: 700; font-size: 11px; letter-spacing: .04em; text-transform: uppercase; width: 100%; }
+  .vacio { font-weight: 200; font-style: italic; font-size: 14px; color: var(--dim); margin-top: 18px; }
 
-  .vacio { font-weight: 300; font-style: italic; font-size: 14px; color: var(--muted); margin-top: 18px; }
+  /* Etiquetas: dos columnas */
+  .etq { display: grid; grid-template-columns: minmax(300px, 1.1fr) minmax(300px, 1fr); gap: clamp(16px, 2.5vw, 28px); }
+  @media (max-width: 760px) { .etq { grid-template-columns: 1fr; } }
+  .resumen { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 14px; margin-top: 18px; }
+  .kpi { border-top: 1px solid var(--fg); padding-top: 10px; }
+  .kpi .n { font-weight: 900; font-size: 30px; letter-spacing: -.03em; line-height: 1; }
+  .kpi .l { font-weight: 200; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--dim); margin-top: 6px; }
+  .filtros { display: flex; gap: 6px; margin-top: 22px; flex-wrap: wrap; }
+  .chip { background: transparent; color: var(--dim); border: 1px solid var(--line); border-radius: 999px; padding: 6px 12px; font-family: inherit; font-weight: 200; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; cursor: pointer; }
+  .chip[aria-pressed="true"] { color: var(--bg); background: var(--fg); border-color: var(--fg); font-weight: 900; }
+  .dia { font-weight: 200; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--dim); margin: 22px 0 8px; }
+  .log { list-style: none; }
+  .log li { display: grid; grid-template-columns: 74px 1fr auto; gap: 14px; align-items: center; padding: 14px 0; border-top: 1px solid var(--line); }
+  .log li:first-child { border-top: none; }
+  .canal { font-weight: 900; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; padding: 6px 0; text-align: center; border: 1px solid var(--fg); border-radius: 4px; }
+  .canal.shein { background: var(--fg); color: var(--bg); }
+  .log .q { font-weight: 900; font-size: 20px; letter-spacing: -.02em; line-height: 1; }
+  .log .q small { font-weight: 200; font-size: 13px; letter-spacing: 0; margin-left: 6px; }
+  .log .r { font-weight: 200; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--dim); margin-top: 5px; }
+  .log .r b { color: var(--fg); font-weight: 700; }
+  .log .h { font-weight: 200; font-size: 13px; color: var(--dim); text-align: right; white-space: nowrap; }
+  .log .h b { display: block; font-weight: 900; font-size: 15px; color: var(--fg); }
+  .log li.nuevo { animation: entra .6s ease-out; }
+  @keyframes entra { from { background: #1c1c1c; } to { background: transparent; } }
+  @media (prefers-reduced-motion: reduce) { .log li.nuevo { animation: none; } }
+  .origen { font-weight: 200; font-size: 11px; color: var(--dim); margin-top: 18px; letter-spacing: .04em; }
+
+  .estado { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: 8px; margin-top: 18px; font-weight: 700; font-size: 13px; background: var(--ok-bg); color: var(--ok); }
+  .estado.warn { background: var(--warn-bg); color: var(--warn); }
+  .estado.err { background: var(--err-bg); color: var(--err); }
+  .estado .dot { width: 9px; height: 9px; border-radius: 50%; background: currentColor; flex: none; }
+  .estado small { display: block; font-weight: 200; font-size: 12px; color: var(--fg); margin-top: 2px; }
+  .campos { display: grid; gap: 16px; margin-top: 22px; }
+  .flabel { font-weight: 200; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--dim); margin-bottom: 8px; display: block; }
+  .drop { position: relative; border: 1px dashed var(--line); border-radius: 10px; padding: 20px; text-align: center; cursor: pointer; }
+  .drop:hover, .drop.over { border-color: var(--fg); }
+  .drop input { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
+  .drop .t { font-weight: 200; font-size: 13px; color: var(--dim); }
+  .drop .f { font-weight: 700; font-size: 13px; margin-top: 6px; min-height: 18px; word-break: break-all; }
+  .dos { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 420px) { .dos { grid-template-columns: 1fr; } }
+  .btn.big { width: 100%; padding: 17px; margin-top: 6px; font-size: 13px; }
+  .salida { margin-top: 16px; font-size: 13px; font-weight: 200; color: var(--dim); min-height: 20px; line-height: 1.5; }
+  .salida.ok { color: var(--ok); font-weight: 700; }
+  .salida.err { color: var(--err); font-weight: 700; }
+  .cat { margin-top: 22px; padding-top: 16px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; font-weight: 200; font-size: 12px; color: var(--dim); letter-spacing: .04em; }
+  .cat b { color: var(--fg); font-weight: 700; }
+  .cat .ok { color: var(--ok); } .cat .warn { color: var(--warn); } .cat .err { color: var(--err); }
+
+  .reservado .card { border-style: dashed; }
+  .reservado .card-title, .reservado .count { opacity: .35; }
+  .reservado .count { background: transparent; color: var(--fg); border: 1px solid var(--line); }
+  .nota { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: clamp(20px, 2.5vw, 30px); margin-top: clamp(16px, 2.5vw, 28px); font-weight: 200; font-size: 14px; line-height: 1.65; max-width: 70ch; }
+  .nota b { font-weight: 700; }
 </style>
 </head>
 <body>
 
 <header>
-  <div class="title">Devoluciones — Para tu revisión</div>
-  <div class="meta" id="ultima">Cargando…</div>
+  <div class="head-row">
+    <div class="brand">CERO<span>//</span>CERO <span>· Tablero eCommerce</span></div>
+    <div class="meta" id="ultima">Cargando…</div>
+  </div>
+  <nav role="tablist" aria-label="Secciones">
+    <button class="tab" role="tab" id="tab-ml" aria-selected="true" aria-controls="sec-ml">Devoluciones Mercado Libre <span class="pill" id="pill-ml">0</span></button>
+    <button class="tab" role="tab" id="tab-etq" aria-selected="false" aria-controls="sec-etq">Etiquetas SHEIN &amp; TikTok <span class="pill" id="pill-etq">0</span></button>
+    <button class="tab" role="tab" id="tab-amz" aria-selected="false" aria-controls="sec-amz">Devoluciones Amazon <span class="pill soon">Próximamente</span></button>
+  </nav>
 </header>
 
 <main>
-  <div id="banner"></div>
 
-  <div class="section-label">Devoluciones que llegan a tu almacén</div>
-  <div class="cards-row">
-    <div class="dash-card urg">
-      <div class="dash-head"><span class="dash-title">Urgentes</span><span class="count" id="count-urgentes">0</span></div>
-      <div class="dash-desc">Vencen hoy o ya vencieron — necesitan atención ahora.</div>
-      <div class="lista" id="lista-urgentes"></div>
+  <!-- ═══ 1. Devoluciones Mercado Libre ═══════════════════════ -->
+  <section id="sec-ml" role="tabpanel" aria-labelledby="tab-ml">
+    <div id="banner"></div>
+    <div class="label">Devoluciones que llegan a tu almacén</div>
+    <div class="row">
+      <div class="card urg">
+        <div class="card-head"><span class="card-title">Urgentes</span><span class="count" id="count-urgentes">0</span></div>
+        <div class="desc">Vencen hoy o ya vencieron — necesitan atención ahora.</div>
+        <div class="lista" id="lista-urgentes"></div>
+      </div>
+      <div class="card">
+        <div class="card-head"><span class="card-title">Próximas por atender</span><span class="count" id="count-proximas">0</span></div>
+        <div class="desc">Tienen fecha límite (3 días para "Ya la revisé"), pero todavía no es hoy.</div>
+        <div class="lista" id="lista-proximas"></div>
+      </div>
     </div>
-    <div class="dash-card">
-      <div class="dash-head"><span class="dash-title">Próximas por atender</span><span class="count" id="count-proximas">0</span></div>
-      <div class="dash-desc">Tienen fecha límite (3 días para "Ya la revisé"), pero todavía no es hoy.</div>
-      <div class="lista" id="lista-proximas"></div>
+  </section>
+
+  <!-- ═══ 2. Etiquetas SHEIN & TikTok ═════════════════════════ -->
+  <section id="sec-etq" role="tabpanel" aria-labelledby="tab-etq" hidden>
+    <div class="etq">
+
+      <div class="card">
+        <div class="card-head"><span class="card-title">Registro</span><span class="count" id="c-hoy">0</span></div>
+        <div class="desc">Cada lote procesado se anota solo: canal, etiquetas, remisión, hora y quién lo hizo.</div>
+        <div class="resumen">
+          <div class="kpi"><div class="n" id="k-etq">0</div><div class="l">etiquetas hoy</div></div>
+          <div class="kpi"><div class="n" id="k-lotes">0</div><div class="l">lotes hoy</div></div>
+          <div class="kpi"><div class="n" id="k-semana">0</div><div class="l">esta semana</div></div>
+        </div>
+        <div class="filtros" role="group" aria-label="Filtrar por canal">
+          <button class="chip" aria-pressed="true" data-f="">Todos</button>
+          <button class="chip" aria-pressed="false" data-f="TIKTOK">TikTok</button>
+          <button class="chip" aria-pressed="false" data-f="SHEIN">SHEIN</button>
+        </div>
+        <div id="registro-lista"><div class="vacio">Todavía no hay lotes procesados.</div></div>
+        <div class="origen" id="registro-origen"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><span class="card-title">Procesar etiquetas</span></div>
+        <div class="desc">Sube el PDF de guías y el machote. El canal se detecta solo. Los archivos no salen de tu computadora: se procesan aquí mismo y se descarga el PDF listo para imprimir.</div>
+        <div class="estado" id="estado-motor"><span class="dot"></span><div>Cargando motor…<small>Un momento.</small></div></div>
+
+        <form id="form-etq" class="campos">
+          <div>
+            <span class="flabel">PDF de guías (o ZIP)</span>
+            <div class="drop" id="d-pdf"><input type="file" id="f-pdf" name="pdf" accept=".pdf,.zip" required><div class="t">Selecciona o arrastra el PDF</div><div class="f" id="n-pdf"></div></div>
+          </div>
+          <div>
+            <span class="flabel">Excel / machote</span>
+            <div class="drop" id="d-xl"><input type="file" id="f-xl" name="excel" accept=".xlsx,.xls" required><div class="t">Selecciona o arrastra el Excel</div><div class="f" id="n-xl"></div></div>
+          </div>
+          <div class="dos">
+            <div><span class="flabel">Remisión (opcional)</span><input class="input" id="f-rem" name="remision" placeholder="Ej: S10844" style="width:100%" autocomplete="off"></div>
+            <div><span class="flabel">Operadora</span><input class="input" id="f-op" name="operadora" placeholder="Tu nombre" style="width:100%" autocomplete="off"></div>
+          </div>
+          <button class="btn big" id="b-proc" type="submit">Procesar etiquetas</button>
+          <div class="salida" id="salida">El PDF se descarga y el lote se anota en el registro.</div>
+        </form>
+
+        <div class="cat"><span id="cat-txt">Catálogo: cargando…</span><a href="https://github.com/britanie-veen/devoluciones-full-ml/actions/workflows/catalogo.yml" target="_blank" rel="noopener">Sincronizar</a></div>
+      </div>
+
     </div>
-  </div>
+  </section>
+
+  <!-- ═══ 3. Devoluciones Amazon (reservado) ══════════════════ -->
+  <section id="sec-amz" role="tabpanel" aria-labelledby="tab-amz" hidden>
+    <div class="label">Devoluciones que llegan a tu almacén</div>
+    <div class="row reservado">
+      <div class="card"><div class="card-head"><span class="card-title">Urgentes</span><span class="count">—</span></div><div class="desc">Misma tarjeta que en Mercado Libre. Se llenará cuando conectemos la API de Amazon.</div></div>
+      <div class="card"><div class="card-head"><span class="card-title">Próximas por atender</span><span class="count">—</span></div><div class="desc">Misma tarjeta que en Mercado Libre. Se llenará cuando conectemos la API de Amazon.</div></div>
+    </div>
+    <div class="nota"><b>Espacio reservado.</b> Se construye más adelante y funcionará igual que Mercado Libre: un motor que consulta Amazon y aquí se ven las devoluciones urgentes y próximas con su botón <b>Registrar</b>. Dejar la pestaña visible es a propósito: el equipo ya sabe dónde va a estar.</div>
+  </section>
+
 </main>
 
+<!-- Librerías del motor de etiquetas (pdf.js · pdf-lib · SheetJS · JSZip) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="./js/etiquetas.js"></script>
+
 <script>
+  // ═══ Pestañas ═════════════════════════════════════════════
+  const tabs = Array.from(document.querySelectorAll('.tab'));
+  function abrirTab(tab) {
+    tabs.forEach(t => { const on = t === tab; t.setAttribute('aria-selected', on ? 'true' : 'false'); document.getElementById(t.getAttribute('aria-controls')).hidden = !on; });
+    try { localStorage.setItem('tablero-tab', tab.id); } catch (e) {}
+  }
+  tabs.forEach(t => t.addEventListener('click', () => abrirTab(t)));
+  try { const g = localStorage.getItem('tablero-tab'); const t = g && document.getElementById(g); if (t) abrirTab(t); } catch (e) {}
+
+  // ═══ 1. Devoluciones ML (sin cambios de lógica) ═══════════
   const REFRESCO_MS = 5 * 60 * 1000;
   const MESES = ["ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic"];
-
   // Web app del scanner (mismo endpoint; el registro entra por action=registrarDevolucionFull).
   const BRIDGE_URL = 'https://script.google.com/macros/s/AKfycbzyt2_OBXDiGStpeyTAkQGBAG_wWGI_GP24swuGLcAI1S9LnCWwEmhPHQul2CGsDw/exec';
   // Motor (Apps Script) que jala las devoluciones de ML y las sirve. Refresca el token solo.
@@ -145,45 +247,19 @@
     const status = card.querySelector(".reg-status");
     if (!item.guia) { status.textContent = "⚠️ esta no trae guía todavía"; return; }
     btn.disabled = true; status.textContent = "Registrando…";
-    const payload = JSON.stringify({
-      action: "registrarDevolucionFull",
-      guia: item.guia, pedido: item.order_id, sku: item.sku,
-      cantidad: item.cantidad || 1, remision: rem,
-      motivo: item.motivo, canal: "FULL"
-    });
+    const payload = JSON.stringify({ action: "registrarDevolucionFull", guia: item.guia, pedido: item.order_id, sku: item.sku, cantidad: item.cantidad || 1, remision: rem, motivo: item.motivo, canal: "FULL" });
     try {
       const res = await fetch(BRIDGE_URL, { method: "POST", redirect: "follow", body: payload });
       const data = await res.json();
-      if (data.ok) {
-        status.textContent = "✓ Registrada" + (rem ? " · Rem " + rem : " (sin remisión aún)");
-      } else {
-        status.textContent = "❌ " + (data.error || "error"); btn.disabled = false;
-      }
+      if (data.ok) status.textContent = "✓ Registrada" + (rem ? " · Rem " + rem : " (sin remisión aún)");
+      else { status.textContent = "❌ " + (data.error || "error"); btn.disabled = false; }
     } catch (e) { status.textContent = "❌ error de red"; btn.disabled = false; }
   }
-
-  function fechaBonita(iso) {
-    if (!iso) return "";
-    const p = iso.split("-");
-    return `${p[2]}/${MESES[(+p[1])-1]}`;
-  }
-  function nivel(dias) {
-    if (dias === null || dias === undefined) return "";
-    if (dias <= 0) return "urgent";
-    if (dias <= 1) return "warn";
-    return "";
-  }
-  function textoReloj(dias) {
-    if (dias === null || dias === undefined) return "sin fecha";
-    if (dias < 0)  return `venció hace ${Math.abs(dias)} d`;
-    if (dias === 0) return "vence HOY";
-    if (dias === 1) return "queda 1 día";
-    return `quedan ${dias} días`;
-  }
-
+  function fechaBonita(iso) { if (!iso) return ""; const p = iso.split("-"); return `${p[2]}/${MESES[(+p[1])-1]}`; }
+  function nivel(d) { if (d === null || d === undefined) return ""; if (d <= 0) return "urgent"; if (d <= 1) return "warn"; return ""; }
+  function textoReloj(d) { if (d === null || d === undefined) return "sin fecha"; if (d < 0) return `venció hace ${Math.abs(d)} d`; if (d === 0) return "vence HOY"; if (d === 1) return "queda 1 día"; return `quedan ${d} días`; }
   function cardItem(i) {
-    const idx = i._idx;
-    const nv = nivel(i.dias_restantes);
+    const idx = i._idx, nv = nivel(i.dias_restantes);
     return `<div class="item ${nv}" id="item-${idx}">
       <div class="prod">${i.producto || "(producto sin nombre)"}</div>
       <div class="sub">${i.sku || ""}${i.cantidad ? " ×" + i.cantidad : ""} · <a href="https://www.mercadolibre.com.mx/ventas/${i.order_id}/detalle" target="_blank">Pedido ${i.order_id}</a></div>
@@ -193,39 +269,195 @@
         <input class="rem-input" placeholder="N° de remisión (Odoo)">
         <button class="btn-reg" onclick="registrar(${idx})">Registrar</button>
         <span class="reg-status"></span>
-      </div>
-    </div>`;
+      </div></div>`;
   }
-
   function pintar(items) {
     DATOS = items;
     const urg = [], prox = [];
     items.forEach((it, idx) => { it._idx = idx; ((it.dias_restantes ?? 99) <= 0 ? urg : prox).push(it); });
     document.getElementById("count-urgentes").textContent = urg.length;
     document.getElementById("count-proximas").textContent = prox.length;
+    document.getElementById("pill-ml").textContent = urg.length + prox.length;
     const vacio = `<div class="vacio">Nada por aquí ahora mismo.</div>`;
     document.getElementById("lista-urgentes").innerHTML = urg.length ? urg.map(cardItem).join("") : vacio;
     document.getElementById("lista-proximas").innerHTML = prox.length ? prox.map(cardItem).join("") : vacio;
   }
-
   async function cargar() {
     try {
       const r = await fetch(MOTOR_URL + "?_=" + Date.now(), { redirect: "follow" });
       if (!r.ok) throw new Error(r.status);
       const d = await r.json();
       document.getElementById("banner").innerHTML = "";
-      document.getElementById("ultima").textContent =
-        "Actualizado: " + new Date(d.generado).toLocaleString("es-MX");
+      document.getElementById("ultima").textContent = "Devoluciones ML: " + new Date(d.generado).toLocaleString("es-MX");
       pintar(d.por_revisar || []);
     } catch (e) {
-      document.getElementById("banner").innerHTML =
-        "Todavía no hay datos (no se pudo leer el motor). Es normal si el actualizador no ha corrido aún.";
-      document.getElementById("ultima").textContent = "Sin datos todavía";
+      document.getElementById("banner").innerHTML = "Todavía no hay datos (no se pudo leer el motor). Es normal si el actualizador no ha corrido aún.";
+      document.getElementById("ultima").textContent = "Sin datos de devoluciones todavía";
     }
   }
-
   cargar();
   setInterval(cargar, REFRESCO_MS);
+
+  // ═══ 2. Etiquetas ═════════════════════════════════════════
+  pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+
+  // ── Catálogo (catalogo.json en este repo, lo regenera GitHub Actions cada hora desde Odoo)
+  const CATALOGO_URL = './catalogo.json';
+  const HORAS_ALERTA = 2;
+  let CATALOGO_OK = false;
+  async function cargarCatalogo() {
+    const el = document.getElementById('cat-txt');
+    try {
+      const r = await fetch(CATALOGO_URL + '?_=' + Date.now(), { cache: 'no-store' });
+      if (!r.ok) throw new Error(r.status);
+      const d = await r.json();
+      const n = EtiquetasMotor.cargarCatalogo(d.skus || {});
+      const gen = d.generado ? new Date(d.generado) : null;
+      const fecha = gen ? gen.toLocaleString('es-MX', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : '—';
+      const viejo = gen && (Date.now() - gen.getTime() > HORAS_ALERTA * 3600000);
+      el.innerHTML = `Catálogo: <b>${n} SKUs</b> · <span class="${viejo ? 'warn' : 'ok'}">${viejo ? 'sin sincronizar desde' : 'al día con Odoo'}</span> · ${fecha}`;
+      CATALOGO_OK = n > 0;
+    } catch (e) {
+      el.innerHTML = `Catálogo: <span class="err">no se pudo leer catalogo.json</span> (${e.message})`;
+    }
+    pintarEstadoMotor();
+  }
+  function pintarEstadoMotor() {
+    const box = document.getElementById('estado-motor');
+    const listo = !!(window.EtiquetasMotor && window.PDFLib && window.pdfjsLib && window.XLSX && window.JSZip);
+    if (!listo) { box.className = 'estado err'; box.innerHTML = '<span class="dot"></span><div>No cargó el motor<small>Revisa la conexión a internet y recarga la página.</small></div>'; return; }
+    if (!CATALOGO_OK) { box.className = 'estado warn'; box.innerHTML = '<span class="dot"></span><div>Motor listo, sin catálogo<small>Las etiquetas saldrían con el SKU en lugar de la descripción. Recarga o revisa el catálogo abajo.</small></div>'; return; }
+    box.className = 'estado'; box.innerHTML = '<span class="dot"></span><div>Listo para procesar<small>Se procesa en esta pestaña; nada se instala ni se sube a ningún servidor.</small></div>';
+  }
+  cargarCatalogo();
+  setInterval(cargarCatalogo, REFRESCO_MS);
+
+  // ── Registro de lotes: Apps Script (compartido) + copia local por si no hay red
+  // Cuando exista el Apps Script del registro, pega aquí su URL de web app (termina en /exec).
+  const REGISTRO_URL = '';
+  const LS_REG = 'tablero-registro-etiquetas';
+  let REGISTROS = [];
+  let FILTRO = '';
+
+  function leerLocal() { try { return JSON.parse(localStorage.getItem(LS_REG) || '[]'); } catch (e) { return []; } }
+  function guardarLocal(arr) { try { localStorage.setItem(LS_REG, JSON.stringify(arr.slice(0, 500))); } catch (e) {} }
+
+  async function cargarRegistro() {
+    let remotos = [], origen = 'Registro guardado en esta computadora.';
+    if (REGISTRO_URL) {
+      try {
+        const r = await fetch(REGISTRO_URL + '?action=listarLotes&_=' + Date.now(), { redirect: 'follow' });
+        const d = await r.json();
+        if (d.ok && Array.isArray(d.registros)) { remotos = d.registros; origen = 'Registro compartido (Apps Script).'; }
+      } catch (e) { origen = 'Sin conexión al registro compartido; mostrando la copia local.'; }
+    }
+    const locales = leerLocal();
+    const vistos = new Set();
+    REGISTROS = [...remotos, ...locales].filter(x => { const k = x.id || (x.fecha + x.canal + x.etiquetas + x.remision); if (vistos.has(k)) return false; vistos.add(k); return true; })
+      .sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
+    document.getElementById('registro-origen').textContent = origen;
+    pintarRegistro();
+  }
+
+  async function anotarLote(lote) {
+    const arr = leerLocal(); arr.unshift(lote); guardarLocal(arr);
+    if (REGISTRO_URL) {
+      try { await fetch(REGISTRO_URL, { method: 'POST', redirect: 'follow', body: JSON.stringify({ action: 'registrarLote', ...lote }) }); }
+      catch (e) { /* queda en la copia local; se verá cuando vuelva la red */ }
+    }
+    REGISTROS.unshift(lote);
+    pintarRegistro(lote.id);
+  }
+
+  function mismoDia(a, b) { return a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate(); }
+  function tituloDia(d) {
+    const hoy = new Date(); const ayer = new Date(); ayer.setDate(hoy.getDate() - 1);
+    const largo = d.toLocaleDateString('es-MX', { weekday: 'long', day: 'numeric', month: 'short' });
+    if (mismoDia(d, hoy)) return 'Hoy · ' + largo;
+    if (mismoDia(d, ayer)) return 'Ayer · ' + largo;
+    return largo;
+  }
+  function pintarRegistro(nuevoId) {
+    const hoy = new Date();
+    const lunes = new Date(hoy); lunes.setDate(hoy.getDate() - ((hoy.getDay() + 6) % 7)); lunes.setHours(0, 0, 0, 0);
+    const deHoy = REGISTROS.filter(x => mismoDia(new Date(x.fecha), hoy));
+    const semana = REGISTROS.filter(x => new Date(x.fecha) >= lunes);
+    const suma = arr => arr.reduce((s, x) => s + (+x.etiquetas || 0), 0);
+    document.getElementById('k-etq').textContent = suma(deHoy);
+    document.getElementById('k-lotes').textContent = deHoy.length;
+    document.getElementById('k-semana').textContent = suma(semana).toLocaleString('es-MX');
+    document.getElementById('c-hoy').textContent = deHoy.length;
+    document.getElementById('pill-etq').textContent = suma(deHoy);
+
+    const cont = document.getElementById('registro-lista');
+    const lista = REGISTROS.filter(x => !FILTRO || x.canal === FILTRO).slice(0, 200);
+    if (!lista.length) { cont.innerHTML = '<div class="vacio">Todavía no hay lotes procesados.</div>'; return; }
+    let html = '', diaActual = '';
+    for (const x of lista) {
+      const f = new Date(x.fecha);
+      const t = tituloDia(f);
+      if (t !== diaActual) { if (diaActual) html += '</ul>'; html += `<div class="dia">${t}</div><ul class="log">`; diaActual = t; }
+      const hh = f.getHours() % 12 || 12, mm = String(f.getMinutes()).padStart(2, '0'), ap = f.getHours() < 12 ? 'am' : 'pm';
+      const sin = +x.sin_sku > 0 ? ` · <b>${x.sin_sku} sin SKU</b>` : '';
+      html += `<li class="${x.id === nuevoId ? 'nuevo' : ''}"><span class="canal ${x.canal === 'SHEIN' ? 'shein' : ''}">${x.canal === 'SHEIN' ? 'SHEIN' : 'TikTok'}</span>
+        <div><div class="q">${x.etiquetas}<small>etiquetas</small></div><div class="r">${x.remision ? `Remisión <b>${x.remision}</b>` : 'Sin remisión'}${x.operadora ? ' · ' + x.operadora : ''}${sin}</div></div>
+        <div class="h"><b>${hh}:${mm}</b>${ap}</div></li>`;
+    }
+    cont.innerHTML = html + '</ul>';
+  }
+  document.querySelectorAll('.chip').forEach(ch => ch.addEventListener('click', () => {
+    document.querySelectorAll('.chip').forEach(c => c.setAttribute('aria-pressed', c === ch ? 'true' : 'false'));
+    FILTRO = ch.dataset.f; pintarRegistro();
+  }));
+  cargarRegistro();
+
+  // ── Formulario de procesamiento
+  function zona(dId, fId, nId) {
+    const d = document.getElementById(dId), f = document.getElementById(fId), n = document.getElementById(nId);
+    f.addEventListener('change', () => n.textContent = f.files[0]?.name || '');
+    d.addEventListener('dragover', e => { e.preventDefault(); d.classList.add('over'); });
+    d.addEventListener('dragleave', e => { if (d.contains(e.relatedTarget)) return; d.classList.remove('over'); });
+    d.addEventListener('drop', e => { e.preventDefault(); d.classList.remove('over'); const x = e.dataTransfer.files[0]; if (x) { const dt = new DataTransfer(); dt.items.add(x); f.files = dt.files; n.textContent = x.name; } });
+  }
+  zona('d-pdf', 'f-pdf', 'n-pdf'); zona('d-xl', 'f-xl', 'n-xl');
+
+  const opInput = document.getElementById('f-op');
+  try { opInput.value = localStorage.getItem('tablero-operadora') || ''; } catch (e) {}
+  opInput.addEventListener('change', () => { try { localStorage.setItem('tablero-operadora', opInput.value.trim()); } catch (e) {} });
+
+  document.getElementById('form-etq').addEventListener('submit', async function (e) {
+    e.preventDefault();
+    const btn = document.getElementById('b-proc'), s = document.getElementById('salida');
+    const pdf = document.getElementById('f-pdf').files[0], xl = document.getElementById('f-xl').files[0];
+    const remision = document.getElementById('f-rem').value.trim();
+    const operadora = opInput.value.trim();
+    if (!pdf || !xl) { s.className = 'salida err'; s.textContent = 'Debes subir el PDF de etiquetas y el Excel.'; return; }
+    btn.disabled = true; btn.textContent = 'Procesando…'; s.className = 'salida'; s.textContent = 'Leyendo archivos…';
+    try {
+      const r = await EtiquetasMotor.procesar({
+        pdfBytes: await pdf.arrayBuffer(), filename: pdf.name, excelBytes: await xl.arrayBuffer(), remision,
+        onProgreso: msg => { s.textContent = msg; },
+      });
+      // Descargar el PDF
+      const blob = new Blob([r.pdfBytes], { type: 'application/pdf' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a'); a.href = url; a.download = r.nombreArchivo; document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 10000);
+
+      const st = r.stats;
+      let msg = `✓ ${st.total} etiquetas · ${st.canal} · ${r.nombreArchivo} descargado`;
+      if (st.sin_sku.length) msg += ` · ⚠️ ${st.sin_sku.length} SIN-SKU: ${st.sin_sku.join(', ')}`;
+      s.className = st.sin_sku.length ? 'salida err' : 'salida ok'; s.textContent = msg;
+
+      await anotarLote({ id: Date.now() + '-' + Math.random().toString(36).slice(2, 7), fecha: new Date().toISOString(),
+        canal: st.canal, etiquetas: st.total, remision: remision.toUpperCase(), operadora, sin_sku: st.sin_sku.length, archivo: r.nombreArchivo });
+    } catch (err) {
+      s.className = 'salida err'; s.textContent = 'Error: ' + (err.message || err);
+      console.error(err);
+    } finally {
+      btn.disabled = false; btn.textContent = 'Procesar etiquetas';
+    }
+  });
 </script>
 
 </body>
