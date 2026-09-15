@@ -305,6 +305,26 @@
   const CATALOGO_URL = './catalogo.json';
   const HORAS_ALERTA = 2;
   let CATALOGO_OK = false;
+  // Última corrida exitosa del workflow en GitHub = última vez que se VERIFICÓ contra Odoo
+  // (catalogo.json solo se reescribe cuando hay cambios, así que su fecha es "último cambio", no "última verificación").
+  const RUNS_URL = 'https://api.github.com/repos/britanie-veen/devoluciones-full-ml/actions/workflows/catalogo.yml/runs?status=success&per_page=1';
+  async function ultimaVerificacion() {
+    try {
+      const r = await fetch(RUNS_URL, { headers: { 'Accept': 'application/vnd.github+json' } });
+      if (!r.ok) return null;
+      const d = await r.json();
+      const run = d.workflow_runs && d.workflow_runs[0];
+      return run ? new Date(run.updated_at) : null;
+    } catch (e) { return null; }
+  }
+  function haceCuanto(ms) {
+    const min = Math.round(ms / 60000);
+    if (min < 1) return 'ahora mismo';
+    if (min < 60) return `hace ${min} min`;
+    const h = Math.floor(min / 60);
+    if (h < 48) return `hace ${h} h`;
+    return `hace ${Math.floor(h / 24)} días`;
+  }
   async function cargarCatalogo() {
     const el = document.getElementById('cat-txt');
     try {
@@ -312,11 +332,16 @@
       if (!r.ok) throw new Error(r.status);
       const d = await r.json();
       const n = EtiquetasMotor.cargarCatalogo(d.skus || {});
-      const gen = d.generado ? new Date(d.generado) : null;
-      const fecha = gen ? gen.toLocaleString('es-MX', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : '—';
-      const viejo = gen && (Date.now() - gen.getTime() > HORAS_ALERTA * 3600000);
-      el.innerHTML = `Catálogo: <b>${n} SKUs</b> · <span class="${viejo ? 'warn' : 'ok'}">${viejo ? 'sin sincronizar desde' : 'al día con Odoo'}</span> · ${fecha}`;
       CATALOGO_OK = n > 0;
+
+      const cambio = d.generado ? new Date(d.generado) : null;
+      const fechaCambio = cambio ? cambio.toLocaleString('es-MX', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : '—';
+      const verif = await ultimaVerificacion();
+      const ref = verif || cambio;
+      const viejo = ref && (Date.now() - ref.getTime() > HORAS_ALERTA * 3600000);
+      const estado = viejo ? `<span class="warn">sin verificar desde ${haceCuanto(Date.now() - ref.getTime())}</span>`
+                           : `<span class="ok">al día con Odoo</span>${verif ? ` · verificado ${haceCuanto(Date.now() - verif.getTime())}` : ''}`;
+      el.innerHTML = `Catálogo: <b>${n} SKUs</b> · ${estado} · último cambio ${fechaCambio}`;
     } catch (e) {
       el.innerHTML = `Catálogo: <span class="err">no se pudo leer catalogo.json</span> (${e.message})`;
     }
