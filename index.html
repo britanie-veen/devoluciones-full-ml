@@ -150,6 +150,14 @@
         <div class="lista" id="lista-proximas"></div>
       </div>
     </div>
+
+    <!-- 🆕 (18-sep): Comparativa histórica — llegaron vs debían llegar -->
+    <div class="label" style="margin-top:22px;">Comparativa histórica — llegaron vs debían llegar</div>
+    <div class="card">
+      <div class="card-head"><span class="card-title">Por semana</span></div>
+      <div class="desc">Cuántas devoluciones dijo ML que debían llegar al almacén vs cuántas llegaron de verdad (ya escaneadas). Empieza a llenarse desde hoy; sirve para detectar si se pierde algo en el camino.</div>
+      <div id="comparativa-tabla" style="margin-top:10px;overflow-x:auto;"></div>
+    </div>
   </section>
 
   <!-- ═══ 2. Etiquetas SHEIN & TikTok ═════════════════════════ -->
@@ -297,6 +305,54 @@
   }
   cargar();
   setInterval(cargar, REFRESCO_MS);
+
+  // 🆕 (18-sep): Comparativa histórica (llegaron vs debían). Lee el resumen
+  // por semana del backend del scanner (?action=comparativaFull), que acumula
+  // lo que ML marca y lo cruza con lo que ya llegó/se escaneó.
+  function etiquetaSemana_(lunesStr) {
+    try {
+      const p = String(lunesStr).split("-");
+      const lun = new Date(+p[0], +p[1] - 1, +p[2], 12);
+      const vie = new Date(lun); vie.setDate(vie.getDate() + 4);
+      const meses = ["ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic"];
+      return "Sem " + lun.getDate() + "–" + vie.getDate() + " " + meses[vie.getMonth()];
+    } catch (e) { return lunesStr; }
+  }
+  async function cargarComparativa_() {
+    const cont = document.getElementById("comparativa-tabla");
+    if (!cont) return;
+    try {
+      const r = await fetch(BRIDGE_URL + "?action=comparativaFull&_=" + Date.now(), { redirect: "follow" });
+      const d = await r.json();
+      const semanas = (d && d.semanas) || [];
+      if (!semanas.length) {
+        cont.innerHTML = '<div class="vacio" style="padding:14px;color:#999;font-size:13px;">Todavía no hay historial. Se irá llenando conforme ML marque devoluciones y lleguen al almacén.</div>';
+        return;
+      }
+      let html = '<table style="width:100%;border-collapse:collapse;font-size:14px;">' +
+        '<thead><tr>' +
+        '<th style="text-align:left;padding:10px;border-bottom:1px solid #e8e8e8;">Semana</th>' +
+        '<th style="text-align:center;padding:10px;border-bottom:1px solid #e8e8e8;">Debían llegar</th>' +
+        '<th style="text-align:center;padding:10px;border-bottom:1px solid #e8e8e8;">Llegaron</th>' +
+        '<th style="text-align:center;padding:10px;border-bottom:1px solid #e8e8e8;">Faltan</th>' +
+        '</tr></thead><tbody>';
+      semanas.forEach(function (s) {
+        const faltanColor = (s.faltan > 0) ? "#C0392B" : "#1E9E4C";
+        html += '<tr>' +
+          '<td style="text-align:left;padding:10px;border-bottom:1px solid #f0f0f0;font-weight:700;">' + etiquetaSemana_(s.semana) + '</td>' +
+          '<td style="text-align:center;padding:10px;border-bottom:1px solid #f0f0f0;font-weight:900;font-size:18px;">' + s.debian + '</td>' +
+          '<td style="text-align:center;padding:10px;border-bottom:1px solid #f0f0f0;font-weight:900;font-size:18px;color:#1E9E4C;">' + s.llegaron + '</td>' +
+          '<td style="text-align:center;padding:10px;border-bottom:1px solid #f0f0f0;font-weight:900;font-size:18px;color:' + faltanColor + ';">' + s.faltan + '</td>' +
+          '</tr>';
+      });
+      html += '</tbody></table>';
+      cont.innerHTML = html;
+    } catch (e) {
+      cont.innerHTML = '<div class="vacio" style="padding:14px;color:#999;font-size:13px;">No se pudo cargar la comparativa.</div>';
+    }
+  }
+  cargarComparativa_();
+  setInterval(cargarComparativa_, REFRESCO_MS);
 
   // ═══ 2. Etiquetas ═════════════════════════════════════════
   pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
