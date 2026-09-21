@@ -414,8 +414,10 @@
   setInterval(cargarCatalogo, REFRESCO_MS);
 
   // ── Registro de lotes: Apps Script (compartido) + copia local por si no hay red
-  // Cuando exista el Apps Script del registro, pega aquí su URL de web app (termina en /exec).
-  const REGISTRO_URL = '';
+  // 🆕 (21-sep): registro COMPARTIDO encendido. Usa el mismo backend del scanner
+  // (BRIDGE_URL) con las acciones registrarLote / listarLotes. Así todas las
+  // computadoras ven el mismo registro (antes cada quien veía solo lo suyo, local).
+  const REGISTRO_URL = BRIDGE_URL;
   const LS_REG = 'tablero-registro-etiquetas';
   const DIAS_RETENCION = 7;   // el registro conserva solo la ultima semana; lo mas viejo se borra solo
   function vigente(x) { return (Date.now() - new Date(x.fecha).getTime()) <= DIAS_RETENCION * 86400000; }
