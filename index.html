@@ -127,7 +127,7 @@
   </div>
   <nav role="tablist" aria-label="Secciones">
     <button class="tab" role="tab" id="tab-ml" aria-selected="true" aria-controls="sec-ml">Devoluciones Mercado Libre <span class="pill" id="pill-ml">0</span></button>
-    <button class="tab" role="tab" id="tab-etq" aria-selected="false" aria-controls="sec-etq">Etiquetas SHEIN &amp; TikTok <span class="pill" id="pill-etq">0</span></button>
+    <button class="tab" role="tab" id="tab-etq" aria-selected="false" aria-controls="sec-etq">Etiquetas SHEIN, TikTok &amp; Walmart <span class="pill" id="pill-etq">0</span></button>
     <button class="tab" role="tab" id="tab-amz" aria-selected="false" aria-controls="sec-amz">Devoluciones Amazon <span class="pill soon">Próximamente</span></button>
   </nav>
 </header>
@@ -176,6 +176,7 @@
           <button class="chip" aria-pressed="true" data-f="">Todos</button>
           <button class="chip" aria-pressed="false" data-f="TIKTOK">TikTok</button>
           <button class="chip" aria-pressed="false" data-f="SHEIN">SHEIN</button>
+          <button class="chip" aria-pressed="false" data-f="WALMART">Walmart</button>
         </div>
         <div id="registro-lista"><div class="vacio">Todavía no hay lotes procesados.</div></div>
         <div class="origen" id="registro-origen"></div>
@@ -226,6 +227,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<!-- 🆕 (22-sep): lector de código de barras para las etiquetas de Walmart (FedEx),
+     que son imágenes sin texto. Solo lo usa el flujo de Walmart. -->
+<script src="https://cdn.jsdelivr.net/npm/@zxing/library@0.21.3/umd/index.min.js"></script>
 <script src="./js/etiquetas.js"></script>
 
 <script>
@@ -484,7 +488,8 @@
       if (t !== diaActual) { if (diaActual) html += '</ul>'; html += `<div class="dia">${t}</div><ul class="log">`; diaActual = t; }
       const hh = f.getHours() % 12 || 12, mm = String(f.getMinutes()).padStart(2, '0'), ap = f.getHours() < 12 ? 'am' : 'pm';
       const sin = +x.sin_sku > 0 ? ` · <b>${x.sin_sku} sin SKU</b>` : '';
-      html += `<li class="${x.id === nuevoId ? 'nuevo' : ''}"><span class="canal ${x.canal === 'SHEIN' ? 'shein' : ''}">${x.canal === 'SHEIN' ? 'SHEIN' : 'TikTok'}</span>
+      const nombreCanal = x.canal === 'SHEIN' ? 'SHEIN' : x.canal === 'WALMART' ? 'Walmart' : 'TikTok';
+      html += `<li class="${x.id === nuevoId ? 'nuevo' : ''}"><span class="canal ${x.canal === 'SHEIN' ? 'shein' : ''}">${nombreCanal}</span>
         <div><div class="q">${x.etiquetas}<small>etiquetas</small></div><div class="r">${x.remision ? `Remisión <b>${x.remision}</b>` : 'Sin remisión'}${x.operadora ? ' · ' + x.operadora : ''}${sin}</div></div>
         <div class="h"><b>${hh}:${mm}</b>${ap}</div></li>`;
     }
