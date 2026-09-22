@@ -82,6 +82,16 @@
     return _catalog[sku] !== undefined ? _catalog[sku] : sku;
   }
 
+  // 🆕 (22-sep) WALMART: descripción COMPLETA del catálogo (qué es + color), sin
+  // el recorte agresivo de limpiarDesc. Solo le quita el prefijo "[SKU] " y deja
+  // el resto tal cual (ej. "Funda para Asador Circular (Azul Marino)"). Si el SKU
+  // no está en el catálogo, muestra el SKU. Se usa solo en las etiquetas Walmart.
+  function descCompleta(sku) {
+    const raw = _raw[sku];
+    if (!raw) return sku;
+    return raw.replace(/^\[.*?\]\s*/, "").trim() || sku;
+  }
+
   function limpiarSkuShein(sku) { return sku.replace(/-ok+$/i, "").trim(); }
 
   // ── Helpers de texto / Excel ───────────────────────────────────────────────
@@ -392,6 +402,185 @@
   // Orden "alfabético" igual que Python (comparación de strings por código de carácter)
   function cmp(a, b) { return a < b ? -1 : a > b ? 1 : 0; }
 
+  // ════════════════════════════════════════════════════════════════════════════
+  // 🆕 (22-sep) WALMART — etiquetas FedEx.
+  // A diferencia de SHEIN/TikTok, la etiqueta de Walmart es una IMAGEN (sin
+  // texto): no se puede leer el tracking del texto. Por eso se renderiza cada
+  // página a un <canvas> y se LEE su código de barras (Code128/PDF417) con ZXing;
+  // los últimos 12 dígitos son el "Número De Rastreo" del machote. NO se recorta
+  // la etiqueta: se deja completa y se le agrega abajo una franja con
+  // SKU + descripción (catálogo) + cantidad + conteo + remisión, ordenado por SKU.
+  // ════════════════════════════════════════════════════════════════════════════
+  function ultimos12(v) { const d = String(v == null ? "" : v).replace(/\D/g, ""); return d.length >= 12 ? d.slice(-12) : d; }
+
+  // ¿El Excel es un machote de Walmart? (tiene columna "...rastreo..." + "sku").
+  // A propósito pide "rastreo" (no "tracking") para no confundirlo con TikTok.
+  function esMachoteWalmart(excelBytes) {
+    try {
+      const wb = leerLibro(excelBytes);
+      for (const name of wb.SheetNames) {
+        const { cols } = hojaARegistros(wb, name);
+        if (findCol(cols, "rastreo") && findCol(cols, "sku")) return true;
+      }
+    } catch (e) { /* no es Walmart */ }
+    return false;
+  }
+
+  function hojaMachoteWalmart_(wb) {
+    for (const name of wb.SheetNames) {
+      const { cols } = hojaARegistros(wb, name);
+      if (findCol(cols, "rastreo", "tracking", "guia") && findCol(cols, "sku")) return name;
+    }
+    return wb.SheetNames[0];
+  }
+
+  // lookup: tracking(12) → [[sku, qty], …] · remisiones: tracking(12) → remisión
+  function leerMachoteWalmart(excelBytes) {
+    const wb = leerLibro(excelBytes);
+    const { cols, rows } = hojaARegistros(wb, hojaMachoteWalmart_(wb));
+    const colTrk = findCol(cols, "numero de rastreo", "rastreo", "tracking", "guia");
+    const colSku = findCol(cols, "sku");
+    const colQty = findCol(cols, "cantidad", "quantity", "qty");
+    const colRem = findCol(cols, "remisi", "remission");
+    if (!colTrk || !colSku) throw new Error(`Machote de Walmart: no encontré columnas de rastreo/SKU. Disponibles: ${JSON.stringify(cols)}`);
+    const lookup = {}, remisiones = {};
+    for (const row of rows) {
+      const trk = ultimos12(row[colTrk]);
+      if (trk.length < 12) continue;
+      const sku = esNan(row[colSku]) ? "nan" : String(row[colSku]).trim();
+      const qty = colQty ? parseQty(row[colQty]) : 1;
+      if (colRem && !(trk in remisiones)) { const rv = esNan(row[colRem]) ? "" : String(row[colRem]).trim(); if (rv) remisiones[trk] = rv.toUpperCase(); }
+      if (!lookup[trk]) lookup[trk] = [];
+      const ex = lookup[trk].find(e => e[0] === sku);
+      if (ex) ex[1] += qty; else lookup[trk].push([sku, qty]);
+    }
+    return { lookup, remisiones, validos: new Set(Object.keys(lookup)) };
+  }
+
+  // Render de una página del PDF a un <canvas> (para leer el código de barras).
+  async function paginaACanvas(doc, i, scale) {
+    const page = await doc.getPage(i + 1);
+    const vp = page.getViewport({ scale: scale });
+    const canvas = document.createElement("canvas");
+    canvas.width = Math.ceil(vp.width); canvas.height = Math.ceil(vp.height);
+    const c2d = canvas.getContext("2d", { willReadFrequently: true });
+    await page.render({ canvasContext: c2d, viewport: vp }).promise;
+    return canvas;
+  }
+
+  // Lee los códigos de barras del canvas y devuelve el tracking (12 díg) que EXISTA
+  // en el machote. Si ninguno casa, devuelve el primer 12-díg encontrado (para
+  // reportar) o "".
+  // Decodifica UN código de barras de un canvas (o null si no hay). Usa
+  // MultiFormatReader (Code128 + PDF417). No depende de clases de "multi".
+  function _decodeUno(canvas, hints, reader) {
+    let src;
+    if (ZXing.HTMLCanvasElementLuminanceSource) {
+      src = new ZXing.HTMLCanvasElementLuminanceSource(canvas);
+    } else {
+      const img = canvas.getContext("2d").getImageData(0, 0, canvas.width, canvas.height);
+      const lum = new Uint8ClampedArray(canvas.width * canvas.height);
+      for (let i = 0, j = 0; i < img.data.length; i += 4, j++) lum[j] = (img.data[i] * 0.299 + img.data[i + 1] * 0.587 + img.data[i + 2] * 0.114) | 0;
+      src = new ZXing.RGBLuminanceSource(lum, canvas.width, canvas.height);
+    }
+    const bitmap = new ZXing.BinaryBitmap(new ZXing.HybridBinarizer(src));
+    try { const r = reader.decode(bitmap, hints); return r ? String(r.getText()) : ""; }
+    catch (e) { return ""; }
+    finally { try { reader.reset(); } catch (e) {} }
+  }
+
+  // Devuelve el tracking (12 díg del machote) leído de la etiqueta. La etiqueta
+  // trae VARIOS códigos; como ZXing.decode lee solo uno, se decodifica la imagen
+  // completa Y en bandas horizontales, y se busca el tracking como SUBCADENA de
+  // los dígitos leídos (funciona con el Code128 de 34 díg y con el PDF417, que
+  // llevan el tracking adentro). Si nada casa, devuelve "" (→ SIN-SKU).
+  function leerTrackingBarcode(canvas, validos) {
+    if (typeof ZXing === "undefined" || !ZXing.MultiFormatReader) {
+      throw new Error("No cargó el lector de código de barras. Recarga la página e intenta de nuevo.");
+    }
+    const hints = new Map();
+    hints.set(ZXing.DecodeHintType.TRY_HARDER, true);
+    hints.set(ZXing.DecodeHintType.POSSIBLE_FORMATS, [ZXing.BarcodeFormat.CODE_128, ZXing.BarcodeFormat.PDF_417]);
+    const reader = new ZXing.MultiFormatReader();
+    reader.setHints(hints);
+    const trks = Array.from(validos);
+    const casa = (txt) => { const d = String(txt).replace(/\D/g, ""); for (const trk of trks) if (d.indexOf(trk) !== -1) return trk; return ""; };
+
+    // 1) imagen completa
+    let m = casa(_decodeUno(canvas, hints, reader));
+    if (m) return m;
+
+    // 2) bandas horizontales solapadas (cada Code128 por separado)
+    const W = canvas.width, H = canvas.height, N = 10;
+    const step = Math.max(1, Math.floor(H / N)), bandH = Math.min(H, step * 2);
+    let fallback = "";
+    for (let b = 0; b < N; b++) {
+      const y = Math.min(b * step, H - 1), hh = Math.min(bandH, H - y);
+      if (hh < 24) continue;
+      const c = document.createElement("canvas"); c.width = W; c.height = hh;
+      c.getContext("2d", { willReadFrequently: true }).drawImage(canvas, 0, y, W, hh, 0, 0, W, hh);
+      const txt = _decodeUno(c, hints, reader);
+      if (!txt) continue;
+      m = casa(txt); if (m) return m;
+      const d = txt.replace(/\D/g, ""); if (!fallback && d.length >= 12) fallback = d.slice(-12);
+    }
+    return fallback && validos.has(fallback) ? fallback : "";
+  }
+
+  // Render de una etiqueta Walmart: NO se recorta. Etiqueta completa arriba +
+  // franja blanca abajo con el banner (una línea por SKU) + contador y remisión.
+  // La letra se ajusta sola para que quepa.
+  async function renderPaginaWalmart(ctx, srcIdx, items, counter, remision) {
+    const { outDoc, srcDoc, font } = ctx;
+    const srcPage = srcDoc.getPage(srcIdx);
+    const w = srcPage.getWidth(), h = srcPage.getHeight();
+    const lineas = items.map(function (it) {
+      const sku = it[0];
+      const desc = sku === "SIN-SKU" ? "Sin descripción" : descCompleta(sku);
+      return `${sku}  //  ${desc}  //  ${it[1]} pz`;
+    });
+    const contLinea = remision ? `${counter}   ·   ${remision}` : counter;
+    const todas = lineas.concat([contLinea]);
+    const usable = w - 16;
+    let size = 9;
+    while (size > 6 && todas.some(function (t) { return font.widthOfTextAtSize(textoSeguro(font, t), size) > usable; })) size -= 0.5;
+    const gap = 4;
+    const STRIP = 12 + todas.length * (size + gap);
+    const page = outDoc.addPage([w, h + STRIP]);
+    const emb = await outDoc.embedPage(srcPage);
+    page.drawPage(emb, { x: 0, y: STRIP, width: w, height: h });
+    page.drawLine({ start: { x: 0, y: STRIP }, end: { x: w, y: STRIP }, thickness: 1, color: PDFLib.rgb(0, 0, 0) });
+    let y = STRIP - 6 - size;
+    for (const t of todas) {
+      const s = textoSeguro(font, t);
+      const tw = font.widthOfTextAtSize(s, size);
+      page.drawText(s, { x: (w - tw) / 2, y: y, size: size, font: font, color: PDFLib.rgb(0, 0, 0) });
+      y -= (size + gap);
+    }
+  }
+
+  async function procesarWalmart(ctx, excelBytes, remision) {
+    const { lookup, remisiones, validos } = leerMachoteWalmart(excelBytes);
+    const n = ctx.pdfjs.numPages, paginas = [];
+    for (let i = 0; i < n; i++) {
+      ctx.progreso(`Leyendo etiqueta ${i + 1}/${n}…`);
+      const canvas = await paginaACanvas(ctx.pdfjs, i, 4);
+      const trk = leerTrackingBarcode(canvas, validos);
+      const items = (trk && lookup[trk]) ? lookup[trk] : [["SIN-SKU", 1]];
+      const rem = (trk && remisiones[trk]) || (remision || "").trim().toUpperCase();
+      paginas.push({ idx: i, items: items, skuSort: items[0][0], trk: trk, remision: rem });
+    }
+    paginas.sort(function (a, b) { return cmp(a.skuSort, b.skuSort); });
+    const total = paginas.length;
+    const sinSku = paginas.filter(function (p) { return p.items[0][0] === "SIN-SKU"; }).map(function (p) { return p.trk || ("pág " + (p.idx + 1)); });
+    for (let o = 0; o < total; o++) {
+      ctx.progreso(`Generando ${o + 1}/${total}…`);
+      const p = paginas[o];
+      await renderPaginaWalmart(ctx, p.idx, p.items, `${o + 1}/${total}`, p.remision || null);
+    }
+    return { total: total, sin_sku: sinSku, canal: "WALMART" };
+  }
+
   // ── Detección de canal (app.py) ────────────────────────────────────────────
   async function detectarCanal(pdfBytes, filename = "") {
     try {
@@ -438,8 +627,12 @@
     }
 
     progreso("Detectando canal…");
-    const canal = await detectarCanal(bytes, filename);
-    if (canal === "desconocido") throw new Error("No se pudo detectar el canal. Verifica que el PDF sea de SHEIN o TikTok.");
+    let canal = await detectarCanal(bytes, filename);
+    // 🆕 (22-sep): la etiqueta de Walmart es una IMAGEN (sin texto), así que
+    // detectarCanal no la reconoce por texto. Si el machote es de Walmart
+    // (columna "…rastreo…"), entonces es Walmart.
+    if (canal === "desconocido" && esMachoteWalmart(excelBytes)) canal = "walmart";
+    if (canal === "desconocido") throw new Error("No se pudo detectar el canal. Verifica que el PDF/machote sea de SHEIN, TikTok o Walmart.");
 
     const pdfjs = await abrirPdfjs(bytes);
     const srcDoc = await PDFLib.PDFDocument.load(bytes, { ignoreEncryption: true });
@@ -449,8 +642,9 @@
 
     let stats;
     try {
-      stats = canal === "shein" ? await procesarShein(ctx, excelBytes, remision)
-                                : await procesarTiktok(ctx, excelBytes, remision);
+      stats = canal === "shein"   ? await procesarShein(ctx, excelBytes, remision)
+            : canal === "walmart" ? await procesarWalmart(ctx, excelBytes, remision)
+            :                       await procesarTiktok(ctx, excelBytes, remision);
     } finally {
       await pdfjs.destroy();
     }
