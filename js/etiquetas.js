@@ -360,7 +360,12 @@
     while (i < n) {
       const txt = textos[i];
       if (!esPaginaFrontal(txt)) { i += 1; continue; }
-      const tipoB = txt.includes("IMI-M04");
+      const tu = txt.toUpperCase();
+      // Familia M04: IMI-M04 cl\u00e1sico + variante J&T ("PUDO-IMI" / "SHEIN M04 FF" /
+      // gu\u00eda tipo JMX\u2026). La J&T NO dice "IMI-M04", por eso antes ca\u00eda a la rama iMile
+      // (que solo acepta 14 d\u00edgitos) y como su gu\u00eda es JMX+12d\u00edg se saltaba en silencio.
+      const esJT = tu.includes("PUDO-IMI") || tu.includes("SHEIN M04") || /\bJMX\d{10,}\b/.test(tu);
+      const tipoB = tu.includes("IMI-M04") || esJT;
       let clave = "";
       if (tipoB) {
         let m = txt.match(/(GSH\w+)/); clave = m ? m[1] : "";
@@ -368,7 +373,11 @@
         if (!clave) { m = txt.match(/\b([A-Z]{2,4}\d{10,})\b/); if (m) clave = m[1]; }
         if (!clave && i + 1 < n) { m = textos[i + 1].match(/SEGUIMIENTO[\uff1a:\s]+(\S+)/); if (m) clave = m[1]; }
       } else {
-        const m = txt.match(/\b(\d{14})\b/); clave = m ? m[1] : "";
+        let m = txt.match(/\b(\d{14})\b/); clave = m ? m[1] : "";
+        // Defensivo: si un formato nuevo cae aqu\u00ed, intentar la orden GSH o una gu\u00eda
+        // tipo JMX en vez de saltar la p\u00e1gina en silencio (como pasaba con J&T).
+        if (!clave) { m = txt.match(/(GSH\w+)/); if (m) clave = m[1]; }
+        if (!clave) { m = txt.match(/\b([A-Z]{2,4}\d{10,})\b/); if (m) clave = m[1]; }
       }
       if (!clave) { i += 1; continue; }
       let items = lookup[clave] || [["SIN-SKU", 1]];
@@ -378,8 +387,10 @@
       }
       let clipB = null, sclB = null, bannerB = null;
       if (tipoB) {
-        const maxY = await maxDibujoY(ctx.pdfjs, i);
-        if (maxY > 380) { clipB = CLIP_B_TALL; sclB = SCL_B_TALL; bannerB = BANNER_B_TALL; }
+        // J&T: su código de barras es una IMAGEN y maxDibujoY solo mide vectores →
+        // mediría de menos y cortaría la etiqueta. Por eso la J&T va SIEMPRE en TALL.
+        const tall = esJT ? true : (await maxDibujoY(ctx.pdfjs, i)) > 380;
+        if (tall) { clipB = CLIP_B_TALL; sclB = SCL_B_TALL; bannerB = BANNER_B_TALL; }
         else { clipB = CLIP_B_SHORT; sclB = SCL_B_SHORT; bannerB = BANNER_B_SHORT; }
       }
       paginas.push({ idx: i, tipoB, clave, items, skuSort: items[0][0], clipB, sclB, bannerB });
