@@ -89,6 +89,31 @@
   @media (prefers-reduced-motion: reduce) { .log li.nuevo { animation: none; } }
   .origen { font-weight: 200; font-size: 11px; color: var(--dim); margin-top: 18px; letter-spacing: .04em; }
 
+  /* Tablero semanal de etiquetas (por día y corte) */
+  .tsem-top { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .tsem-nav { display: flex; align-items: center; gap: 12px; }
+  .tsem-nav button { background: transparent; border: 1px solid var(--line); border-radius: 8px; width: 40px; height: 40px; font-size: 15px; cursor: pointer; color: var(--fg); font-family: inherit; }
+  .tsem-nav button:hover:not(:disabled) { border-color: var(--fg); }
+  .tsem-nav button:disabled { opacity: .3; cursor: default; }
+  .tsem-rango { font-weight: 900; font-size: 15px; min-width: 165px; text-align: center; text-transform: capitalize; }
+  .tsem-tot { display: flex; gap: 26px; }
+  .tsem-tot .kpi { border-top: none; padding-top: 0; text-align: right; }
+  .tsem-dia { border: 1px solid var(--line); border-radius: 12px; padding: 15px 18px; margin-top: 14px; }
+  .tsem-dia.hoy { border: 2px solid var(--fg); }
+  .tsem-dia.vacio-dia { opacity: .45; padding: 11px 18px; }
+  .tsem-dia-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 8px; }
+  .tsem-dia-head .d { font-weight: 900; font-size: 14px; text-transform: capitalize; }
+  .tsem-dia-head .t { font-weight: 200; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--dim); }
+  .tsem-dia-head .t b { color: var(--fg); font-weight: 900; font-size: 15px; }
+  .tsem-can { display: grid; grid-template-columns: 84px 1fr auto; gap: 14px; align-items: center; padding: 9px 0; border-top: 1px solid var(--line); }
+  .tsem-can:first-of-type { border-top: none; }
+  .tsem-can .cn { font-weight: 900; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; text-align: center; padding: 5px 0; border: 1px solid var(--fg); border-radius: 4px; }
+  .tsem-can .cn.shein { background: var(--fg); color: var(--bg); }
+  .tsem-can .cortes .c { display: inline-block; margin-right: 16px; white-space: nowrap; font-weight: 200; font-size: 13px; }
+  .tsem-can .cortes .c b { font-weight: 900; }
+  .tsem-can .cortes.muted { color: var(--dim); font-style: italic; font-size: 13px; }
+  .tsem-can .sub { font-weight: 900; font-size: 18px; letter-spacing: -.02em; white-space: nowrap; }
+
   .estado { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: 8px; margin-top: 18px; font-weight: 700; font-size: 13px; background: var(--ok-bg); color: var(--ok); }
   .estado.warn { background: var(--warn-bg); color: var(--warn); }
   .estado.err { background: var(--err-bg); color: var(--err); }
@@ -128,6 +153,7 @@
   <nav role="tablist" aria-label="Secciones">
     <button class="tab" role="tab" id="tab-ml" aria-selected="true" aria-controls="sec-ml">Devoluciones Mercado Libre <span class="pill" id="pill-ml">0</span></button>
     <button class="tab" role="tab" id="tab-etq" aria-selected="false" aria-controls="sec-etq">Etiquetas SHEIN, TikTok &amp; Walmart <span class="pill" id="pill-etq">0</span></button>
+    <button class="tab" role="tab" id="tab-tsem" aria-selected="false" aria-controls="sec-etq-tablero">Tablero de etiquetas</button>
     <button class="tab" role="tab" id="tab-amz" aria-selected="false" aria-controls="sec-amz">Devoluciones Amazon <span class="pill soon">Próximamente</span></button>
   </nav>
 </header>
@@ -207,6 +233,25 @@
         <div class="cat"><span id="cat-txt">Catálogo: cargando…</span><a href="https://github.com/britanie-veen/devoluciones-full-ml/actions/workflows/catalogo.yml" target="_blank" rel="noopener">Sincronizar</a></div>
       </div>
 
+    </div>
+  </section>
+
+  <!-- ═══ 2b. Tablero semanal de etiquetas (por día y corte) ══ -->
+  <section id="sec-etq-tablero" role="tabpanel" aria-labelledby="tab-tsem" hidden>
+    <div class="card">
+      <div class="tsem-top">
+        <div class="tsem-nav">
+          <button id="tsem-prev" aria-label="Semana anterior">◀</button>
+          <div class="tsem-rango" id="tsem-rango">—</div>
+          <button id="tsem-next" aria-label="Semana siguiente">▶</button>
+        </div>
+        <div class="tsem-tot">
+          <div class="kpi"><div class="n" id="tsem-semana">0</div><div class="l">semana</div></div>
+          <div class="kpi"><div class="n" id="tsem-mes">0</div><div class="l" id="tsem-mes-l">mes</div></div>
+        </div>
+      </div>
+      <div class="desc">Cuántas etiquetas se generaron por día y por corte, en los 3 canales. Cada corte = una vez que se procesó un lote ese día.</div>
+      <div id="tsem-dias"></div>
     </div>
   </section>
 
@@ -425,7 +470,9 @@
   const LS_REG = 'tablero-registro-etiquetas';
   const DIAS_RETENCION = 7;   // el registro conserva solo la ultima semana; lo mas viejo se borra solo
   function vigente(x) { return (Date.now() - new Date(x.fecha).getTime()) <= DIAS_RETENCION * 86400000; }
-  let REGISTROS = [];
+  let REGISTROS = [];       // últimos 7 días (para la lista de arriba)
+  let REGISTROS_ALL = [];   // TODO el historial del backend (para el tablero semanal/mensual)
+  let semanaOffset = 0;     // 0 = semana actual, -1 = anterior, etc.
   let FILTRO = '';
 
   function leerLocal() { try { return JSON.parse(localStorage.getItem(LS_REG) || '[]').filter(vigente); } catch (e) { return []; } }
@@ -442,10 +489,13 @@
     }
     const locales = leerLocal();
     const vistos = new Set();
-    REGISTROS = [...remotos, ...locales].filter(vigente).filter(x => { const k = x.id || (x.fecha + x.canal + x.etiquetas + x.remision); if (vistos.has(k)) return false; vistos.add(k); return true; })
+    const todos = [...remotos, ...locales].filter(x => { const k = x.id || (x.fecha + x.canal + x.etiquetas + x.remision); if (vistos.has(k)) return false; vistos.add(k); return true; })
       .sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
+    REGISTROS_ALL = todos;                 // historial completo (tablero)
+    REGISTROS = todos.filter(vigente);     // últimos 7 días (lista)
     document.getElementById('registro-origen').textContent = origen;
     pintarRegistro();
+    pintarTablero();
   }
 
   async function anotarLote(lote) {
@@ -455,7 +505,9 @@
       catch (e) { /* queda en la copia local; se verá cuando vuelva la red */ }
     }
     REGISTROS.unshift(lote);
+    REGISTROS_ALL.unshift(lote);
     pintarRegistro(lote.id);
+    pintarTablero();
   }
 
   function mismoDia(a, b) { return a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate(); }
@@ -495,6 +547,63 @@
     }
     cont.innerHTML = html + '</ul>';
   }
+
+  // ── Tablero semanal de etiquetas (por día · corte · canal)
+  const CANALES_T = ['SHEIN', 'TIKTOK', 'WALMART'];
+  const nomCanal = c => c === 'SHEIN' ? 'SHEIN' : c === 'WALMART' ? 'Walmart' : 'TikTok';
+  function lunesDe(offset) {
+    const hoy = new Date(), lun = new Date(hoy);
+    lun.setDate(hoy.getDate() - ((hoy.getDay() + 6) % 7) + offset * 7);
+    lun.setHours(0, 0, 0, 0);
+    return lun;
+  }
+  function pintarTablero() {
+    const cont = document.getElementById('tsem-dias');
+    if (!cont) return;
+    const lun = lunesDe(semanaOffset);
+    const dom = new Date(lun); dom.setDate(lun.getDate() + 6);
+    const fmt = (d, o) => d.toLocaleDateString('es-MX', o);
+    document.getElementById('tsem-rango').textContent =
+      fmt(lun, { day: 'numeric', month: 'short' }) + ' – ' + fmt(dom, { day: 'numeric', month: 'short' });
+    const hoy = new Date();
+    let totalSemana = 0, html = '';
+    for (let i = 0; i < 7; i++) {
+      const d = new Date(lun); d.setDate(lun.getDate() + i);
+      const lotes = REGISTROS_ALL.filter(x => mismoDia(new Date(x.fecha), d))
+        .sort((a, b) => new Date(a.fecha) - new Date(b.fecha));   // asc por hora → cortes en orden
+      const totalDia = lotes.reduce((s, x) => s + (+x.etiquetas || 0), 0);
+      totalSemana += totalDia;
+      const cab = fmt(d, { weekday: 'long', day: 'numeric' });
+      if (!lotes.length) {
+        html += `<div class="tsem-dia vacio-dia"><div class="tsem-dia-head"><span class="d">${cab}</span><span class="t">sin actividad</span></div></div>`;
+        continue;
+      }
+      let filas = '';
+      CANALES_T.forEach(c => {
+        const ls = lotes.filter(x => String(x.canal || '').toUpperCase() === c);
+        const sub = ls.reduce((s, x) => s + (+x.etiquetas || 0), 0);
+        const cortes = ls.length
+          ? `<span class="cortes">${ls.map((x, k) => `<span class="c">Corte ${k + 1}: <b>${(+x.etiquetas || 0).toLocaleString('es-MX')}</b></span>`).join('')}</span>`
+          : `<span class="cortes muted">—</span>`;
+        filas += `<div class="tsem-can"><span class="cn ${c === 'SHEIN' ? 'shein' : ''}">${nomCanal(c)}</span>${cortes}<b class="sub">${sub.toLocaleString('es-MX')}</b></div>`;
+      });
+      html += `<div class="tsem-dia ${mismoDia(d, hoy) ? 'hoy' : ''}">
+        <div class="tsem-dia-head"><span class="d">${cab}</span><span class="t">${lotes.length} corte(s) · <b>${totalDia.toLocaleString('es-MX')}</b> etiquetas</span></div>
+        ${filas}
+      </div>`;
+    }
+    cont.innerHTML = html;
+    document.getElementById('tsem-semana').textContent = totalSemana.toLocaleString('es-MX');
+    const totalMes = REGISTROS_ALL.filter(x => { const f = new Date(x.fecha); return f.getMonth() === lun.getMonth() && f.getFullYear() === lun.getFullYear(); })
+      .reduce((s, x) => s + (+x.etiquetas || 0), 0);
+    document.getElementById('tsem-mes').textContent = totalMes.toLocaleString('es-MX');
+    document.getElementById('tsem-mes-l').textContent = fmt(lun, { month: 'long' });
+    const next = document.getElementById('tsem-next');
+    if (next) next.disabled = semanaOffset >= 0;   // no hay semanas futuras
+  }
+  document.getElementById('tsem-prev').addEventListener('click', () => { semanaOffset--; pintarTablero(); });
+  document.getElementById('tsem-next').addEventListener('click', () => { if (semanaOffset < 0) { semanaOffset++; pintarTablero(); } });
+
   document.querySelectorAll('.chip').forEach(ch => ch.addEventListener('click', () => {
     document.querySelectorAll('.chip').forEach(c => c.setAttribute('aria-pressed', c === ch ? 'true' : 'false'));
     FILTRO = ch.dataset.f; pintarRegistro();
