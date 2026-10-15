@@ -55,6 +55,10 @@
   .registro .guia b { color: var(--fg); font-weight: 900; letter-spacing: 0; }
   .rem-input, .input { flex: 1; min-width: 150px; padding: 12px 14px; border: 1px solid var(--line); background: var(--bg); color: var(--fg); font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 14px; border-radius: 8px; }
   .rem-input::placeholder, .input::placeholder { color: var(--dim); font-weight: 200; }
+  .chip-origen { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .3px; padding: 2px 8px; border-radius: 999px; vertical-align: middle; margin-left: 6px; }
+  .chip-origen.full { background: var(--fg); color: var(--bg); }
+  .chip-origen.colecta { background: var(--bg); color: var(--fg); border: 1px solid var(--fg); }
+  .chip-origen.desc { background: transparent; color: var(--dim); font-weight: 300; }
   .rem-input:focus-visible, .input:focus-visible { outline: 2px solid var(--fg); outline-offset: 1px; }
   .btn-reg, .btn { padding: 13px 26px; border: none; background: var(--fg); color: var(--bg); font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 12px; letter-spacing: .18em; text-transform: uppercase; cursor: pointer; border-radius: 8px; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
   .btn-reg:disabled, .btn:disabled { opacity: .35; cursor: default; }
@@ -315,10 +319,15 @@
   function fechaBonita(iso) { if (!iso) return ""; const p = iso.split("-"); return `${p[2]}/${MESES[(+p[1])-1]}`; }
   function nivel(d) { if (d === null || d === undefined) return ""; if (d <= 0) return "urgent"; if (d <= 1) return "warn"; return ""; }
   function textoReloj(d) { if (d === null || d === undefined) return "sin fecha"; if (d < 0) return `venció hace ${Math.abs(d)} d`; if (d === 0) return "vence HOY"; if (d === 1) return "queda 1 día"; return `quedan ${d} días`; }
+  function chipOrigen(origen) {
+    if (origen === "FULL")    return `<span class="chip-origen full">📦 FULL</span>`;
+    if (origen === "Colecta") return `<span class="chip-origen colecta">🧺 Colecta</span>`;
+    return `<span class="chip-origen desc">· sin origen</span>`;   // null = ML aún no lo resolvió
+  }
   function cardItem(i) {
     const idx = i._idx, nv = nivel(i.dias_restantes);
     return `<div class="item ${nv}" id="item-${idx}">
-      <div class="prod">${i.producto || "(producto sin nombre)"}</div>
+      <div class="prod">${i.producto || "(producto sin nombre)"} ${chipOrigen(i.origen)}</div>
       <div class="sub">${i.sku || ""}${i.cantidad ? " ×" + i.cantidad : ""} · <a href="https://www.mercadolibre.com.mx/ventas/${i.order_id}/detalle" target="_blank">Pedido ${i.order_id}</a></div>
       <div class="reloj-linea">${textoReloj(i.dias_restantes)} · vence ${fechaBonita(i.vence)}</div>
       <div class="registro">
