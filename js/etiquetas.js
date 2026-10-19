@@ -264,7 +264,7 @@
       const rem = remisiones[tid] || remision.trim().toUpperCase();
       paginas.push({ idx: i, items, skuSort: items[0][0], tid, remision: rem });
     }
-    paginas.sort((a, b) => cmp(a.skuSort, b.skuSort));
+    ordenarPaginas(paginas);   // individuales por SKU · múltiples al final (19-oct)
     const total = paginas.length;
     const sinSku = paginas.filter(p => p.items[0][0] === "SIN-SKU").map(p => p.tid);
     for (let o = 0; o < total; o++) {
@@ -397,7 +397,7 @@
       // Saltar 2 solo si la siguiente página es declaración; si no, saltar 1
       if (i + 1 < n && !esPaginaFrontal(textos[i + 1])) i += 2; else i += 1;
     }
-    paginas.sort((a, b) => cmp(a.skuSort, b.skuSort));
+    ordenarPaginas(paginas);   // individuales por SKU · múltiples al final (19-oct)
     const total = paginas.length;
     const sinSku = paginas.filter(p => p.items[0][0] === "SIN-SKU").map(p => p.clave);
     const rem = remision.trim().toUpperCase() || null;
@@ -412,6 +412,27 @@
 
   // Orden "alfabético" igual que Python (comparación de strings por código de carácter)
   function cmp(a, b) { return a < b ? -1 : a > b ? 1 : 0; }
+
+  // 🆕 (19-oct) Pedido por dirección en la reunión mensual de octubre:
+  //  · Las etiquetas de pedidos INDIVIDUALES (1 pieza) se siguen ordenando por
+  //    SKU — y como el color va dentro del SKU (…-NEG, …-MOR), quedan agrupadas
+  //    por color solas.
+  //  · Las etiquetas de pedidos MÚLTIPLES (más de un SKU, o más de 1 pieza del
+  //    mismo SKU) se separan y van TODAS AL FINAL del listado, también por SKU.
+  //  Se usa en los 3 canales (TikTok, SHEIN, Walmart).
+  function esMultiple(items) {
+    if (!items || !items.length) return false;
+    if (items.length > 1) return true;                       // varios SKUs
+    return (Number(items[0][1]) || 1) > 1;                   // 1 SKU pero 2+ piezas
+  }
+  function ordenarPaginas(paginas) {
+    paginas.sort(function (a, b) {
+      const ma = esMultiple(a.items) ? 1 : 0, mb = esMultiple(b.items) ? 1 : 0;
+      if (ma !== mb) return ma - mb;                         // individuales primero, múltiples al final
+      return cmp(a.skuSort, b.skuSort);                      // dentro de cada grupo: por SKU
+    });
+    return paginas;
+  }
 
   // ════════════════════════════════════════════════════════════════════════════
   // 🆕 (22-sep) WALMART — etiquetas FedEx.
@@ -581,7 +602,7 @@
       const rem = (trk && remisiones[trk]) || (remision || "").trim().toUpperCase();
       paginas.push({ idx: i, items: items, skuSort: items[0][0], trk: trk, remision: rem });
     }
-    paginas.sort(function (a, b) { return cmp(a.skuSort, b.skuSort); });
+    ordenarPaginas(paginas);   // individuales por SKU · múltiples al final (19-oct)
     const total = paginas.length;
     const sinSku = paginas.filter(function (p) { return p.items[0][0] === "SIN-SKU"; }).map(function (p) { return p.trk || ("pág " + (p.idx + 1)); });
     for (let o = 0; o < total; o++) {
