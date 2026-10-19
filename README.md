@@ -29,3 +29,10 @@ procesan en la pestaña del navegador y no salen de la computadora.
 ## Devoluciones Mercado Libre
 - `scripts/actualizar_datos.py` y `scripts/diagnostico_devoluciones.py` — consultas a la API de ML
   (credenciales por variables de entorno). Hoy la página lee el motor en Apps Script, no `data.json`.
+
+## 19-oct-2026 — Etiquetas: orden individuales / múltiples (pedido de dirección, reunión mensual de octubre)
+- `js/etiquetas.js`: nuevo `esMultiple(items)` (**2 o más SKUs DISTINTOS**; 1 SKU con varias piezas = individual, regla confirmada por Bri) y `ordenarPaginas(paginas)`
+  (individuales primero por SKU → agrupadas por color porque el color va en el SKU; múltiples TODAS AL FINAL,
+  también por SKU). Reemplaza los 3 `paginas.sort` de TikTok / SHEIN / Walmart. SIN-SKU cuenta como individual.
+- `index.html`: cache-bust `etiquetas.js?v=20261019-mult2`. Commits `8b2f588` (orden) y el ajuste de la regla de múltiple; verificado local == vivo.
+- Respaldos: `js/etiquetas.js.bak-19oct`, `index.html.bak-19oct`.

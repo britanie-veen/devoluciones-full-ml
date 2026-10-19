@@ -421,9 +421,12 @@
   //    mismo SKU) se separan y van TODAS AL FINAL del listado, también por SKU.
   //  Se usa en los 3 canales (TikTok, SHEIN, Walmart).
   function esMultiple(items) {
+    // Múltiple = el pedido trae 2 o más SKUs DISTINTOS (regla del almacén, 19-oct).
+    // Un solo SKU con varias piezas cuenta como individual.
     if (!items || !items.length) return false;
-    if (items.length > 1) return true;                       // varios SKUs
-    return (Number(items[0][1]) || 1) > 1;                   // 1 SKU pero 2+ piezas
+    const skus = {};
+    items.forEach(function (it) { skus[String(it[0] || '').trim().toUpperCase()] = 1; });
+    return Object.keys(skus).length > 1;
   }
   function ordenarPaginas(paginas) {
     paginas.sort(function (a, b) {
