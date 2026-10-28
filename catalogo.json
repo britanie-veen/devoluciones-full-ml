@@ -1,6 +1,6 @@
 {
- "generado": "2026-10-15T11:26:43",
- "total": 517,
+ "generado": "2026-10-28T13:57:05",
+ "total": 520,
  "skus": {
   "CER-ALFBAR66-45CM": "[CER-ALFBAR66-45CM] Tapete Alfombrilla (Blanco - Rojo)",
   "CER-ALFRJB66-45CM": "[CER-ALFRJB66-45CM] Tapete Alfombrilla (Rojo - Blanco)",
@@ -373,6 +373,7 @@
   "VIN-JAZAZM140-5M": "[VIN-JAZAZM140-5M] Jazz  (Azul Marino, 5M)",
   "VIN-JAZBEI140-10M": "[VIN-JAZBEI140-10M] Jazz  (Beige, 10M)",
   "VIN-JAZBEI140-1M": "[VIN-JAZBEI140-1M] Jazz  (Beige, 1M)",
+  "VIN-JAZBEI140-2M": "[VIN-JAZBEI140-2M] Jazz  (Beige, 2M)",
   "VIN-JAZBEI140-5M": "[VIN-JAZBEI140-5M] Jazz  (Beige, 5M)",
   "VIN-JAZBLA140-10M": "[VIN-JAZBLA140-10M] Jazz  (Blanco, 10M)",
   "VIN-JAZBLA140-1M": "[VIN-JAZBLA140-1M] Jazz  (Blanco, 1M)",
@@ -387,6 +388,7 @@
   "VIN-JAZFUC140-1M": "[VIN-JAZFUC140-1M] Jazz  (Fucsia, 1M)",
   "VIN-JAZGRI140-10M": "[VIN-JAZGRI140-10M] Jazz  (Gris, 10M)",
   "VIN-JAZGRI140-1M": "[VIN-JAZGRI140-1M] Jazz  (Gris, 1M)",
+  "VIN-JAZGRI140-2M": "[VIN-JAZGRI140-2M] Jazz  (Gris, 2M)",
   "VIN-JAZGRI140-3M": "[VIN-JAZGRI140-3M] Jazz  (Gris, 3M)",
   "VIN-JAZGRI140-5M": "[VIN-JAZGRI140-5M] Jazz  (Gris, 5M)",
   "VIN-JAZHUE140-10M": "[VIN-JAZHUE140-10M] Jazz  (Hueso, 10M)",
@@ -482,6 +484,7 @@
   "VIN-TEXGRI140-10M": "[VIN-TEXGRI140-10M] Piso Tachon 1.60M (Gris, 10M)",
   "VIN-TEXGRI140-1M": "[VIN-TEXGRI140-1M] Piso Tachon 1.60M (Gris, 1M)",
   "VIN-TEXGRI140-2M": "[VIN-TEXGRI140-2M] Piso Tachon 1.60M (Gris, 2M)",
+  "VIN-TEXGRI140-30M": "[VIN-TEXGRI140-30M] Piso Tachon 1.60M (Gris, 30M)",
   "VIN-TEXGRI140-3M": "[VIN-TEXGRI140-3M] Piso Tachon 1.60M (Gris, 3M)",
   "VIN-TEXGRI140-5M": "[VIN-TEXGRI140-5M] Piso Tachon 1.60M (Gris, 5M)",
   "VIN-TEXGRI160-10M": "[VIN-TEXGRI160-10M] Piso Tachon 1.60m (Gris, 10M)",
